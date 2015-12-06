@@ -3,7 +3,6 @@ package interpreter;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -68,8 +67,103 @@ public class Interpreter {
 	}
 	
 	private String Text(String text){
-	
+		String[] buffor= text.split("\n");
 		
-		return text;
+		for(;PCB.LR<buffor.length;PCB.LR++){
+		
+			buffor[PCB.LR]=buffor[PCB.LR].trim();
+			task(buffor[PCB.LR],buffor);
+		
+		}
+		
+		String output = "A: " + PCB.A + "\nB: " + PCB.B;
+		
+		return output;
 	}
+	
+	private void task(String taskText, String[] buffor){
+		String[] buffor1= taskText.split(" ");
+		
+		int lenght=buffor1.length;
+		
+		switch(lenght){
+		
+			case 1:{
+				if(buffor1[0]=="HLT"){
+					//zakoñczenie procesu
+				}
+				break;
+			}
+			
+			case 2:{
+				switch(buffor1[0]){
+				
+					case "INR":{
+						switch(buffor1[1]){
+						case "A":
+							PCB.A+=1;
+							break;
+						case "B":
+							PCB.B++;
+							break;
+						case "C":
+							PCB.C++;
+							break;
+						}
+						break;
+					}
+				
+					case "DCR":{
+						switch(buffor1[1]){
+						case "A":
+							PCB.A--;
+							break;
+						case "B":
+							PCB.B--;
+							break;
+						case "C":
+							PCB.C--;
+							break;
+						}
+						break;
+					}
+				
+				case "JNZ":{
+					if(PCB.C!=0){
+						int temp=Integer.parseInt(buffor1[1]);
+						task(buffor[temp-1], buffor);
+					}
+					break;
+				}
+			
+				case "JZ":{
+					if(PCB.C==0){
+						int temp=Integer.parseInt(buffor1[1]);
+						task(buffor[temp-1], buffor);
+					}
+					break;
+				}
+			
+				case "OPENF":{
+					break;
+					}
+				}
+				break;
+			}
+			
+			case 3:{
+
+				
+				break;
+			}
+		}
+	}
+	
+}
+
+class  PCB{
+	static int A;
+	static int B;
+	static int C;
+	static int LR;			
 }
