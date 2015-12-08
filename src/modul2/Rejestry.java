@@ -1,4 +1,4 @@
-package pamiecOperacyjna;
+package modul2;
 
 public class Rejestry {
     public static Object r0 = 0;

@@ -1,4 +1,6 @@
-package pamiecOperacyjna;
+
+package modul2;
+
 
 public class Element {
     private int indeks;

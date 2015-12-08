@@ -20,7 +20,7 @@ public class PCB {
         int memoryLimit;
         //inf. o otwartych plikach
        
-        PCB(String name, int memory) {
+        public PCB(String name, int memory) {
                 this.name = name;
                 this.memoryLimit = memory;
                 stopped = true;

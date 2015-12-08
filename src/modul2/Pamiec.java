@@ -1,6 +1,7 @@
-package pamiecOperacyjna;
+package modul2;
 import java.util.*;
 
+//KOMENTARZ DODANY NA NOWO -PROBA
 public class Pamiec {
     private static Semafory FSBSEM  ; //semafor wolnej pamięci >0 można dokonać operacje
     private static Semafory MEMORY_SEM  ;

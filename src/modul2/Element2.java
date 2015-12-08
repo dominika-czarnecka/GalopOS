@@ -1,4 +1,4 @@
-package pamiecOperacyjna;
+package modul2;
 
 class Element2 extends Element{
 
