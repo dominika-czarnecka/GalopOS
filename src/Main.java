@@ -1,6 +1,8 @@
 import interpreter.*;
 import modul1.*;
 import modul4.*;
+import modul1.*;
+import modul2.*;
 
 
 
