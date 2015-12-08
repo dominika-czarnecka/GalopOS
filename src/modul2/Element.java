@@ -1,5 +1,5 @@
 package pamiecOperacyjna;
-
+//dodaje komentarz Pawlaczyk
 public class Element {
     private int indeks;
     private int rozmiar;
