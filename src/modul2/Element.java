@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 package modul2;
 
+=======
+package pamiecOperacyjna;
+//dodaje komentarz Pawlaczyk
+>>>>>>> origin/master
 public class Element {
     private int indeks;
     private int rozmiar;
