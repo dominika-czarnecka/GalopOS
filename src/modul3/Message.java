@@ -1,4 +1,4 @@
-package zarzProc;
+package modul3;
 
 public class Message {
 	public Message(PCB sender, String content) {

@@ -1,8 +1,8 @@
 import interpreter.*;
 import modul1.*;
-import modul4.*;
-import modul1.*;
 import modul2.*;
+import modul3.*;
+import modul4.*;
 
 
 
