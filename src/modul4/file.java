@@ -1,5 +1,5 @@
 ////////////////// SZYMON KO£ODZIEJCZAK
-package fat;
+package modul4;
 import java.util.*;
 
 public class file
