@@ -27,7 +27,7 @@ public class Processor {
 		else expropriation();
 	}
 	
-	static private void XPER(){
+	static public void XPER(){
 		expropriation();
 		}
 	
