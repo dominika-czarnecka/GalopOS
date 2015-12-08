@@ -1,13 +1,16 @@
 package modul2;
+import modul1.Registers;
+import modul1.Semaphores;
+
 import java.util.*;
 
 //KOMENTARZ DODANY NA NOWO -PROBA
 public class Pamiec {
-    private static Semafory FSBSEM  ; //semafor wolnej pamięci >0 można dokonać operacje
-    private static Semafory MEMORY_SEM  ;
+    private static Semaphores FSBSEM  ; //semafor wolnej pamięci >0 można dokonać operacje
+    private static Semaphores MEMORY_SEM  ;
     private static Wolna WolnaLista;
     private static Zajeta ZajetaLista;
-    private static Rejestry rejestry;
+    private static Registers rejestry;
 
 
     public static int MEMORY_SIZE = 256;
@@ -19,10 +22,10 @@ public class Pamiec {
         byte[] RAM = new byte[MEMORY_SIZE];
         WolnaLista = new Wolna(MEMORY_SIZE);
         ZajetaLista = new Zajeta();
-        MEMORY_SEM = new Semafory(0);
-        FSBSEM = new Semafory(1); // na poczatku ma wartosc 1
+        MEMORY_SEM = new Semaphores(0);
+        FSBSEM = new Semaphores(1); // na poczatku ma wartosc 1
         //=-------------------------------------------------
-        rejestry = new Rejestry(); // Tylko do mnie
+        rejestry = new Registers(); // Tylko do mnie
         //-----------------------------------------------------
         System.out.println("Inicjalizacja Pamieci o rozmiarze "+ MEMORY_SIZE +" zakonczona pomyslnie");
 
@@ -34,17 +37,17 @@ public class Pamiec {
         //2)przeszukuje obszar pamięci aż znajdzie tak duży który się zmieści
         //3) zmiany połączeń elementów w liście dokonuje się za pomocą operacji XB; powrót do XA
 
-        System.out.println("Wartość semafora FSBSEM: " + FSBSEM.VALUE);
-        System.out.println("Wartość semafora MEMORY_SEM: " + MEMORY_SEM.VALUE);
+        System.out.println("Wartość semafora FSBSEM: " + FSBSEM.value);
+        System.out.println("Wartość semafora MEMORY_SEM: " + MEMORY_SEM.value);
         if( rozmiar > MEMORY_SIZE){
             System.out.println("[!] BLAD: próba przydzielenia bloku większego od całej pamieci [!] ");
         }
         else{
-            rejestry.r2 = FSBSEM;
+            rejestry.reg2 = FSBSEM.value;
             Semafory.XP();
             if (WolnaLista.Wolna() < rozmiar){
                 System.out.println("[*]Brak wystarczającej ilości wolnej pamięci [*]\n[!] Zablokowanie procesu[!]");
-                rejestry.r2=MEMORY_SEM;
+                rejestry.reg2=MEMORY_SEM.value;
                 Semafory.XP();
             }
             else{
@@ -62,7 +65,7 @@ public class Pamiec {
                 }
                 System.out.println("Przydział pamieci dla procesu" + NazwaProcesu);
             }
-            rejestry.r2 = FSBSEM;
+            rejestry.reg2 = FSBSEM.value;
             Semafory.XV();
 
         }
@@ -73,12 +76,12 @@ public class Pamiec {
     //Nazwy procesów nadaje moduł procesora niższy
     public static void XF(String  NazwaProcesu){
         System.out.println("Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
-        rejestry.r2=FSBSEM;
+        rejestry.reg2=FSBSEM.value;
         Semafory.XP();
         WolnaLista.DodajWolnyBlok(ZajetaLista.Poczatek(NazwaProcesu), ZajetaLista.Rozmiar(NazwaProcesu));
         ZajetaLista.Usun(NazwaProcesu);
-        if(MEMORY_SEM.VALUE < 0){
-            rejestry.r2 = MEMORY_SEM;
+        if(MEMORY_SEM.value < 0){
+            rejestry.reg2 = MEMORY_SEM.value;
             Semafory.XV(); //zawsze gsy zwalniany jest blok pamięci wykonywana jest operacja XV; lwywoałanXV == lZwolnienPamieci
             Wyswietl(); //wyswietla pamiec po zwolnieniu
         }
