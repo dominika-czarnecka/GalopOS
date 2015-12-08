@@ -82,7 +82,7 @@ public class ZarzProc {
 	
 	void sendMessage(PCB sender, PCB receiver, String content) {
 		receiver.Messages.add(new Message(sender, content));
-		receiver.msgSemaphore.V();
+		receiver.msgSemaphore.XV();
 	}
 	
 	Message readMessage(PCB process) {
