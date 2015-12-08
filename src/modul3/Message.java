@@ -1,4 +1,5 @@
 package modul3;
+import modul1.*;
 
 public class Message {
 	public Message(PCB sender, String content) {

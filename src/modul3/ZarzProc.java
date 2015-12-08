@@ -1,5 +1,5 @@
 package modul3;
-
+import modul1.*;
 
 
 public class ZarzProc {
