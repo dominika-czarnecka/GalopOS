@@ -64,7 +64,7 @@ public class ZarzProc {
 		}
 	}
 
-	void startProcess(String name) throws procNotFoundError {
+	public void startProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
 		//wpisywanie stanu rejestrów

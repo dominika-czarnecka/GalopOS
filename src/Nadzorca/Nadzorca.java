@@ -1,24 +1,26 @@
 package Nadzorca;
 
 import modul1.*;
+import modul2.*;
 import java.util.*;
 
 import modul1.PCB;
 
 public class Nadzorca {
 	
-	static Processor Processor = new Processor();
+	static Processor Procesor = new Processor();
 	
 	public static void IPLRTN()
 	{
+				
+	PCB iplrtn = new PCB("*iplrtn",0);
+	Procesor.RUNNING=iplrtn;
+	Procesor.next_try=iplrtn;
+	Pamiec pamiec = new Pamiec();	
 		
-		
-	PCB iplrtn = new PCB("*IPRTLN",0);
-		
-	//zawiadowca.nexttry=iplrtn;
+	
 	//zawiadowca.nexttry=iplrtn;
 
-	PCB ibsup = new PCB("*IBSUP", 0);
 
 	uruchomienie_procesu(ibsup);  // chyba tomek ma tak¹ funkcjê
 	ibsup.first =ibsup;	
