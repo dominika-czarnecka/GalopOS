@@ -32,6 +32,7 @@ public class Pamiec {
     }
 
     //Przydział wolnego bloku pamięci
+    //od tego co tworzy proces biorę tylko [NAZWA PROCESU], [ROZMIAR PROCESU]
     public static void XA(String NazwaProcesu,int rozmiar){
         // 1) operacja P na semaforze FSBSEM
         //2)przeszukuje obszar pamięci aż znajdzie tak duży który się zmieści
@@ -44,16 +45,18 @@ public class Pamiec {
         }
         else{
             rejestry.reg2 = FSBSEM.value;
-            Semafory.XP();
+            //Semafory.XP(); Nika zakomentowane
+            FSBSEM.XP(); //Nika
             if (WolnaLista.Wolna() < rozmiar){
                 System.out.println("[*]Brak wystarczającej ilości wolnej pamięci [*]\n[!] Zablokowanie procesu[!]");
                 rejestry.reg2=MEMORY_SEM.value;
                 Semafory.XP();
             }
+            //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
             else{
-                int list_index =WolnaLista.ZnajdzWolne(rozmiar);
-                if(list_index != -1){
-                    ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
+                int list_index =WolnaLista.ZnajdzWolne(rozmiar); //lis_index przechwuje tylkoe rozmiar wolnego obszaru
+                if(list_index != -1){ //jesli jest dodstatecznie duży blok aby przydzielic pamiec
+                    ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
                 }
                 else{
                     System.out.println("[*] Brak bloku o odpowiednim rozmiarze [*]");
@@ -65,7 +68,7 @@ public class Pamiec {
                 }
                 System.out.println("Przydział pamieci dla procesu" + NazwaProcesu);
             }
-            rejestry.reg2 = FSBSEM.value;
+            rejestry.reg2 = FSBSEM.value; /// [!!!] Rejestr3 ma mi te bloki dać (?!)
             Semafory.XV();
 
         }
