@@ -2,7 +2,7 @@ package modul1;
 
 public class Registers {
 	
-	public Object reg1, 
+	public int reg1,
 	reg2, 
 	reg3, 
 	reg4, 
@@ -27,6 +27,6 @@ public class Registers {
 		reg6 = 
 		reg7 = 
 		reg8 = 
-		reg9 = Integer.valueOf(0);	
+		reg9 = 0;
 	}
 }
