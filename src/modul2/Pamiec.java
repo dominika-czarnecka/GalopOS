@@ -1,4 +1,4 @@
-package pamiecOperacyjna;
+package modul2;
 import java.util.*;
 
 public class Pamiec {

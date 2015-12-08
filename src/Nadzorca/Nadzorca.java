@@ -3,15 +3,14 @@ package Nadzorca;
 
 import java.util.*;
 
+import modul1.PCB;
+
 public class Nadzorca {
 	
 	public static void IPLRTN()
 	{
 	PCB iplrtn = new PCB("*IPRTLN",0);
-	iplrtn.next = iplrtn;
-	iplrtn.prev = iplrtn;
-	iplrtn.first = iplrtn;
-	iplrtn.stopped = false;	
+		
 	//zawiadowca.nexttry=iplrtn;
 	//zawiadowca.nexttry=iplrtn;
 	
