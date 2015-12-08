@@ -1,4 +1,4 @@
-package fat;
+package modul4;
 
 public class main_class {
 
