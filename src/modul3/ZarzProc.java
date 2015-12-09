@@ -4,7 +4,7 @@ import modul1.*;
 
 public class ZarzProc {
 	
-	PCB findProcess(String name) {
+	static public PCB findProcess(String name) {
 		if(PCB.first==null) return null;
 		PCB it = PCB.first;
 		do {
@@ -14,7 +14,7 @@ public class ZarzProc {
 		return null;
 	}
 	
-	void createProcess(String name, int memory) throws procCreationError {
+	static public void createProcess(String name, int memory) throws procCreationError {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
@@ -24,7 +24,7 @@ public class ZarzProc {
 		}
 	}
 	
-	void removeProcess(String name) throws procNotFoundError {
+	static public void removeProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) {
 			throw new procNotFoundError();
@@ -38,7 +38,7 @@ public class ZarzProc {
 	
 	//XH - zatrzymanie zlecenia i powiadomienie nadzorcy
 	
-	void popProcess(PCB process) {
+	static public void popProcess(PCB process) {
 		if (process.next==process)
 			PCB.first = null;
 		else {
@@ -49,7 +49,7 @@ public class ZarzProc {
 		}
 	}
 
-	void pushProcess(PCB process) {
+	static public void pushProcess(PCB process) {
 		if (PCB.first == null) {
 			PCB.first = process;
 			process.next = process;
@@ -64,7 +64,7 @@ public class ZarzProc {
 		}
 	}
 
-	public void startProcess(String name) throws procNotFoundError {
+	static public void startProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
 		//wpisywanie stanu rejestrów
@@ -72,7 +72,7 @@ public class ZarzProc {
 	}
 	
 	
-	void stopProcess(String name) throws procNotFoundError {
+	static public void stopProcess(String name) throws procNotFoundError {
 		if (name.startsWith("*")) return; //proces systemowy nie mo¿e byæ zatrzymany
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
@@ -80,18 +80,18 @@ public class ZarzProc {
 	}
 	
 	
-	void sendMessage(PCB sender, PCB receiver, String content) {
+	static public void sendMessage(PCB sender, PCB receiver, String content) {
 		receiver.Messages.add(new Message(sender, content));
 		receiver.msgSemaphore.XV();
 	}
 	
-	Message readMessage(PCB process) {
+	static public Message readMessage(PCB process) {
 		//P na semaforze
 		return process.Messages.remove(0);
 	}
 	
 	
-	void printProcessList() {
+	static public void printProcessList() {
 		if (PCB.first == null) System.out.println("Puste");
 		else {
 			PCB it = PCB.first;
@@ -105,7 +105,7 @@ public class ZarzProc {
 		}
 	}
 	
-	void printProcessListBack() {
+	static public void printProcessListBack() {
 		if (PCB.first == null) System.out.println("Puste");
 		else {
 			PCB it = PCB.first;
