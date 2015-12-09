@@ -4,8 +4,8 @@ public class Processor {
 
 	static Registers reg = new Registers();
 	static PCB PROCESS = PCB.first;
-	static PCB RUNNING = null;
-	static PCB next_try = PCB.first;
+	public static PCB RUNNING = null;
+	public static PCB next_try = PCB.first;
 	static int counter=0;
 	
 	static public PCB find_to_run(){ //znajdü pierwszy moøliwy do wykonania
@@ -27,7 +27,7 @@ public class Processor {
 		else expropriation();
 	}
 	
-	static private void XPER(){
+	static public void XPER(){
 		expropriation();
 		}
 	

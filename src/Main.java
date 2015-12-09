@@ -1,5 +1,7 @@
 import interpreter.*;
 import modul1.*;
+import modul2.*;
+import modul3.*;
 import modul4.*;
 
 
@@ -10,6 +12,7 @@ public class Main {
 		Thread t1 = new Thread(new Interpreter());
 		t1.start();
 		hdd_commander driver = new hdd_commander(32,32);
+		Processor processor
 	}
 
 }

@@ -1,29 +1,31 @@
 package Nadzorca;
 
-
+import modul1.*;
+import modul2.*;
 import java.util.*;
+
+import modul1.PCB;
 
 public class Nadzorca {
 	
+	static Processor Procesor = new Processor();
+	
 	public static void IPLRTN()
 	{
-	PCB iplrtn = new PCB("*IPRTLN",0);
-	iplrtn.next = iplrtn;
-	iplrtn.prev = iplrtn;
-	iplrtn.first = iplrtn;
-	iplrtn.stopped = false;	
-	//zawiadowca.nexttry=iplrtn;
-	//zawiadowca.nexttry=iplrtn;
+				
+	PCB iplrtn = new PCB("*iplrtn",0);
+	Procesor.RUNNING=iplrtn;
+	Procesor.next_try=iplrtn;
+	Pamiec pamiec = new Pamiec();	
+		
 	
-	PCB ibsup = new PCB("*IBSUP", 0);
-	ibsup.name="*IBSUP";
+	//zawiadowca.nexttry=iplrtn;
+
+
 	uruchomienie_procesu(ibsup);  // chyba tomek ma tak¹ funkcjê
-	ibsup.blocked = false;
-	ibsup.blocked = false;
-	iplrtn.blocked = true;
-	ibsup.first =ibsup;
+	ibsup.first =ibsup;	
 	//zawiadowca.nexttry = ibsup
-	//XPER();    fukcja steruj¹ca systemem od zawiadowcy 
+	Processor.XPER();   // fukcja steruj¹ca systemem od zawiadowcy 
 	}
 	
 	public static void uruchomienie_procesu(PCB pcb)
