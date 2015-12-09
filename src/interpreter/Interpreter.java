@@ -1,7 +1,6 @@
 package interpreter;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
@@ -15,34 +14,25 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 
-public class Interpreter implements Runnable{
+public class Interpreter{
 
 	private Scanner scanner;
-	private PrintWriter writer;
-	
+	private PrintWriter writer;	
 	private JFrame frmGaloposV;
 
 	/**
 	 * Launch the application.
 	 */
 	
-
-
-	@Override
-	public void run() {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Interpreter window = new Interpreter();
-					window.frmGaloposV.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		public void run() {
+			try {
+				Interpreter window = new Interpreter();
+				window.frmGaloposV.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		});
+			}
 		
-	}
 
 	/**
 	 * Create the application.
@@ -87,29 +77,23 @@ public class Interpreter implements Runnable{
 	private String Text(String text){
 		String output = "";
 		String[] buffor= text.split("\n");
-		for(int i = 0;i<buffor.length;PCB.LR++, i++){
-			while(!PCB.running){
-				try {
-					Thread.sleep(4000);
-					System.out.println("Sleep");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			buffor[i]=buffor[i].trim();
-			try {
-				task(buffor[i],buffor);
-			} catch (FileNotFoundException e) {
-				return "File not found! :(";
-			} catch (Exception e) {
-				if(e.getMessage().equals("HALT")){
-					output = "Completed :)";
-				}else{
-					i = Integer.parseInt(e.getMessage());
-				}
-			}		
-		}
 		
+		for(int i = 0;i<buffor.length;PCB.LR++, i++){
+			while(PCB.running){
+				buffor[i]=buffor[i].trim();
+				try {
+					task(buffor[i],buffor);
+				} catch (FileNotFoundException e) {
+					return "File not found! :(";
+				} catch (Exception e) {
+					if(e.getMessage().equals("HALT")){
+						output = "Completed :)";
+					}else{
+						i = Integer.parseInt(e.getMessage());
+					}
+				}		
+			}
+		}
 		output = "A: " + PCB.A + "\nB: " + PCB.B + "\nC: " + PCB.C + "\nLR:" + PCB.LR + "\n" + output;
 		return output;
 	}
@@ -117,9 +101,7 @@ public class Interpreter implements Runnable{
 	private void task(String taskText, String[] buffor) throws Exception{
 		String[] linia= taskText.split(" ");
 		
-		int lenght=linia.length;
-		
-		switch(lenght){
+		switch(linia.length){
 		
 			case 1:{
 				switch(linia[0]){
@@ -325,8 +307,7 @@ public class Interpreter implements Runnable{
 									case "C":{
 										PCB.A=PCB.C%2;
 										break;
-									}
-									
+									}									
 								}
 								break;
 							}
@@ -339,8 +320,7 @@ public class Interpreter implements Runnable{
 									case "C":{
 										PCB.B=PCB.C%2;
 										break;
-									}
-									
+									}									
 								}
 								break;
 							}
@@ -353,8 +333,7 @@ public class Interpreter implements Runnable{
 									case "B":{
 										PCB.C=PCB.B%2;
 										break;
-									}
-									
+									}	
 								}
 								break;
 							}
