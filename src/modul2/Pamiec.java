@@ -182,7 +182,7 @@ public byte[] OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - 
     FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
 }
 
-
+////
 
 
 
