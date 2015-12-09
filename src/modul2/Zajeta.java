@@ -11,7 +11,7 @@ public class Zajeta {
     }
 
 
-    public int Poczatek(String NazwaProcesu){
+    public static int Poczatek(String NazwaProcesu){
         for(int i=0; i<List.size(); i++){
             if(List.get(i).NAZWA() == NazwaProcesu )
                 return List.get(i).Poczatek();
@@ -46,6 +46,7 @@ public class Zajeta {
         return -1;
     }
 
+
     public void Przesun(byte[] RAM){
         int nastepny=0;
         int przesuniecie;
@@ -69,7 +70,7 @@ public class Zajeta {
 
     public void Wyswietl(){
         int indeks, rozmiar =0;
-        System.out.println("---------------Zajęta Lista - bloki ------------------");
+o        System.out.println("---------------Zajęta Lista - bloki ------------------");
         for(int i=0; i< List.size(); i++){
             indeks = i+1;
             rozmiar += List.get(i).ZwrocRozmiar();
@@ -78,3 +79,5 @@ public class Zajeta {
         System.out.println("Rozmiar Pamieci zajętej: " + rozmiar + "\n");
     }
 }
+
+

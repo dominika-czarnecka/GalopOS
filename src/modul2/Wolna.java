@@ -53,6 +53,7 @@ public class Wolna {
     }
 
 
+
     //scal gdy dwa bloki ze sobą sąsiadują - UWAGA na pierwszy i ostatni blok listy - problemy w porównaniach
     private void Scal(int indeks){
         if(List.size() <=1)
