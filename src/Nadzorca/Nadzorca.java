@@ -2,6 +2,7 @@ package Nadzorca;
 
 import modul1.*;
 import modul2.*;
+import modul3.*;
 import java.util.*;
 
 import modul1.PCB;
@@ -12,27 +13,25 @@ public class Nadzorca {
 	
 	public static void IPLRTN()
 	{
-				
-	PCB iplrtn = new PCB("*iplrtn",0);
-	Procesor.RUNNING=iplrtn;
-	Procesor.next_try=iplrtn;
-	Pamiec pamiec = new Pamiec();	
+
+	Pamiec pamiec = new Pamiec();
+	try {
+		ZarzProc.createProcess("*IPSUB", 0);
+		ZarzProc.createProcess("*IN", 0);
+		ZarzProc.createProcess("*OUT", 0);
+	} catch (procCreationError e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	try {
+		ZarzProc.startProcess("*IBSUP");
+		ZarzProc.startProcess("*IN");
+		ZarzProc.startProcess("*OUT");		
+	} catch (procNotFoundError e) {
+		e.printStackTrace();
+	}
+	Processor.next_try = PCB.first;	
+	Processor.XPER();
 		
-	
-	//zawiadowca.nexttry=iplrtn;
-
-
-	uruchomienie_procesu(ibsup);  // chyba tomek ma tak¹ funkcjê
-	ibsup.first =ibsup;	
-	//zawiadowca.nexttry = ibsup
-	Processor.XPER();   // fukcja steruj¹ca systemem od zawiadowcy 
-	}
-	
-	public static void uruchomienie_procesu(PCB pcb)
-	{
-		System.out.println("/n");
-		pcb.blocked = false;
-		System.out.println("Proces: " + pcb.name + "zosta³ uruchomiony");
-	}
-	
 }
+	}
