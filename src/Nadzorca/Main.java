@@ -21,7 +21,7 @@ public class Main {
 				+ "JNZ 2" + "\n"
 				+ "HLT" + "\n");
 		
-		driver.create("prog2", "$JOB,20,CZYTNIK=*IN,DRUKARKA=*OUT"
+		driver.create("prog2", "$JOB,172,CZYTNIK=*IN,DRUKARKA=*OUT"
 				+ "OFR prog2dane.txt" + "\n"
 				+ "RF A" + "\n"
 				+ "RF B" + "\n"
