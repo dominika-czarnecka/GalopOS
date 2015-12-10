@@ -4,6 +4,7 @@ import modul1.*;
 import modul2.*;
 import modul3.*;
 import modul4.*;
+import Nadzorca.*;
 
 
 public class Main {
@@ -11,7 +12,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		hdd_commander driver = new hdd_commander(32,32);
-		System.out.println("test");
+		Pamiec pamiec=new Pamiec();
+		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
+		Interpreter interpreter= new interpreter(driver, pamiec);
+		//System.out.println("test");
 		driver.create("prog1","$JOB,95,CZYTNIK=*IN,DRUKARKA=*OUT" 
 				+ "MVI C 10" + "\n"
 				+ "MVI B 1" + "\n"
