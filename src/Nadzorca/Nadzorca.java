@@ -50,12 +50,13 @@ public class Nadzorca
 	
 	public static void IBSUP()
 	{
+		while(true)
+		{
 		menu1();
 		komenda=s.nextLine();   //wybranie opcji z menu
 		int wybor = Integer.parseInt(komenda);
 		
-		while(true)
-		{
+		
 		switch (wybor) 
 		{
 		  case 1:   //utworz proces 
