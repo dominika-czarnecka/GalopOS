@@ -290,3 +290,25 @@ public class Interpreter{
 	}
 	
 }
+odczytywanie z pamieci linijka po linijce bez uwzglednienia poczatku
+/*
+Queue<String>komendy=new LinkedList<String>();
+
+void odczytaj_komende()
+{
+String komenda;
+
+int index=0;
+while(plik_pamieci[index]!=-1; // kod pustego miejsca
+	while(plik_pamiec[i]!=10) // kod ascii entera
+	{// budowanie stringa
+	komenda+=(char)plik_pamieci[index].toString(); // w kazdym razie rzutowanie na string
+	index++;
+	}
+index++; //drugi raz zeby "ominac" ENTER
+komendy.offer(komenda);
+}
+
+}
+/////dopoki kolejka nie jest pusta zi¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹
+String pobierz_komende(){return komendy.poll();} */
