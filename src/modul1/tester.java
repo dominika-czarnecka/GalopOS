@@ -1,16 +1,43 @@
 package modul1;
 
+import java.util.Scanner;
+
 import modul3.ZarzProc;
 
 
 public class tester {
 
+	static int a = 0;
 	static PCB p1;
 	static PCB p2;
 	static PCB p3;
 	static PCB p4;
 	static PCB p5;
 	static PCB p6;
+	static Scanner scanner = new Scanner(System.in);
+	public static void menu()
+	{
+		
+		System.out.println("MENU: ");
+		try
+		{
+			a = scanner.nextInt();
+		}
+		catch (Exception ex) {ex.printStackTrace();}
+		switch(a){
+		case 1:
+			Processor.set_to_run();
+			menu();
+			break;
+		case 2:
+			elo();
+			menu();
+			break;
+		default:
+				
+		}
+			
+	}
 	
 	public static void elo(){
 		try
@@ -18,6 +45,9 @@ public class tester {
 			System.out.println(p1.name);
 			System.out.println(p2.name);
 			System.out.println(p3.name);
+			System.out.println(p4.name);
+			System.out.println(p5.name);
+			System.out.println(p6.name);
 			System.out.println("RUNNING: "+Processor.RUNNING.name);
 		}
 		catch(NullPointerException e){System.out.println("blad wyswietl_nazwe_running");}
@@ -70,15 +100,9 @@ public class tester {
 		p6.stopped = false;
 		p6.blocked = false;
 			
-								
+		menu();
 			
-			
-			while(true)
-			{
-				Processor.set_to_run();
-				elo();
-				Thread.sleep(1000);
-			}
+	
 	}
 
 }

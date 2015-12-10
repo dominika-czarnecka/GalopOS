@@ -1,4 +1,8 @@
 package modul1;
+import java.awt.List;
+import java.util.*;
+import java.util.ArrayList;
+
 //import java.util.List;
 import modul3.*;
 
@@ -10,8 +14,8 @@ public class PCB {
         public static PCB first;
         public PCB next_semaphore_waiter;
         
-       
-      //  public List<Message> Messages;
+        public ArrayList<Message> Messages = new ArrayList<Message>();
+        
         public Semaphores msgSemaphore;
         public int Line;
         public String buffor;
