@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		hdd_commander driver = new hdd_commander(32,32);
-		
+		System.out.println("test");
 		driver.create("prog1","$JOB,95,CZYTNIK=*IN,DRUKARKA=*OUT" 
 				+ "MVI C 10" + "\n"
 				+ "MVI B 1" + "\n"
