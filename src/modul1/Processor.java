@@ -6,7 +6,7 @@ public class Processor {
 	static PCB PROCESS = PCB.first;
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
-	static int counter=0;
+	public static int counter=0;
 	
 	static public PCB find_to_run(){ //znajdü pierwszy moøliwy do wykonania
 		while(PROCESS.next.blocked == true && PROCESS.next.stopped == true ){
