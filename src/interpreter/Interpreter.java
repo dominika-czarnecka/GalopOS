@@ -3,11 +3,7 @@ import modul1.*;
 import modul2.Pamiec;
 import modul4.*;
 //import java.awt.EventQueue;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 
 public class Interpreter{
 
@@ -32,7 +28,7 @@ public class Interpreter{
 				try {
 					task(buffor[i],buffor);
 				} catch (FileNotFoundException e) {
-					return "File not found! :(";
+					return "File not found! :( ";
 				} catch (Exception e) {
 					if(e.getMessage().equals("HALT")){
 						output = "Completed :)";
@@ -41,7 +37,7 @@ public class Interpreter{
 					}
 				}		
 		Processor.counter++;
-		output = "A: " + PCB.A + "\nB: " + PCB.B + "\nC: " + PCB.C + "\nLR:" + PCB.LR + "\n" + output;
+		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.RUNNING.Line + "\n" + output;
 		return output;
 	}
 	
@@ -81,13 +77,13 @@ public class Interpreter{
 					case "INR":{
 						switch(linia[1]){
 						case "A":
-							PCB.A+=1;
+							Processor.reg.A+=1;
 							break;
 						case "B":
-							PCB.B++;
+							Processor.reg.B+=1;
 							break;
 						case "C":
-							PCB.C++;
+							Processor.reg.C+=1;
 							break;
 						}
 						break;
@@ -96,20 +92,20 @@ public class Interpreter{
 					case "DCR":{
 						switch(linia[1]){
 						case "A":
-							PCB.A--;
+							Processor.reg.A--;
 							break;
 						case "B":
-							PCB.B--;
+							Processor.reg.B--;
 							break;
 						case "C":
-							PCB.C--;
+							Processor.reg.C--;
 							break;
 						}
 						break;
 					}
 				
 				case "JNZ":{
-					if(PCB.C!=0){
+					if(Processor.reg.C!=0){
 						int temp=Integer.parseInt(linia[1]) - 2;
 						throw new Exception(temp+"");
 						//task(buffor[temp-1], buffor);
@@ -118,7 +114,7 @@ public class Interpreter{
 				}
 			
 				case "JZ":{
-					if(PCB.C==0){
+					if(Processor.reg.C==0){
 						int temp=Integer.parseInt(linia[1]) - 2;
 						throw new Exception(temp+"");
 						//task(buffor[temp-1], buffor);
@@ -141,15 +137,15 @@ public class Interpreter{
 				case "WF":{
 					switch(linia[1]){
 					case "A":{		
-						driver.edit("prog2dane",PCB.A+"\n");
+						driver.edit("prog2dane",Processor.reg.A+"\n");
 						break;
 					}
 					case "B":{
-						driver.edit("prog2dane",PCB.B+"\n");
+						driver.edit("prog2dane",Processor.reg.B+"\n");
 						break;
 					}
 					case "C":{
-						driver.edit("prog2dane",PCB.C+"\n");
+						driver.edit("prog2dane",Processor.reg.C+"\n");
 						break;
 					}
 					
@@ -188,13 +184,13 @@ public class Interpreter{
 					case "MVI":{
 						switch(linia[1]){
 							case "A":{
-								PCB.A=Integer.parseInt(linia[2]);
+								Processor.reg.A=Integer.parseInt(linia[2]);
 								break;}
 							case "B":{
-								PCB.B=Integer.parseInt(linia[2]);
+								Processor.reg.B=Integer.parseInt(linia[2]);
 								break;}
 							case "C":{
-								PCB.C=Integer.parseInt(linia[2]);
+								Processor.reg.C=Integer.parseInt(linia[2]);
 								break;}
 						}
 						break;
@@ -204,11 +200,11 @@ public class Interpreter{
 							case "A":{
 								switch(linia[2]){
 									case "B":{
-										PCB.A+=PCB.B;
+										Processor.reg.A+=Processor.reg.B;
 										break;
 									}
 									case "C":{
-										PCB.A+=PCB.C;
+										Processor.reg.A+=Processor.reg.C;
 										break;
 									}
 								}
@@ -217,11 +213,11 @@ public class Interpreter{
 							case "B":{
 								switch(linia[2]){
 								case "A":{
-									PCB.B+=PCB.A;
+									Processor.reg.B+=Processor.reg.A;
 									break;
 								}
 								case "C":{
-									PCB.B+=PCB.C;
+									Processor.reg.B+=Processor.reg.C;
 									break;
 								}
 							}
@@ -230,11 +226,11 @@ public class Interpreter{
 							case "C":{
 								switch(linia[2]){
 								case "A":{
-									PCB.C+=PCB.A;
+									Processor.reg.C+=Processor.reg.A;
 									break;
 								}
 								case "B":{
-									PCB.C+=PCB.B;
+									Processor.reg.C+=Processor.reg.B;
 									break;
 								}
 							}
@@ -249,11 +245,11 @@ public class Interpreter{
 							case "A":{
 								switch(linia[2]){
 									case "B":{
-										PCB.A=PCB.B%2;
+										Processor.reg.A=Processor.reg.B%2;
 										break;
 									}
 									case "C":{
-										PCB.A=PCB.C%2;
+										Processor.reg.A=Processor.reg.C%2;
 										break;
 									}									
 								}
@@ -262,11 +258,11 @@ public class Interpreter{
 							case "B":{
 								switch(linia[2]){
 									case "A":{
-										PCB.B=PCB.A%2;
+										Processor.reg.B=Processor.reg.A%2;
 										break;
 									}
 									case "C":{
-										PCB.B=PCB.C%2;
+										Processor.reg.B=Processor.reg.C%2;
 										break;
 									}									
 								}
@@ -275,11 +271,11 @@ public class Interpreter{
 							case "C":{
 								switch(linia[2]){
 									case "A":{
-										PCB.C=PCB.A%2;
+										Processor.reg.C=Processor.reg.A%2;
 										break;
 									}
 									case "B":{
-										PCB.C=PCB.B%2;
+										Processor.reg.C=Processor.reg.B%2;
 										break;
 									}	
 								}
@@ -293,11 +289,4 @@ public class Interpreter{
 		}
 	}
 	
-}
-
-class  PCB{
-	static int A;
-	static int B;
-	static int C;
-	static int LR;
 }
