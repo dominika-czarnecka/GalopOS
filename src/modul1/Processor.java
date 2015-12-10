@@ -1,27 +1,35 @@
 package modul1;
 
+import interpreter.*;
+
 public class Processor {
 
 	static Registers reg = new Registers();
 	static PCB PROCESS = PCB.first;
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
-	public static int counter=0;
+	public static int counter=1;
 	
 	static public PCB find_to_run(){ //znajdŸ pierwszy mo¿liwy do wykonania
-		while(PROCESS.next.blocked == true && PROCESS.next.stopped == true ){
-			//RUNNING = PROCESS;
-			next_try = PROCESS;
-			PROCESS = next_try;
+		PCB it = PCB.first;
+		try
+		{
+		while(it.blocked == true && it.stopped == true )
+		{
+			it = it.next;	
 		}
+		next_try = it;
 		counter=0;
 		load_all_registers();
+		}
+		catch(Exception ex) {System.out.println("b³ad");}
+		
 		return next_try;
 
 		//Processor.run_proc();
 	}
 	static private void run_proc(){ //wykonaj instrukcjê
-		//wywo³anie funkcji interpretera
+		//Interpreter.Rozkaz();
 //		counter++;
 		if (counter<3) run_proc();
 		else expropriation();
