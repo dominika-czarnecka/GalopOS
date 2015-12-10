@@ -11,7 +11,14 @@ import java.util.*;
 public class Nadzorca 
 {
 	
-	static Processor Procesor = new Processor();
+	//static Processor Procesor = new Processor();
+	static hdd_commander driver;
+	static Pamiec pamiec;
+	public Nadzorca(hdd_commander driver,Pamiec pamiec)
+	{
+		this.driver=driver;
+		this.pamiec=pamiec;
+	}
 	
 	static Scanner s = new Scanner(System.in);
     static String komenda = s.nextLine();
@@ -44,26 +51,45 @@ public class Nadzorca
 	public static void IBSUP()
 	{
 		komenda=s.nextLine();   //wybranie opcji z menu
+		int wybor = Integer.parseInt(komenda);
 		
-		switch (komenda) 
+		menu1();
+		
+		switch (wybor) 
 		{
-		  case "Utworz Proces":
+		  case 1:   //utworz proces 
 		  {
+			  
 			  komenda=s.nextLine();  // wybranie programu dla ktorego ma zostac utworzony proces 
 			  UtworzProces(komenda);
 		  }
 
-		  case "Wyœwietl Pamiêæ":
+		  case 2:  //wyswietl pamiec
 		  {
-		  
+			  pamiec.WyswietlPamiec();
 		  }
 		  
-		  case "Wyœwietl dysk":
+		  case 10:  //wyswietl RAM
 		  {
+			  pamiec.WyswietlRAM();
+		  }
 		  
-		  }		  
+		  case 3:  //wyswietl dysk
+		  {
+			  driver.driver_show();
+		  }
 		  
-		  case "Wyœwietl listê procesów":
+		  case 4: //wyswietl tablice FAT
+		  {
+			  driver.fat_show();
+		  }
+		  
+		  case 5: //wyswietl katalogi
+		  {
+			  driver.catalog_show();
+		  }
+		  
+		  case 6: //wyswietl liste procesow
 		  {
 			  ZarzProc.printProcessList();
 		  }		  
@@ -98,4 +124,18 @@ public class Nadzorca
 		}
 	}
 	
+	public static void menu1()
+	{
+		System.out.println("Opcje /n");
+		System.out.println("1. Otworz program /n");
+		System.out.println("2. Wyswietl pamiec /n");
+		System.out.println("3. Wyswietl dysk /n");
+		System.out.println("4. Wyswietl tablice FAT /n");
+		System.out.println("5. Wyswietl liste procesow /n");
+	}
+	public static void menu2()
+	{
+		System.out.println("1. Prog1);
+	}
 }
+	
