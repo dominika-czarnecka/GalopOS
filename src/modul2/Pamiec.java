@@ -157,8 +157,10 @@ public class Pamiec {
             FSBSEM.XV(); //odblokowuje semafor
         }
     }
-
-
+public byte[] odczytzpamieci()
+{
+	
+}
     //odczyt bzposredni z tablicy RAM
 public byte[] OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
     //1 blokuje semafor żeby nikt w tym czasie nie zapisywal

@@ -1,78 +1,27 @@
 package interpreter;
 import modul1.*;
-
+import modul2.Pamiec;
+import modul4.*;
 //import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
+
 
 public class Interpreter{
 
-	private Scanner scanner;
-	private PrintWriter writer;	
-	private JFrame frmGaloposV;
-
-	/**
-	 * Launch the application.
-	 */
+	static hdd_commander driver;
+	static Pamiec pamiec;
 	
-		public void run() {
-			try {
-				Interpreter window = new Interpreter();
-				window.frmGaloposV.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			}
-		
-	/**
-	 * Create the application.
-	 */
-	public Interpreter() {
-		initialize();
+	public Interpreter(hdd_commander driver,Pamiec pamiec)
+	{
+		this.driver=driver;
+		this.pamiec=pamiec;
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmGaloposV = new JFrame();
-		frmGaloposV.setIconImage(Toolkit.getDefaultToolkit().getImage(Interpreter.class.getResource("/interpreter/icon.png")));
-		frmGaloposV.setTitle("GalopOS v2.1");
-		frmGaloposV.setBounds(100, 100, 450, 300);
-		frmGaloposV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGaloposV.getContentPane().setLayout(null);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(10, 11, 202, 208);
-		frmGaloposV.getContentPane().add(editorPane);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBackground(SystemColor.control);
-		textPane.setEditable(false);
-		textPane.setBounds(222, 11, 202, 208);
-		frmGaloposV.getContentPane().add(textPane);
-		
-		JButton btnWykonaj = new JButton("Wykonaj");
-		btnWykonaj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				textPane.setText(Rozkaz(editorPane.getText()));
-				
-			}
-		});
-		btnWykonaj.setBounds(335, 227, 89, 23);
-		frmGaloposV.getContentPane().add(btnWykonaj);
-	}
+	
+	//private Scanner scanner;
+	//private PrintWriter writer;	
 	
 	public String Rozkaz(String text){
 		String output = "";
@@ -109,7 +58,8 @@ public class Interpreter{
 						
 						throw new Exception("HALT");
 					}
-					case "CFR":{
+				/*	
+				    case "CFR":{
 						scanner.close();
 						break;
 					}
@@ -119,6 +69,7 @@ public class Interpreter{
 						writer.close();
 						break;
 					}
+					*/
 				}
 				break;
 				
@@ -174,7 +125,7 @@ public class Interpreter{
 					}
 					break;
 				}
-			
+			/*
 				case "OFR":{
 					File plik = new File(linia[1]);
 					scanner = new Scanner(plik);
@@ -186,48 +137,48 @@ public class Interpreter{
 					
 					break;
 					}
+					*/
 				case "WF":{
 					switch(linia[1]){
-					case "A":{					
-						writer.write(PCB.A+"\n");
+					case "A":{		
+						driver.edit("prog2dane",PCB.A+"\n");
 						break;
 					}
 					case "B":{
-						writer.println(PCB.A);
+						driver.edit("prog2dane",PCB.B+"\n");
 						break;
 					}
 					case "C":{
-						writer.println(PCB.C);
+						driver.edit("prog2dane",PCB.C+"\n");
 						break;
 					}
 					
 					default:{
 						String temp = linia[1].replace("_", " "); 
-						writer.println(temp);
+						System.out.println(temp);
 					}
 				}
 					
 					break;
 				}
 				
-				case "RF":{
+				case "RF":{// na razie niesprawne, problem z odczytem jednej liczby
 					switch(linia[1]){
-					case "A":{					
-						PCB.A = scanner.nextInt();
+					case "A":{		
+						driver.read("prog2dane");
 						break;
 					}
 					case "B":{
-						PCB.B = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
 					}
 					case "C":{
-						PCB.C = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
+					}
 					}
 				}
 					break;
-				}
-				
 				}
 				break;
 			}
@@ -235,19 +186,18 @@ public class Interpreter{
 			case 3:{
 				switch(linia[0]){
 					case "MVI":{
-						int temp=Integer.parseInt(linia[2]);
-					switch(linia[1]){
-						case "A":{
-							PCB.A=temp;
-							break;}
-						case "B":{
-							PCB.B=temp;
-							break;}
-						case "C":{
-							PCB.C=temp;
-							break;}
-					}
-					break;
+						switch(linia[1]){
+							case "A":{
+								PCB.A=Integer.parseInt(linia[2]);
+								break;}
+							case "B":{
+								PCB.B=Integer.parseInt(linia[2]);
+								break;}
+							case "C":{
+								PCB.C=Integer.parseInt(linia[2]);
+								break;}
+						}
+						break;
 					}
 					case "ADD":{
 						switch(linia[1]){

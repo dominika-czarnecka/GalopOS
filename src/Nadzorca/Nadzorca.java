@@ -50,11 +50,12 @@ public class Nadzorca
 	
 	public static void IBSUP()
 	{
+		menu1();
 		komenda=s.nextLine();   //wybranie opcji z menu
 		int wybor = Integer.parseInt(komenda);
 		
-		menu1();
-		
+		while(true)
+		{
 		switch (wybor) 
 		{
 		  case 1:   //utworz proces 
@@ -62,49 +63,61 @@ public class Nadzorca
 			  menu2();
 			  komenda=s.nextLine();  // wybranie programu dla ktorego ma zostac utworzony proces 
 			  UtworzProces(komenda);
+			  break;
 		  }
 
 		  case 2:  //wyswietl pamiec
 		  {
 			  pamiec.WyswietlPamiec();
+			  break;
 		  }
 		  
 		  case 10:  //wyswietl RAM
 		  {
 			  pamiec.WyswietlRAM();
+			  break;
 		  }
 		  
 		  case 3:  //wyswietl dysk
 		  {
 			  driver.driver_show();
+			  break;
 		  }
 		  
 		  case 4: //wyswietl tablice FAT
 		  {
 			  driver.fat_show();
+			  break;
 		  }
 		  
 		  case 5: //wyswietl katalogi
 		  {
 			  driver.catalog_show();
+			  break;
 		  }
 		  
 		  case 6: //wyswietl liste procesow
 		  {
 			  ZarzProc.printProcessList();
+			  break;
 		  }		  
 		  
 		  
 		  default:
 		    System.out.println("Wybrano nieznana opcje");
+		    break;
 		}
 		  
-				
+		}		
 	}
 	//Tworzenie procesu USERPROG
 	public static void UtworzProces(String komenda)
-	{		
-		if(komenda=="prog1" || komenda=="prog2" || komenda=="program3")
+	{	String program=null;
+		if(komenda=="1"){program="prog1";}
+		if(komenda=="2"){program="prog2";}
+		if(komenda=="3"){program="prog3";}
+		
+		if(program=="prog1" || program=="prog2" || program=="program3")
 		{
 			String JOB = null;  // pobranie linijki $JOB  tymczasowo =null;
 			String[] wynik1 = null;
@@ -115,7 +128,7 @@ public class Nadzorca
 				int Pamiec = Integer.parseInt(wynik1[2]);
 				try 
 				{
-					ZarzProc.createProcess(komenda, Pamiec);
+					ZarzProc.createProcess(program, Pamiec);
 				} catch (procCreationError e) 
 					{
 						e.printStackTrace();
@@ -135,8 +148,13 @@ public class Nadzorca
 	}
 	public static void menu2()
 	{
-		System.out.println(" 1. Prog1 /n");
-		System.out.println(" 2. Prog2 /n");
-		System.out.println(" 3. Prog3 /n");
+		System.out.println("1. Prog1 /n");
+		System.out.println("2. Prog2 /n");
+		System.out.println("3. Prog3 /n");
+	}
+	public static void start()
+	{
+		IPLRTN();
+		IBSUP();
 	}
 }
