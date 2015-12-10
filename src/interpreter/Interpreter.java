@@ -19,7 +19,7 @@ public class Interpreter{
 	//private Scanner scanner;
 	//private PrintWriter writer;	
 	
-	public String Rozkaz(String text){
+	public static void Rozkaz(String text){
 		String output = "";
 		String[] buffor= text.split("\n");
 		
@@ -28,7 +28,7 @@ public class Interpreter{
 				try {
 					task(buffor[i],buffor);
 				} catch (FileNotFoundException e) {
-					return "File not found! :( ";
+					System.out.println("File not found! :( ");
 				} catch (Exception e) {
 					if(e.getMessage().equals("HALT")){
 						output = "Completed :)";
@@ -38,10 +38,10 @@ public class Interpreter{
 				}		
 		Processor.counter++;
 		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.RUNNING.Line + "\n" + output;
-		return output;
+		System.out.println(output);
 	}
 	
-	private void task(String taskText, String[] buffor) throws Exception{
+	private static void task(String taskText, String[] buffor) throws Exception{
 		String[] linia= taskText.split(" ");
 		
 		switch(linia.length){
