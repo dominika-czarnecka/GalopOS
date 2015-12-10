@@ -12,9 +12,9 @@ public class Registers {
 		ClearRegisters();
 	}
 	
-	public void ClearRegisters()
+	private void ClearRegisters()
 	{
-		A = 
+		A = 0;
 		B = 
 		C = 
 		D =  0;

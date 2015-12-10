@@ -14,48 +14,57 @@ public class Processor {
 		
 		try
 		{
-		while(Processor.next_try.blocked == true || Processor.next_try.stopped == true )
+		while(next_try.blocked == true || next_try.stopped == true )
 		{
-			Processor.next_try = Processor.next_try.next;	
+			next_try = next_try.next;	
 		}
-		Processor.RUNNING = next_try;
-		Processor.next_try = next_try.next;
-		//next_try = RUNNING.next;
-		//counter = 1;
-		//load_all_registers();
+		RUNNING = next_try;
+		next_try = next_try.next;
+		System.out.println("REJESTR PROC: "+reg.A);
+		System.out.println("REJESTR PROC: "+reg.B);
+		System.out.println("REJESTR PROC: "+reg.C);
+		System.out.println("REJESTR PROC: "+reg.D);
+		
+		
+		load_all_registers();
+		System.out.println("REJESTR ob: "+ RUNNING.register.A);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.B);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.C);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.D);
 		}
-		catch(Exception ex) {System.out.println("blad find_to_run");}
-		//Processor.run_proc();
+		//catch(Exception ex) {System.out.println("blad find_to_run");}
+		catch(Exception ex) {ex.printStackTrace();}
+		Interpreter.Rozkaz("INR A");
 	}
 	static private void run_proc(){ //wykonaj instrukcjê
 		//Interpreter.Rozkaz();
 //		counter++;
 		if (counter<3) run_proc();
-		else expropriation();
+		else XPER();
 	}
 	
 	static public void XPER(){
-		expropriation();
-		}
-	
-	static public void expropriation(){ //wyw³aszczenie
 		save_all_registers();
 		RUNNING.stopped = true;
 		set_to_run();
-	}
+		}
 	
 	static private void save_all_registers(){
 		 reg.A = RUNNING.register.A;
-		 reg.B = RUNNING.register.B;
+		 /*reg.B = RUNNING.register.B;
 		 reg.C = RUNNING.register.C;
-		 reg.D = RUNNING.register.D;
+		 reg.D = RUNNING.register.D;*/
 	}
 	static private void load_all_registers(){
-		RUNNING.register.A = reg.A;
-		RUNNING.register.B = reg.B;
-		RUNNING.register.C = reg.C;
-		RUNNING.register.D = reg.D;
+		//RUNNING.register.A = reg.A;
+		//RUNNING.register.B = reg.B;
+		//RUNNING.register.C = reg.C;
+		//RUNNING.register.D = reg.D;
+		reg.A = RUNNING.register.A;
 	}	
+	static public void show_registers(){
+		System.out.println(RUNNING.register.A);
+	}
 	
 			
 

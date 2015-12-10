@@ -27,10 +27,11 @@ public class tester {
 		switch(a){
 		case 1:
 			Processor.set_to_run();
+			elo();
 			menu();
 			break;
 		case 2:
-			elo();
+			Processor.show_registers();
 			menu();
 			break;
 		default:
