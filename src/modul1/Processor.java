@@ -4,7 +4,7 @@ import interpreter.*;
 
 public class Processor {
 
-	static Registers reg = new Registers();
+	public static Registers reg = new Registers();
 	
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
@@ -19,6 +19,7 @@ public class Processor {
 			Processor.next_try = Processor.next_try.next;	
 		}
 		Processor.RUNNING = next_try;
+		Processor.next_try = next_try.next;
 		//next_try = RUNNING.next;
 		//counter = 1;
 		//load_all_registers();

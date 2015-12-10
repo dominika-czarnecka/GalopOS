@@ -5,14 +5,34 @@ import modul3.ZarzProc;
 
 public class tester {
 
-	public static void main(String[] args) {
+	static PCB p1;
+	static PCB p2;
+	static PCB p3;
+	static PCB p4;
+	static PCB p5;
+	static PCB p6;
+	
+	public static void elo(){
+		try
+		{
+			System.out.println(p1.name);
+			System.out.println(p2.name);
+			System.out.println(p3.name);
+			System.out.println("RUNNING: "+Processor.RUNNING.name);
+		}
+		catch(NullPointerException e){System.out.println("blad wyswietl_nazwe_running");}
+	}
+	
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		PCB p1 = new PCB("p1", 0);
-		PCB p2 = new PCB("p2", 0);
-		PCB p3 = new PCB("p3", 0);
-		PCB p4 = new PCB("p4", 0);
-		PCB p5 = new PCB("p5", 0);
-		PCB p6 = new PCB("p6", 0);
+		
+		
+		p1 = new PCB("p1", 0);
+		p2 = new PCB("p2", 0);
+		p3 = new PCB("p3", 0);
+		p4 = new PCB("p4", 0);
+		p5 = new PCB("p5", 0);
+		p6 = new PCB("p6", 0);
 		PCB.first = p1;
 		p1.next = p2;
 		p1.prev = p6;
@@ -30,7 +50,7 @@ public class tester {
 		p3.prev = p2;
 		
 		p3.stopped = false;
-		p3.blocked = false;
+		p3.blocked = true;
 		
 		p4.next = p5;
 		p4.prev = p3;
@@ -50,20 +70,15 @@ public class tester {
 		p6.stopped = false;
 		p6.blocked = false;
 			
-		try
-		{
-			Processor.set_to_run();
-		}
-		catch(NullPointerException e) {System.out.println("blad find_to_runtester");}
-						
-			try
+								
+			
+			
+			while(true)
 			{
-				System.out.println(p1.name);
-				System.out.println(p2.name);
-				System.out.println(p3.name);
-				System.out.println("RUNNING: "+Processor.RUNNING.name);
+				Processor.set_to_run();
+				elo();
+				Thread.sleep(1000);
 			}
-			catch(NullPointerException e){System.out.println("blad wyswietl_nazwe_running");}
 	}
 
 }
