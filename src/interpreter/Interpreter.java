@@ -23,7 +23,7 @@ public class Interpreter{
 		String output = "";
 		String[] buffor= text.split("\n");
 		
-	int i=Processor.counter+1;
+	int i=Processor.counter;
 				buffor[i]=buffor[i].trim();
 				try {
 					task(buffor[i],buffor);

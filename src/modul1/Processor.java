@@ -34,7 +34,7 @@ public class Processor {
 		}
 		//catch(Exception ex) {System.out.println("blad find_to_run");}
 		catch(Exception ex) {ex.printStackTrace();}
-		Interpreter.Rozkaz("INR A");
+		Interpreter.Rozkaz("INR A\nADD A");
 	}
 	static private void run_proc(){ //wykonaj instrukcjê
 		//Interpreter.Rozkaz();
