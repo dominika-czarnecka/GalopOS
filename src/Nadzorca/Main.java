@@ -1,3 +1,4 @@
+package Nadzorca;
 import interpreter.*;
 import modul1.*;
 import modul2.*;
