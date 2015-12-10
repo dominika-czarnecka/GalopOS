@@ -1,5 +1,7 @@
 package interpreter;
 import modul1.*;
+import modul2.Pamiec;
+import modul4.*;
 //import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,8 +11,17 @@ import java.util.Scanner;
 
 public class Interpreter{
 
-	private Scanner scanner;
-	private PrintWriter writer;	
+	static hdd_commander driver;
+	static Pamiec pamiec;
+	
+	public Interpreter(hdd_commander driver,Pamiec pamiec)
+	{
+		this.driver=driver;
+		this.pamiec=pamiec;
+	}
+	
+	//private Scanner scanner;
+	//private PrintWriter writer;	
 	
 	public String Rozkaz(String text){
 		String output = "";
@@ -47,7 +58,8 @@ public class Interpreter{
 						
 						throw new Exception("HALT");
 					}
-					case "CFR":{
+				/*	
+				    case "CFR":{
 						scanner.close();
 						break;
 					}
@@ -57,6 +69,7 @@ public class Interpreter{
 						writer.close();
 						break;
 					}
+					*/
 				}
 				break;
 				
@@ -112,7 +125,7 @@ public class Interpreter{
 					}
 					break;
 				}
-			
+			/*
 				case "OFR":{
 					File plik = new File(linia[1]);
 					scanner = new Scanner(plik);
@@ -124,24 +137,25 @@ public class Interpreter{
 					
 					break;
 					}
+					*/
 				case "WF":{
 					switch(linia[1]){
-					case "A":{					
-						writer.write(PCB.A+"\n");
+					case "A":{		
+						driver.edit("prog2dane",PCB.A+"\n");
 						break;
 					}
 					case "B":{
-						writer.println(PCB.A);
+						driver.edit("prog2dane",PCB.B+"\n");
 						break;
 					}
 					case "C":{
-						writer.println(PCB.C);
+						driver.edit("prog2dane",PCB.C+"\n");
 						break;
 					}
 					
 					default:{
 						String temp = linia[1].replace("_", " "); 
-						writer.println(temp);
+						System.out.println(temp);
 					}
 				}
 					
