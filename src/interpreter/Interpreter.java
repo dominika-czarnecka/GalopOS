@@ -1,78 +1,16 @@
 package interpreter;
 import modul1.*;
-
 //import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
+
 
 public class Interpreter{
 
 	private Scanner scanner;
 	private PrintWriter writer;	
-	private JFrame frmGaloposV;
-
-	/**
-	 * Launch the application.
-	 */
-	
-		public void run() {
-			try {
-				Interpreter window = new Interpreter();
-				window.frmGaloposV.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			}
-		
-	/**
-	 * Create the application.
-	 */
-	public Interpreter() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmGaloposV = new JFrame();
-		frmGaloposV.setIconImage(Toolkit.getDefaultToolkit().getImage(Interpreter.class.getResource("/interpreter/icon.png")));
-		frmGaloposV.setTitle("GalopOS v2.1");
-		frmGaloposV.setBounds(100, 100, 450, 300);
-		frmGaloposV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGaloposV.getContentPane().setLayout(null);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(10, 11, 202, 208);
-		frmGaloposV.getContentPane().add(editorPane);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBackground(SystemColor.control);
-		textPane.setEditable(false);
-		textPane.setBounds(222, 11, 202, 208);
-		frmGaloposV.getContentPane().add(textPane);
-		
-		JButton btnWykonaj = new JButton("Wykonaj");
-		btnWykonaj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				textPane.setText(Rozkaz(editorPane.getText()));
-				
-			}
-		});
-		btnWykonaj.setBounds(335, 227, 89, 23);
-		frmGaloposV.getContentPane().add(btnWykonaj);
-	}
 	
 	public String Rozkaz(String text){
 		String output = "";
