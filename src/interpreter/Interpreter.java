@@ -34,7 +34,6 @@ public class Interpreter{
 			}
 			}
 		
-
 	/**
 	 * Create the application.
 	 */
@@ -75,11 +74,11 @@ public class Interpreter{
 		frmGaloposV.getContentPane().add(btnWykonaj);
 	}
 	
-	private String Rozkaz(String text){
+	public String Rozkaz(String text){
 		String output = "";
 		String[] buffor= text.split("\n");
 		
-	int i=Processor.counter;
+	int i=Processor.counter+1;
 				buffor[i]=buffor[i].trim();
 				try {
 					task(buffor[i],buffor);
@@ -92,7 +91,7 @@ public class Interpreter{
 						i = Integer.parseInt(e.getMessage());
 					}
 				}		
-
+		Processor.counter++;
 		output = "A: " + PCB.A + "\nB: " + PCB.B + "\nC: " + PCB.C + "\nLR:" + PCB.LR + "\n" + output;
 		return output;
 	}
@@ -351,5 +350,4 @@ class  PCB{
 	static int B;
 	static int C;
 	static int LR;
-	static Boolean running = true;
 }
