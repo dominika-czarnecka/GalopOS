@@ -59,7 +59,7 @@ public class Nadzorca
 		{
 		  case 1:   //utworz proces 
 		  {
-			  
+			  menu2();
 			  komenda=s.nextLine();  // wybranie programu dla ktorego ma zostac utworzony proces 
 			  UtworzProces(komenda);
 		  }
@@ -135,7 +135,8 @@ public class Nadzorca
 	}
 	public static void menu2()
 	{
-		System.out.println("1. Prog1);
+		System.out.println(" 1. Prog1 /n");
+		System.out.println(" 2. Prog2 /n");
+		System.out.println(" 3. Prog3 /n");
 	}
 }
-	

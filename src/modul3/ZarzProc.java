@@ -1,6 +1,7 @@
 package modul3;
-import modul1.*;
 
+import modul1.*;
+import modul2.*;
 
 public class ZarzProc {
 	
@@ -31,14 +32,14 @@ public class ZarzProc {
 		}
 		else {
 			popProcess(process);
-			process.Messages.clear();
-			//XF(name); zwalnianie pamiêci
+			process.Messages.clear(); //bufor czyszczony wiadomosci 
+			Pamiec.XF(process.name); //zwalnianie pamiêci
 		}
 	}
 	
 	//XH - zatrzymanie zlecenia i powiadomienie nadzorcy
 	
-	static public void popProcess(PCB process) {
+	static public void popProcess(PCB process) { //usuwa z listy PCB
 		if (process.next==process)
 			PCB.first = null;
 		else {

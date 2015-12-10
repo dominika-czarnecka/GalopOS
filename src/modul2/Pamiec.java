@@ -180,6 +180,7 @@ public byte[] OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - 
     else
         System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
     FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
+    return null;
 }
 
 ////
@@ -193,4 +194,4 @@ public byte[] OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - 
             System.out.println(RAM[i] + " ");
         }
         System.out.println("\n\n");
-    }
+    }}
