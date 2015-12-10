@@ -17,7 +17,7 @@ public class Main {
 		//Interpreter interpreter= new Interpreter(driver, pamiec);
 		//System.out.println("test");
 		driver.create("prog1","$JOB,95,CZYTNIK=*IN,DRUKARKA=*OUT\n" 
-				+ "MVI C 10\n"
+				+"MVI C 10\n"
 				+ "MVI B 1\n"
 				+ "ADD A B\n"
 				+ "INR B\n"
@@ -26,7 +26,7 @@ public class Main {
 				+ "JNZ 2\n"
 				+ "HLT\n");
 		System.out.println(driver.read("prog1"));
-		driver.create("prog2", "$JOB,173,CZYTNIK=*IN,DRUKARKA=*OUT"
+		driver.create("prog2", "$JOB,173,CZYTNIK=*IN,DRUKARKA=*OUT\n"
 				+ "OFR prog2dane.txt" + "\n"
 				+ "RF A" + "\n"
 				+ "RF B" + "\n"
