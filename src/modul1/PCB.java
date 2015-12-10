@@ -1,6 +1,7 @@
 package modul1;
-import java.util.List;
+//import java.util.List;
 import modul3.*;
+
 public class PCB {
 		public String name;
         public int ID;
@@ -10,9 +11,10 @@ public class PCB {
         public PCB next_semaphore_waiter;
         
        
-        public List<Message> Messages;
+      //  public List<Message> Messages;
         public Semaphores msgSemaphore;
-       
+        public int Line;
+        public String buffor;
         public boolean stopped;
         public boolean blocked;
        
