@@ -290,7 +290,6 @@ public class Interpreter{
 	}
 	
 }
-odczytywanie z pamieci linijka po linijce bez uwzglednienia poczatku
 /*
 Queue<String>komendy=new LinkedList<String>();
 
