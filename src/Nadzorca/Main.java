@@ -12,7 +12,8 @@ public class Main {
 
 		hdd_commander driver = new hdd_commander(32,32);
 		
-		driver.create("prog1", "MVI C 10" + "\n"
+		driver.create("prog1","$JOB,95,CZYTNIK=*IN,DRUKARKA=*OUT" 
+				+ "MVI C 10" + "\n"
 				+ "MVI B 1" + "\n"
 				+ "ADD A B" + "\n"
 				+ "INR B" + "\n"
@@ -21,7 +22,7 @@ public class Main {
 				+ "JNZ 2" + "\n"
 				+ "HLT" + "\n");
 		
-		driver.create("prog2", "$JOB,172,CZYTNIK=*IN,DRUKARKA=*OUT"
+		driver.create("prog2", "$JOB,173,CZYTNIK=*IN,DRUKARKA=*OUT"
 				+ "OFR prog2dane.txt" + "\n"
 				+ "RF A" + "\n"
 				+ "RF B" + "\n"
@@ -31,7 +32,7 @@ public class Main {
 				+ "OFW prog2wynik.txt" + "\n"
 				+ "JNZ 11" + "\n"
 				+ "WF Suma_parzysta" + "\n"
-				+ "JZ 12" + "\n"
+				+ "JZ 13" + "\n"
 				+ "WF Suma_nieparzysta" + "\n"
 				+ "CFW" + "\n"
 				+ "HLT"+ "\n");
