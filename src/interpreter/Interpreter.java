@@ -162,24 +162,23 @@ public class Interpreter{
 					break;
 				}
 				
-				case "RF":{
+				case "RF":{// na razie niesprawne, problem z odczytem jednej liczby
 					switch(linia[1]){
-					case "A":{					
-						PCB.A = scanner.nextInt();
+					case "A":{		
+						driver.read("prog2dane");
 						break;
 					}
 					case "B":{
-						PCB.B = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
 					}
 					case "C":{
-						PCB.C = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
+					}
 					}
 				}
 					break;
-				}
-				
 				}
 				break;
 			}
@@ -187,19 +186,18 @@ public class Interpreter{
 			case 3:{
 				switch(linia[0]){
 					case "MVI":{
-						int temp=Integer.parseInt(linia[2]);
-					switch(linia[1]){
-						case "A":{
-							PCB.A=temp;
-							break;}
-						case "B":{
-							PCB.B=temp;
-							break;}
-						case "C":{
-							PCB.C=temp;
-							break;}
-					}
-					break;
+						switch(linia[1]){
+							case "A":{
+								PCB.A=Integer.parseInt(linia[2]);
+								break;}
+							case "B":{
+								PCB.B=Integer.parseInt(linia[2]);
+								break;}
+							case "C":{
+								PCB.C=Integer.parseInt(linia[2]);
+								break;}
+						}
+						break;
 					}
 					case "ADD":{
 						switch(linia[1]){
