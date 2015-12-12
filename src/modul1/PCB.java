@@ -8,7 +8,7 @@ import modul3.*;
 
 public class PCB {
 		public String name;
-        public int ID;
+        public int count_of_istr;
         public PCB next;
         public PCB prev;      
         public static PCB first;

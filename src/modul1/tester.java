@@ -1,8 +1,8 @@
 package modul1;
 
-import java.util.Scanner;
 
-import modul3.ZarzProc;
+import java.util.Scanner;
+import modul3.*;
 
 
 public class tester {
@@ -18,7 +18,11 @@ public class tester {
 	public static void menu()
 	{
 		
-		System.out.println("MENU: ");
+		System.out.println("--=MENU=--: ");
+		System.out.println("1): Set next RUNNING");
+		System.out.println("2): Show processor registers");
+		System.out.println("3): Show process registers");
+		System.out.println("0): Run one instruction");
 		try
 		{
 			a = scanner.nextInt();
@@ -27,7 +31,6 @@ public class tester {
 		switch(a){
 		case 1:
 			Processor.set_to_run();
-			elo();
 			menu();
 			break;
 		case 2:
@@ -48,25 +51,13 @@ public class tester {
 			
 	}
 	
-	public static void elo(){
-		try
-		{
-			System.out.println(p1.name);
-			System.out.println(p2.name);
-			System.out.println(p3.name);
-			System.out.println(p4.name);
-			System.out.println(p5.name);
-			System.out.println(p6.name);
-			System.out.println("RUNNING: "+Processor.RUNNING.name);
-		}
-		catch(NullPointerException e){System.out.println("blad wyswietl_nazwe_running");}
-	}
-	
 	public static void show_registers_processor(){
 		System.out.println("REJESTR PROC: "+Processor.reg.A);
 		System.out.println("REJESTR PROC: "+Processor.reg.B);
 		System.out.println("REJESTR PROC: "+Processor.reg.C);
-		System.out.println("REJESTR PROC: "+Processor.reg.D);		
+		System.out.println("REJESTR PROC: "+Processor.reg.D);
+		System.out.println("");
+		System.out.println("");
 	}
 	
 	public static void show_registers_process(){
@@ -76,14 +67,32 @@ public class tester {
 		System.out.println("REJESTR ob: "+Processor.RUNNING.register.B);
 		System.out.println("REJESTR ob: "+Processor.RUNNING.register.C);
 		System.out.println("REJESTR ob: "+Processor.RUNNING.register.D);
+		System.out.println("");
+		System.out.println("");
 		}
-		catch(Exception e) {System.out.println("Brak procesu RUNNING!");menu();}
-	}
+		catch(Exception e) 
+		{
+		System.out.println("Brak procesu RUNNING!");System.out.println("");
+		System.out.println("");System.out.println("");
+		System.out.println("");menu();}
+		}
 	
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, procCreationError, procNotFoundError {
 		// TODO Auto-generated method stub
 		
+		/*ZarzProc.createProcess("p1", 0);
+		ZarzProc.createProcess("p2", 0);
+		ZarzProc.createProcess("p3", 0);
+		ZarzProc.createProcess("p4", 0);
+		ZarzProc.createProcess("p5", 0);
+		ZarzProc.createProcess("p6", 0);
+		ZarzProc.startProcess("p1");
+		ZarzProc.startProcess("p2");
+		ZarzProc.startProcess("p3");
+		ZarzProc.startProcess("p4");
+		ZarzProc.startProcess("p5");
+		ZarzProc.startProcess("p6");*/
 		
 		p1 = new PCB("p1", 0);
 		p2 = new PCB("p2", 0);

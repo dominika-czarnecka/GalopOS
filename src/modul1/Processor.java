@@ -22,32 +22,48 @@ public class Processor {
 		next_try = next_try.next;	
 				
 		load_all_registers();
-		System.out.println("RUNNING: "+RUNNING.name);
+		System.out.println("NEW RUNNING: "+RUNNING.name);
+		System.out.println("");
+		System.out.println("");
+		
 		}
 		catch(Exception ex) {ex.printStackTrace();}
 		//Interpreter.Rozkaz("INR A\nADD A");
 	}
 	static public void run_proc(){ //wykonaj instrukcjê
 		//Interpreter.Rozkaz();
-		System.out.println("Wykonanie intstrukcji");
-		counter++;
-		if (counter<4) run_proc();
-		else XPER();
+		try
+		{
+		if (RUNNING.name!=null)
+		{
+			if (counter<4)
+			{
+				System.out.println("Wykonanie intstrukcji: " + counter + " procesu: " + RUNNING.name);
+				counter++;
+			}
+			else XPER();
+			}
+		}
+		catch(Exception ex) {System.out.println("Cannot run instruction");}
 	}
 	
-	static public void XPER(){
-		System.out.println("Wyw³aszczam proces");
+	static public void XPER()
+	{
+		System.out.println("Wyw³aszczam proces: " + RUNNING.name);
 		save_all_registers();
-		RUNNING.stopped = true;
 		counter = 1;
 		set_to_run();
 		}
 	
 	static private void save_all_registers(){
+		try
+		{
 		RUNNING.register.A = reg.A;
 		RUNNING.register.B = reg.B;
 		RUNNING.register.C = reg.C;
 		RUNNING.register.D = reg.D;
+		}
+		catch(Exception e){System.out.println("");}
 		 
 	}
 	static private void load_all_registers(){
