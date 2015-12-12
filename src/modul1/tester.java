@@ -31,7 +31,15 @@ public class tester {
 			menu();
 			break;
 		case 2:
-			Processor.show_registers();
+			show_registers_processor();
+			menu();
+			break;
+		case 3:
+			show_registers_process();
+			menu();
+			break;
+		case 0:
+			Processor.run_proc();
 			menu();
 			break;
 		default:
@@ -54,6 +62,25 @@ public class tester {
 		catch(NullPointerException e){System.out.println("blad wyswietl_nazwe_running");}
 	}
 	
+	public static void show_registers_processor(){
+		System.out.println("REJESTR PROC: "+Processor.reg.A);
+		System.out.println("REJESTR PROC: "+Processor.reg.B);
+		System.out.println("REJESTR PROC: "+Processor.reg.C);
+		System.out.println("REJESTR PROC: "+Processor.reg.D);		
+	}
+	
+	public static void show_registers_process(){
+		try
+		{
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.A);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.B);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.C);
+		System.out.println("REJESTR ob: "+Processor.RUNNING.register.D);
+		}
+		catch(Exception e) {System.out.println("Brak procesu RUNNING!");menu();}
+	}
+	
+	
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		
@@ -70,12 +97,20 @@ public class tester {
 		
 		p1.stopped = true;
 		p1.blocked = true;
+		p1.register.A = 1;
+		p1.register.B = 1;
+		p1.register.C = 1;
+		p1.register.D = 1;
 		
 		p2.next = p3;
 		p2.prev = p1;
-		
+				
 		p2.stopped = false;
 		p2.blocked = false;
+		p2.register.D = 2;
+		p2.register.C = 2;
+		p2.register.B = 2;
+		p2.register.A = 2;
 		
 		p3.next = p4;
 		p3.prev = p2;

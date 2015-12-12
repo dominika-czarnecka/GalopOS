@@ -19,52 +19,44 @@ public class Processor {
 			next_try = next_try.next;	
 		}
 		RUNNING = next_try;
-		next_try = next_try.next;
-		System.out.println("REJESTR PROC: "+reg.A);
-		System.out.println("REJESTR PROC: "+reg.B);
-		System.out.println("REJESTR PROC: "+reg.C);
-		System.out.println("REJESTR PROC: "+reg.D);
-		
-		
+		next_try = next_try.next;	
+				
 		load_all_registers();
-		System.out.println("REJESTR ob: "+ RUNNING.register.A);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.B);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.C);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.D);
+		System.out.println("RUNNING: "+RUNNING.name);
 		}
-		//catch(Exception ex) {System.out.println("blad find_to_run");}
 		catch(Exception ex) {ex.printStackTrace();}
-		Interpreter.Rozkaz("INR A\nADD A");
+		//Interpreter.Rozkaz("INR A\nADD A");
 	}
-	static private void run_proc(){ //wykonaj instrukcjê
+	static public void run_proc(){ //wykonaj instrukcjê
 		//Interpreter.Rozkaz();
-//		counter++;
-		if (counter<3) run_proc();
+		System.out.println("Wykonanie intstrukcji");
+		counter++;
+		if (counter<4) run_proc();
 		else XPER();
 	}
 	
 	static public void XPER(){
+		System.out.println("Wyw³aszczam proces");
 		save_all_registers();
 		RUNNING.stopped = true;
+		counter = 1;
 		set_to_run();
 		}
 	
 	static private void save_all_registers(){
-		 reg.A = RUNNING.register.A;
-		 /*reg.B = RUNNING.register.B;
-		 reg.C = RUNNING.register.C;
-		 reg.D = RUNNING.register.D;*/
+		RUNNING.register.A = reg.A;
+		RUNNING.register.B = reg.B;
+		RUNNING.register.C = reg.C;
+		RUNNING.register.D = reg.D;
+		 
 	}
 	static private void load_all_registers(){
-		//RUNNING.register.A = reg.A;
-		//RUNNING.register.B = reg.B;
-		//RUNNING.register.C = reg.C;
-		//RUNNING.register.D = reg.D;
 		reg.A = RUNNING.register.A;
+		reg.B = RUNNING.register.B;
+		reg.C = RUNNING.register.C;
+		reg.D = RUNNING.register.D;
 	}	
-	static public void show_registers(){
-		System.out.println(RUNNING.register.A);
-	}
+	
 	
 			
 

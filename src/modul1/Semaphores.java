@@ -16,7 +16,7 @@ public class Semaphores {
 				first_semaphore_waiter = Processor.RUNNING;
 				first_semaphore_waiter.next_semaphore_waiter = null;
 				Processor.RUNNING.blocked = true;
-				Processor.expropriation();
+				Processor.XPER();
 				//Processor.RUNNING = Processor.find_to_run();
 			}
 			else{
@@ -25,7 +25,7 @@ public class Semaphores {
 				}
 				first.next_semaphore_waiter = Processor.RUNNING;
 				Processor.RUNNING.blocked = true;
-				Processor.expropriation();
+				Processor.XPER();
 				//Processor.RUNNING = Processor.find_to_run();
 			}
 		}
