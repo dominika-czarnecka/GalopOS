@@ -12,7 +12,7 @@ import interpreter.Interpreter;
 
 public class Nadzorca 
 {
-	
+	public static Boolean end = false;
 	//static Processor Procesor = new Processor();
 	static hdd_commander driver;
 	static Pamiec pamiec;
@@ -55,10 +55,16 @@ public class Nadzorca
 	    
 		while(true)
 		{
+			if(end == true)
+			{
+			Processor.RUNNING.blocked=true;
+			ZarzProc.removeProcess(Processor.RUNNING.name);
+			end = false;
+			}
 			
-		menu1();
-		String komenda=s.nextLine();   //wybranie opcji z menu
-		int wybor = Integer.parseInt(komenda);
+			menu1();
+			String komenda=s.nextLine();   //wybranie opcji z menu
+			int wybor = Integer.parseInt(komenda);
 		
 		
 		switch (wybor) 
@@ -73,13 +79,13 @@ public class Nadzorca
 
 		  case 2:  //wyswietl pamiec
 		  {
-			  pamiec.WyswietlPamiec();
+			  Pamiec.WyswietlPamiec();
 			  break;
 		  }
 		  
 		  case 10:  //wyswietl RAM
 		  {
-			  pamiec.WyswietlRAM();
+			  Pamiec.WyswietlRAM();
 			  break;
 		  }
 		  
