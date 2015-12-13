@@ -26,7 +26,7 @@ public class Interpreter{
 		case 1:
 			switch(line[0]){
 			case "HLT":	
-				Nadzorca.End=true;
+				Nadzorca.end=true;
 				//ZarzProc.removeProcess(Processor.RUNNING.name);						
 				throw new Exception("HALT");
 			//break;

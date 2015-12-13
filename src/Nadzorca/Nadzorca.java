@@ -58,7 +58,11 @@ public class Nadzorca
 			if(end == true)
 			{
 			Processor.RUNNING.blocked=true;
-			ZarzProc.removeProcess(Processor.RUNNING.name);
+			try {
+				ZarzProc.removeProcess(Processor.RUNNING.name);
+			} catch (procNotFoundError e) {
+				e.printStackTrace();
+			}
 			end = false;
 			}
 			
@@ -117,7 +121,11 @@ public class Nadzorca
 		  
 		  case 7: //Takt Procesora
 		  {			  
-			  Interpreter.Rozkaz("INR A");
+			  try {
+				Interpreter.Task();
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}
 			  break;
 		  }		  
 		  
