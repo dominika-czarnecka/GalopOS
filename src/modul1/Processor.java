@@ -1,86 +1,81 @@
 package modul1;
 
+import interpreter.*;
+
 public class Processor {
 
-	static Registers reg = new Registers();
-	static PCB PROCESS = PCB.first;
+	public static Registers reg = new Registers();
+	
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
-	static int counter=0;
+	public static int time=1;
 	
-	static public PCB find_to_run(){ //znajdü pierwszy moøliwy do wykonania
-		while(PROCESS.next.blocked == true && PROCESS.next.stopped == true ){
-			//RUNNING = PROCESS;
-			next_try = PROCESS;
-			PROCESS = next_try;
+	static public void set_to_run(){ //znajdü pierwszy moøliwy do wykonania
+		
+		try
+		{
+		while(next_try.blocked == true || next_try.stopped == true )
+		{
+			next_try = next_try.next;	
 		}
-		counter=0;
-		load_all_registers();
-		return next_try;
-
-		//Processor.run_proc();
-	}
-	static private void run_proc(){ //wykonaj instrukcjÍ
-		//wywo≥anie funkcji interpretera
-//		counter++;
-		if (counter<3) run_proc();
-		else expropriation();
-	}
-	
-	static public void XPER(){
-		expropriation();
-		}
-	
-	static public void expropriation(){ //wyw≥aszczenie
-		save_all_registers();
-		RUNNING.stopped = true;
-		RUNNING = find_to_run();
-	}
-	
-	static private void save_all_registers(){
-		 reg.reg1 = RUNNING.register.reg1;
-		 reg.reg2 = RUNNING.register.reg2;
-		 reg.reg3 = RUNNING.register.reg3;
-		 reg.reg4 = RUNNING.register.reg4;
-		 reg.reg5 = RUNNING.register.reg5;
-		 reg.reg6 = RUNNING.register.reg6;
-		 reg.reg7 = RUNNING.register.reg7;
-		 reg.reg8 = RUNNING.register.reg8;
-		 reg.reg9 = RUNNING.register.reg9;
-	}
-	static private void load_all_registers(){
-		RUNNING.register.reg1 = reg.reg1;
-		RUNNING.register.reg2 = reg.reg2;
-		RUNNING.register.reg3 = reg.reg3;
-		RUNNING.register.reg4 = reg.reg4;
-		RUNNING.register.reg5 = reg.reg5;
-		RUNNING.register.reg6 = reg.reg6;
-		RUNNING.register.reg7 = reg.reg7;
-		RUNNING.register.reg8 = reg.reg8;
-		RUNNING.register.reg9 = reg.reg9;
-	}	
-	static private int count_of_proc(){
-		int count=0;
-		PCB first = PCB.first;
-		while(first.next!=PCB.first){
-			first = first.next;
-			count++;
-		}
-		return count;
-	}
-	static private void process_show(){
-		if (PCB.first == null) System.out.println("There is no process");
-		else{
-			PCB first = PCB.first;
-			System.out.println("NAME		"+"ID		");
-			
-				while(PCB.first.next != first){			
+		RUNNING = next_try;
+		next_try = next_try.next;	
 				
-			}
+		load_all_registers();
+		System.out.println("NEW RUNNING: "+RUNNING.name);
+		System.out.println("");
+		System.out.println("");
 		
 		}
-			
+		catch(Exception ex) {ex.printStackTrace();}
+		//Interpreter.Rozkaz("INR A\nADD A");
 	}
+	static public void run_proc(){ //wykonaj instrukcjÍ
+		//Interpreter.Rozkaz();
+		try
+		{
+		if (RUNNING.name!=null)
+		{
+			if (time<4)
+			{
+				System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+				time++;
+			}
+			else XPER();
+			}
+		}
+		catch(Exception ex) {System.out.println("Cannot run instruction");}
+	}
+	
+	static public void XPER()
+	{
+		System.out.println("Wyw≥aszczam proces: " + RUNNING.name);
+		save_all_registers();
+		time = 1;
+		set_to_run();
+		}
+	
+	static private void save_all_registers(){
+		try
+		{
+		RUNNING.register.A = reg.A;
+		RUNNING.register.B = reg.B;
+		RUNNING.register.C = reg.C;
+		RUNNING.register.D = reg.D;
+		}
+		catch(Exception e){System.out.println("");}
+		 
+	}
+	static private void load_all_registers(){
+		reg.A = RUNNING.register.A;
+		reg.B = RUNNING.register.B;
+		reg.C = RUNNING.register.C;
+		reg.D = RUNNING.register.D;
+	}	
+	
+	
+			
+
 	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

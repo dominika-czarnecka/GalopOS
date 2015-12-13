@@ -1,90 +1,35 @@
 package interpreter;
-
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.io.File;
+import modul1.*;
+import modul2.Pamiec;
+//import modul3.ZarzProc;
+import modul4.*;
+//import java.awt.EventQueue;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
 
 public class Interpreter{
 
-	private Scanner scanner;
-	private PrintWriter writer;	
-	private JFrame frmGaloposV;
-
-	/**
-	 * Launch the application.
-	 */
+	static hdd_commander driver;
+	static Pamiec pamiec;
 	
-		public void run() {
-			try {
-				Interpreter window = new Interpreter();
-				window.frmGaloposV.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			}
-		
-
-	/**
-	 * Create the application.
-	 */
-	public Interpreter() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmGaloposV = new JFrame();
-		frmGaloposV.setIconImage(Toolkit.getDefaultToolkit().getImage(Interpreter.class.getResource("/interpreter/icon.png")));
-		frmGaloposV.setTitle("GalopOS v2.1");
-		frmGaloposV.setBounds(100, 100, 450, 300);
-		frmGaloposV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGaloposV.getContentPane().setLayout(null);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(10, 11, 202, 208);
-		frmGaloposV.getContentPane().add(editorPane);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBackground(SystemColor.control);
-		textPane.setEditable(false);
-		textPane.setBounds(222, 11, 202, 208);
-		frmGaloposV.getContentPane().add(textPane);
-		
-		JButton btnWykonaj = new JButton("Wykonaj");
-		btnWykonaj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				textPane.setText(Text(editorPane.getText()));
-				
-			}
-		});
-		btnWykonaj.setBounds(335, 227, 89, 23);
-		frmGaloposV.getContentPane().add(btnWykonaj);
+	public Interpreter(hdd_commander driver,Pamiec pamiec)
+	{
+		this.driver=driver;
+		this.pamiec=pamiec;
 	}
 	
-	private String Text(String text){
+	//private Scanner scanner;
+	//private PrintWriter writer;	
+	
+	public static void Rozkaz(String text){
 		String output = "";
 		String[] buffor= text.split("\n");
 		
-		for(int i = 0;i<buffor.length;PCB.LR++, i++){
-			while(PCB.running){
+	int i=Processor.reg.IP;
 				buffor[i]=buffor[i].trim();
 				try {
 					task(buffor[i],buffor);
 				} catch (FileNotFoundException e) {
-					return "File not found! :(";
+					System.out.println("File not found! :( ");
 				} catch (Exception e) {
 					if(e.getMessage().equals("HALT")){
 						output = "Completed :)";
@@ -92,26 +37,26 @@ public class Interpreter{
 						i = Integer.parseInt(e.getMessage());
 					}
 				}		
-			}
-		}
-		output = "A: " + PCB.A + "\nB: " + PCB.B + "\nC: " + PCB.C + "\nLR:" + PCB.LR + "\n" + output;
-		return output;
+		Processor.time++;
+		
+		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.reg.IP + "\n" + output;
+		System.out.println(output);
 	}
 	
-	private void task(String taskText, String[] buffor) throws Exception{
+	private static void task(String taskText, String[] buffor) throws Exception{
 		String[] linia= taskText.split(" ");
 		
 		switch(linia.length){
 		
 			case 1:{
 				switch(linia[0]){
-					case "HLT":{
+					case "HLT":{	
 						
-						//
-						
+						//ZarzProc.removeProcess(Processor.RUNNING.name);						
 						throw new Exception("HALT");
 					}
-					case "CFR":{
+				/*	
+				    case "CFR":{
 						scanner.close();
 						break;
 					}
@@ -121,6 +66,7 @@ public class Interpreter{
 						writer.close();
 						break;
 					}
+					*/
 				}
 				break;
 				
@@ -132,13 +78,13 @@ public class Interpreter{
 					case "INR":{
 						switch(linia[1]){
 						case "A":
-							PCB.A+=1;
+							Processor.reg.A+=1;
 							break;
 						case "B":
-							PCB.B++;
+							Processor.reg.B+=1;
 							break;
 						case "C":
-							PCB.C++;
+							Processor.reg.C+=1;
 							break;
 						}
 						break;
@@ -147,36 +93,36 @@ public class Interpreter{
 					case "DCR":{
 						switch(linia[1]){
 						case "A":
-							PCB.A--;
+							Processor.reg.A--;
 							break;
 						case "B":
-							PCB.B--;
+							Processor.reg.B--;
 							break;
 						case "C":
-							PCB.C--;
+							Processor.reg.C--;
 							break;
 						}
 						break;
 					}
 				
 				case "JNZ":{
-					if(PCB.C!=0){
-						int temp=Integer.parseInt(linia[1]) - 2;
-						throw new Exception(temp+"");
-						//task(buffor[temp-1], buffor);
+					if(Processor.reg.C!=0){
+						Processor.reg.IP=Integer.parseInt(linia[1]) - 1;//!!!!!!!!!!!!!
+						//throw new Exception(temp+"");
+						task(buffor[Processor.reg.IP], buffor);
 					}
 					break;
 				}
 			
 				case "JZ":{
-					if(PCB.C==0){
-						int temp=Integer.parseInt(linia[1]) - 2;
-						throw new Exception(temp+"");
-						//task(buffor[temp-1], buffor);
+					if(Processor.reg.C==0){
+						Processor.reg.IP=Integer.parseInt(linia[1]) - 2;//!!!!!!!!!!!!!!
+						//throw new Exception(temp+"");
+						task(buffor[Processor.reg.IP], buffor);
 					}
 					break;
 				}
-			
+			/*
 				case "OFR":{
 					File plik = new File(linia[1]);
 					scanner = new Scanner(plik);
@@ -188,48 +134,48 @@ public class Interpreter{
 					
 					break;
 					}
+					*/
 				case "WF":{
 					switch(linia[1]){
-					case "A":{					
-						writer.write(PCB.A+"\n");
+					case "A":{		
+						driver.edit("prog2dane",Processor.reg.A+"\n");
 						break;
 					}
 					case "B":{
-						writer.println(PCB.A);
+						driver.edit("prog2dane",Processor.reg.B+"\n");
 						break;
 					}
 					case "C":{
-						writer.println(PCB.C);
+						driver.edit("prog2dane",Processor.reg.C+"\n");
 						break;
 					}
 					
 					default:{
 						String temp = linia[1].replace("_", " "); 
-						writer.println(temp);
+						System.out.println(temp);
 					}
 				}
 					
 					break;
 				}
 				
-				case "RF":{
+				case "RF":{// na razie niesprawne, problem z odczytem jednej liczby
 					switch(linia[1]){
-					case "A":{					
-						PCB.A = scanner.nextInt();
+					case "A":{		
+						driver.read("prog2dane");
 						break;
 					}
 					case "B":{
-						PCB.B = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
 					}
 					case "C":{
-						PCB.C = scanner.nextInt();
+						driver.read("prog2dane");
 						break;
+					}
 					}
 				}
 					break;
-				}
-				
 				}
 				break;
 			}
@@ -237,30 +183,29 @@ public class Interpreter{
 			case 3:{
 				switch(linia[0]){
 					case "MVI":{
-						int temp=Integer.parseInt(linia[2]);
-					switch(linia[1]){
-						case "A":{
-							PCB.A=temp;
-							break;}
-						case "B":{
-							PCB.B=temp;
-							break;}
-						case "C":{
-							PCB.C=temp;
-							break;}
-					}
-					break;
+						switch(linia[1]){
+							case "A":{
+								Processor.reg.A=Integer.parseInt(linia[2]);
+								break;}
+							case "B":{
+								Processor.reg.B=Integer.parseInt(linia[2]);
+								break;}
+							case "C":{
+								Processor.reg.C=Integer.parseInt(linia[2]);
+								break;}
+						}
+						break;
 					}
 					case "ADD":{
 						switch(linia[1]){
 							case "A":{
 								switch(linia[2]){
 									case "B":{
-										PCB.A+=PCB.B;
+										Processor.reg.A+=Processor.reg.B;
 										break;
 									}
 									case "C":{
-										PCB.A+=PCB.C;
+										Processor.reg.A+=Processor.reg.C;
 										break;
 									}
 								}
@@ -269,11 +214,11 @@ public class Interpreter{
 							case "B":{
 								switch(linia[2]){
 								case "A":{
-									PCB.B+=PCB.A;
+									Processor.reg.B+=Processor.reg.A;
 									break;
 								}
 								case "C":{
-									PCB.B+=PCB.C;
+									Processor.reg.B+=Processor.reg.C;
 									break;
 								}
 							}
@@ -282,11 +227,11 @@ public class Interpreter{
 							case "C":{
 								switch(linia[2]){
 								case "A":{
-									PCB.C+=PCB.A;
+									Processor.reg.C+=Processor.reg.A;
 									break;
 								}
 								case "B":{
-									PCB.C+=PCB.B;
+									Processor.reg.C+=Processor.reg.B;
 									break;
 								}
 							}
@@ -301,11 +246,11 @@ public class Interpreter{
 							case "A":{
 								switch(linia[2]){
 									case "B":{
-										PCB.A=PCB.B%2;
+										Processor.reg.A=Processor.reg.B%2;
 										break;
 									}
 									case "C":{
-										PCB.A=PCB.C%2;
+										Processor.reg.A=Processor.reg.C%2;
 										break;
 									}									
 								}
@@ -314,11 +259,11 @@ public class Interpreter{
 							case "B":{
 								switch(linia[2]){
 									case "A":{
-										PCB.B=PCB.A%2;
+										Processor.reg.B=Processor.reg.A%2;
 										break;
 									}
 									case "C":{
-										PCB.B=PCB.C%2;
+										Processor.reg.B=Processor.reg.C%2;
 										break;
 									}									
 								}
@@ -327,11 +272,11 @@ public class Interpreter{
 							case "C":{
 								switch(linia[2]){
 									case "A":{
-										PCB.C=PCB.A%2;
+										Processor.reg.C=Processor.reg.A%2;
 										break;
 									}
 									case "B":{
-										PCB.C=PCB.B%2;
+										Processor.reg.C=Processor.reg.B%2;
 										break;
 									}	
 								}
@@ -343,14 +288,27 @@ public class Interpreter{
 				break;
 			}
 		}
+		Processor.reg.IP++;
 	}
-	
+}
+/*
+Queue<String>komendy=new LinkedList<String>();
+
+void odczytaj_komende()
+{
+String komenda;
+
+int index=0;
+while(plik_pamieci[index]!=-1; // kod pustego miejsca
+	while(plik_pamiec[i]!=10) // kod ascii entera
+	{// budowanie stringa
+	komenda+=(char)plik_pamieci[index].toString(); // w kazdym razie rzutowanie na string
+	index++;
+	}
+index++; //drugi raz zeby "ominac" ENTER
+komendy.offer(komenda);
 }
 
-class  PCB{
-	static int A;
-	static int B;
-	static int C;
-	static int LR;
-	static Boolean running = true;
 }
+/////dopoki kolejka nie jest pusta zi¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹
+String pobierz_komende(){return komendy.poll();} */

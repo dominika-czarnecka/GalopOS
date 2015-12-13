@@ -145,6 +145,29 @@ private char[] recc_read(int location, int size, int bsize, int index, char[]con
 		return recc_read(fat[location],size,bsize,index,content);
 	}
 }
+private char[] recc_read(int location, int size, int bsize, int index, char[]content, int content_size)
+{	
+	if(bsize==1)
+	{
+		for(int j=0; j<size; j++){
+			content[index]=(char)driver[location][j]; 
+			index++;
+			if(index==content_size) return content;
+		}
+		bsize--;
+		return content;
+	}
+	else
+	{
+		for(int i=0;i<size_block;i++){
+			content[index]=(char)driver[location][i]; 
+			index++;
+			if(index==content_size) return content;}
+		bsize--;
+		size-=size_block;
+		return recc_read(fat[location],size,bsize,index,content, content_size);
+	}
+}
 private void recc_delete(int location, int bsize)
 {
 	int removable=fat[location];
@@ -269,8 +292,27 @@ public char[] read(String name)
 		char[]content=new char[read.size]; 													//bufor do ktorego zostana wczytane dane
 		int index=0;
 		content=recc_read(read.first_node, read.size, read.bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
-		get_file(name).close();																//zamyka plik
-			
+		read.close();																//zamyka plik
+		
+		return content;
+	}
+	else {System.out.println("Sorry, not possible: file is arleady opened or file is not existing."); return null;}
+}
+public char[] read(String name, int content_size)
+{ 
+	if(open(name))
+	{  																						//jezeli mozemy dzialac
+		file read=get_file(name);  														//plik z ktorego czytamy
+		if(content_size>read.size)
+		{
+			System.out.println("File is not as large as you think");
+			return null;
+		}
+		char[]content=new char[content_size]; 													//bufor do ktorego zostana wczytane dane
+		int index=0;
+		content=recc_read(read.first_node, read.size, read.bsize, index, content, content_size);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
+		read.close();																//zamyka plik
+		
 		return content;
 	}
 	else {System.out.println("Sorry, not possible: file is arleady opened or file is not existing."); return null;}

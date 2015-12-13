@@ -16,17 +16,17 @@ public class Semaphores {
 				first_semaphore_waiter = Processor.RUNNING;
 				first_semaphore_waiter.next_semaphore_waiter = null;
 				Processor.RUNNING.blocked = true;
-				Processor.expropriation();
-				//Processor.RUNNING = Processor.find_to_run();
+				Processor.XPER();
 			}
-			else{
-				while(first.next_semaphore_waiter != null){
+			else
+			{
+				while(first.next_semaphore_waiter != null)
+				{
 					first = first.next_semaphore_waiter;
 				}
 				first.next_semaphore_waiter = Processor.RUNNING;
 				Processor.RUNNING.blocked = true;
-				Processor.expropriation();
-				//Processor.RUNNING = Processor.find_to_run();
+				Processor.XPER();
 			}
 		}
 	}	
@@ -34,7 +34,6 @@ public class Semaphores {
 	{
 		value++;
 		if(value<=0){
-			
 				Processor.next_try = first_semaphore_waiter;
 				first_semaphore_waiter.blocked = false;
 				first_semaphore_waiter = first_semaphore_waiter.next_semaphore_waiter;			

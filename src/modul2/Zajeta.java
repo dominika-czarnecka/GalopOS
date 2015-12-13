@@ -4,10 +4,10 @@ import java.util.*;
 
 
 public class Zajeta {
-    private List<Element2> List;
+    private static List<Element2> List;
 
     public Zajeta(){
-        List = new ArrayList<Element2>();
+        List= new ArrayList<Element2>();
     }
 
 
@@ -70,7 +70,7 @@ public class Zajeta {
 
     public void Wyswietl(){
         int indeks, rozmiar =0;
-o        System.out.println("---------------Zajęta Lista - bloki ------------------");
+       System.out.println("---------------Zajęta Lista - bloki ------------------");
         for(int i=0; i< List.size(); i++){
             indeks = i+1;
             rozmiar += List.get(i).ZwrocRozmiar();
