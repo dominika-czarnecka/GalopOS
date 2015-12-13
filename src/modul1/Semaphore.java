@@ -32,4 +32,13 @@ public class Semaphore {
 		}
 		return value; 
 	}
+	
+	public int get_value(){
+		return value;
+	}
+	
+	public void print_queue(){
+		for(PCB x : queue)
+            System.out.println(x.name);
+	}
 }

@@ -42,7 +42,7 @@ public class Processor {
 				if (time<4)
 				{
 					System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
-					Interpreter.Task();
+					//Interpreter.Task();
 					time++;
 				}
 				else XPER();

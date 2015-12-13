@@ -19,7 +19,7 @@ public class Registers {
 		A =
 		B = 
 		C = 
-		D =
-		IP = 0;
+		D = 0;
+		IP = 33;
 	}
 }

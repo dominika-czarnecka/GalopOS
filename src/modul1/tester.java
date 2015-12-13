@@ -14,39 +14,7 @@ public class tester {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	public static void menu() throws procNotFoundError
 	{
-		while(true)
-		{
-				String[] input = null;
-				System.out.println("--=MENU=--: ");
-				System.out.println("1): Set next RUNNING");
-				System.out.println("2): Show processor registers");
-				System.out.println("3): Show process registers");
-				System.out.println("0): Run one instruction");
-				try
-					{
-						input = br.readLine().split(" ");
-						switch(input[0])
-						{
-							case "1":
-								Processor.set_to_run();
-								break;
-							case "2":
-								show_registers_processor();
-								break;
-							case "3":
-								show_registers_process();
-								break;
-							case "4":
-								ZarzProc.stopProcess(input[1]);
-								break;
-							case "0":
-								Processor.run_proc();
-								break;
-							default:
-						}
-					}
-		catch(Exception n){n.printStackTrace();}	
-		}
+		
 	}
 	
 	public static void stop_process(){
@@ -62,13 +30,14 @@ public class tester {
 		System.out.println("");
 	}
 	
-	public static void show_registers_process() throws procNotFoundError{
+	public static void show_registers_process(String name) throws procNotFoundError{
 		try
 		{
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.A);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.B);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.C);
-		System.out.println("REJESTR ob: "+Processor.RUNNING.register.D);
+			PCB temp = ZarzProc.findProcess(name);
+		System.out.println("REJESTR ob: "+temp.register.A);
+		System.out.println("REJESTR ob: "+temp.register.B);
+		System.out.println("REJESTR ob: "+temp.register.C);
+		System.out.println("REJESTR ob: "+temp.register.D);
 		System.out.println("");
 		System.out.println("");
 		}
@@ -90,6 +59,15 @@ public class tester {
 		ZarzProc.createProcess("p5", 0);
 		ZarzProc.createProcess("p6", 0);
 		
+		try {
+			ZarzProc.findProcess("p1").register.A = 1;
+			ZarzProc.findProcess("p2").register.A = 2;
+			ZarzProc.findProcess("p3").register.A = 3;
+			ZarzProc.findProcess("p4").register.A = 4;
+			ZarzProc.findProcess("p5").register.A = 5;
+			ZarzProc.findProcess("p6").register.A = 6;
+		} catch(Exception e) {}
+		
 		ZarzProc.startProcess("p1");
 		ZarzProc.startProcess("p2");
 		ZarzProc.startProcess("p3");
@@ -99,58 +77,58 @@ public class tester {
 		
 		ZarzProc.printProcessList();
 		
-		/*p1 = new PCB("p1", 0);
-		p2 = new PCB("p2", 0);
-		p3 = new PCB("p3", 0);
-		p4 = new PCB("p4", 0);
-		p5 = new PCB("p5", 0);
-		p6 = new PCB("p6", 0);
-		PCB.first = p1;
-		p1.next = p2;
-		p1.prev = p6;
-		
-		p1.stopped = true;
-		p1.blocked = true;
-		p1.register.A = 1;
-		p1.register.B = 1;
-		p1.register.C = 1;
-		p1.register.D = 1;
-		
-		p2.next = p3;
-		p2.prev = p1;
-				
-		p2.stopped = false;
-		p2.blocked = false;
-		p2.register.D = 2;
-		p2.register.C = 2;
-		p2.register.B = 2;
-		p2.register.A = 2;
-		
-		p3.next = p4;
-		p3.prev = p2;
-		
-		p3.stopped = false;
-		p3.blocked = true;
-		
-		p4.next = p5;
-		p4.prev = p3;
-		
-		p4.stopped = false;
-		p4.blocked = false;
-		
-		p5.next = p6;
-		p5.prev = p4;
-		
-		p5.stopped = false;
-		p5.blocked = false;
-		
-		p6.next = p1;
-		p6.prev = p5;
-		
-		p6.stopped = false;
-		p6.blocked = false;*/
+		Semaphore s = new Semaphore(2);
 			
-		menu();
+		while(true)
+		{
+				String[] input = null;
+				System.out.println("--=MENU=--: ");
+				System.out.println("1): Set next RUNNING");
+				System.out.println("2): Show processor registers");
+				System.out.println("3): Show process registers");
+				System.out.println("4): Show process registers");
+				System.out.println("5): Show process registers");
+				System.out.println("6): Show process registers");
+				
+				System.out.println("0): Run one instruction");
+				try
+					{
+						input = br.readLine().split(" ");
+						switch(input[0])
+						{
+							case "1":
+								Processor.set_to_run();
+								break;
+							case "2":
+								show_registers_processor();
+								break;
+							case "3":
+								show_registers_process(input[1]);
+								break;
+							case "4":
+								ZarzProc.stopProcess(input[1]);
+								break;
+							case "P":
+								s.P(ZarzProc.findProcess(input[1]));
+								break;
+							case "V":
+								s.V(ZarzProc.findProcess(input[1]));
+								break;
+							case "sem":
+								s.print_queue();
+								break;
+							case "val":
+								System.out.println(s.get_value());
+								break;
+							case "0":
+								Processor.run_proc();
+								break;
+							default:
+								System.out.println("Wrong argument");
+						}
+					}
+		catch(Exception n){n.printStackTrace();}	
+		}
 			
 	
 	}
