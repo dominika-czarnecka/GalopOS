@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fad9f648-fa8f-4ec1-82e2-4fb4be7c7ffa" name="Default" comment="Zwracam stringi i zapamietuje w ktorym miejscu interpreter skonczyl czytac&#10;+ zerowanie pamietanego licznika gdy osiganie rozmiar bloku calego procesu">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modul2/Pamiec.java" afterPath="$PROJECT_DIR$/src/modul2/Pamiec.java" />
     </list>
     <ignored path="GalopOS.iws" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="Pamiec.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11135371">
-              <caret line="123" column="148" selection-start-line="123" selection-start-column="148" selection-end-line="123" selection-end-column="148" />
+            <state vertical-scroll-proportion="0.037117902">
+              <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/src/modul3/ZarzProc.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -790,7 +791,7 @@
       <updated>1449597391623</updated>
       <workItem from="1449597401946" duration="8216000" />
       <workItem from="1449608926390" duration="12449000" />
-      <workItem from="1450023825326" duration="15411000" />
+      <workItem from="1450023825326" duration="16499000" />
     </task>
     <task id="LOCAL-00001" summary="fgfdgfgfg">
       <created>1449597510921</created>
@@ -856,7 +857,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36076000" />
+    <option name="totallyTimeSpent" value="37164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1149,7 +1150,7 @@
     <entry file="file://$PROJECT_DIR$/src/modul3/ZarzProc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1201,8 +1202,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11135371">
-          <caret line="123" column="148" selection-start-line="123" selection-start-column="148" selection-end-line="123" selection-end-column="148" />
+        <state vertical-scroll-proportion="0.037117902">
+          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
