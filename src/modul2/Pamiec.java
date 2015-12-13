@@ -184,43 +184,33 @@ public class Pamiec {
         return null;
     }
 
-
-    //// Zczytywanie zawartosci do Znaku Podanego w wywolaniu przez Dominiczke (Interpreter)
+//// ------------------------- Odczytywanie Z RAMU Jednego Rozkazu (do Znaku '\n') ----------------------------------------
     //odczyt bzposredni z tablicy RAM
-    //DoKtoregoZnakuCzytac - znak koncowy komendy podawany przez
-    // HALT też wczytam bo dopiero po nim jest '\n'
+    //
+    // @parametry: Nazwa procesu
+
+
+    // [!] Zmienna Globalna Licznik -
+    //zliczam za kazdym wywołaniem funkcji
+    //ZEROWANIE LICZNIKA GDY DOJDZIE DO KONCA PLIKU
     public static String OdczytajJednaKomende(String NazwaProcesu){
-        char DoKtoregoZnakuCzytac = '\n';
+        char DoKtoregoZnakuCzytac = '\n'; //Java - brak parametrów domyslnych
         // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
-        //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
-       // FSBSEM.P();
-       // MEMORY_SEM.P();
         int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
         int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
 
-
-        //zamiana DoKotregoZnakuCzytac na byte[] zeby porownac
-        //Mam zwracac stringa do znaku DoKtoregoZnakuCzytac
-        //zliczam za kazdym wywołaniem funkcji
-        //ZEROWANIE LICZNIKA GDY DOJDZIE DO KONCA PLIKU
-
         int ilePobrac=0;
-        {
+        do{
             ilePobrac++;
-            //zeby zwracac od miejsca na ktorym skonczyl Interpreter - potrojne dodawanie
-        }while(RAM[indeksPoczatek + ilePobrac + ilePobrac] != DoKtoregoZnakuCzytac) //zrzucam byte na chara do porownania
+        }while(RAM[indeksPoczatek + licznik + ilePobrac] != DoKtoregoZnakuCzytac);//zeby zwracac od miejsca na ktorym skonczyl Interpreter - potrojne dodawanie
 
-        licznik += ilePobrac; //Musze jakos ustawic gdzie ostanio interpreter czytał
+        licznik += ilePobrac; //GLoBALNA ZMIENNA
 
-            if (ilePobrac <= rozmiar) {
+            if (ilePobrac <= rozmiar) {//zliczam  ile znaków mam zwrocic
                 char[] fragmentDoZwrocenia = new char[ilePobrac];
 
-                for (int i = 0; i<ilePobrac; i++) //zliczam sobie łopatologicznie ile znaków mam zwrocic
-                    fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i]; //nie kombinuje z generatorami czy yield
-
-
-                //FSBSEM.V(); //odblokowuje semafory
-               // MEMORY_SEM.V();
+                for (int i = 0; i<ilePobrac; i++)
+                    fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i];
 
                 //---zerowanie globalnego licznika
                 if (licznik == rozmiar)
@@ -241,6 +231,41 @@ public class Pamiec {
     }
 
 
+    //------------------------------------------------[JUMP]---------------------------------------------------------
+//Interpreter do używa do jumpa
+    //@Parametry: Nazwa Procesu, NrKomorki - podaje interpreter od ktorej komorki odczytywac pamiec
+    public  static String KomorkaJump(String NazwaProcesu, int NrKomorki){
+        char DoKtoregoZnakuCzytac = '\n';
+        int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
+        int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
+
+        int ilePobrac=0; //Zliczanie ile znakow mam zwrocic
+        do{
+            ilePobrac++;
+            //zeby zwracac od miejsca na ktorym skonczyl Interpreter - potrojne dodawanie
+        }while(RAM[indeksPoczatek + NrKomorki + ilePobrac] != DoKtoregoZnakuCzytac);
+
+        if (ilePobrac <= rozmiar) {
+            char[] fragmentDoZwrocenia = new char[ilePobrac];
+
+            for (int i = 0; i<ilePobrac; i++) //zliczam sobie łopatologicznie ile znaków mam zwrocic
+                fragmentDoZwrocenia[i] = RAM[indeksPoczatek + NrKomorki +  i]; //nie kombinuje z generatorami czy yield
+
+
+            //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+            String str = String.valueOf(fragmentDoZwrocenia); //fragment zrzucam na stringa i daje interpreterowi
+            return str;
+        }
+
+        else{
+            System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
+            // FSBSEM.V(); //odblokowuje semafor - nie wiem czy porzebnie
+            //  MEMORY_SEM.P();
+            return null;
+        }
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////////////////
     public static void WyswietlRAM() {
         System.out.println("------------------------ RAM - Zawartość ---------------------------\n");
@@ -250,5 +275,4 @@ public class Pamiec {
         System.out.println("\n\n");
     }
     
-}//klamra zamykająca całą klasę
-//fgfdg
+}//klamra zamykająca całą klasę Pamiec
