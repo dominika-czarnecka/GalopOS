@@ -47,7 +47,7 @@ public class Zajeta {
     }
 
 
-    public void Przesun(char[] RAM){
+    public static void Przesun(char[] RAM){
         int nastepny=0;
         int przesuniecie;
 
@@ -63,12 +63,12 @@ public class Zajeta {
         }
     }
 
-    public int Ostatni(){
+    public static int Ostatni(){
         int i= List.size();
         return List.get(i-1).Poczatek() + List.get(i-1).ZwrocRozmiar();
     }
 
-    public void Wyswietl(){
+    public  static void Wyswietl(){
         int indeks, rozmiar =0;
        System.out.println("---------------Zajęta Lista - bloki ------------------");
         for(int i=0; i< List.size(); i++){
