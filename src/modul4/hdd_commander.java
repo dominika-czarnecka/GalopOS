@@ -14,8 +14,8 @@ int []fat;
 byte [][]driver;
 List<file> main_catalog;
 
-int number_blocks;
-int size_block;
+public int number_blocks;
+public int size_block;
 
 
 
@@ -31,9 +31,10 @@ public hdd_commander(int number_blocks, int size_block)     /// ONLY ONE BUILDER
 	main_catalog= new ArrayList<file>();
 	this.number_blocks=number_blocks;
 	this.size_block=size_block;
+	System.out.println("Utworzony dysk o rozmiarze "+number_blocks*size_block+" bajtow.");
 	
 }
-private int count_free_space()
+public int count_free_space()
 {
 	int counter=0;
 	for(int i=0;i<number_blocks;i++)
@@ -116,9 +117,12 @@ public void fat_show()
 }
 public void catalog_show()
 {
+	if(main_catalog.size()==0) System.out.println("empty");
+	else{
 	for(int i=0;i<main_catalog.size();i++)
 	{
 		System.out.println(main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
+	}
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////
