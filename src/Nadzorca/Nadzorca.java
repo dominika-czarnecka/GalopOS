@@ -22,8 +22,7 @@ public class Nadzorca
 		this.pamiec=pamiec;
 	}
 	
-	static Scanner s = new Scanner(System.in);
-   
+	
 	@SuppressWarnings("static-access")
 	
 	public static void IPLRTN()
@@ -52,10 +51,12 @@ public class Nadzorca
 	
 	public static void IBSUP()
 	{
+		Scanner s = new Scanner(System.in);	    
+	    
 		while(true)
 		{
 		menu1();
-		komenda=s.nextLine();   //wybranie opcji z menu
+		String komenda=s.nextLine();   //wybranie opcji z menu
 		int wybor = Integer.parseInt(komenda);
 		
 		
