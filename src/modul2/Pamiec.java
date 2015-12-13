@@ -2,13 +2,11 @@ package modul2;
 import java.lang.*;
 import modul1.Registers;
 import modul1.Semaphore;
-//import java.lang.String
 
 // rejestry.reg2 = FSBSEM.value; /// [!!!] nie potrzebuję rejetrów !
 
 import java.util.*;
 
-//KOMENTARZ DODANY NA NOWO -PROBA
 public class Pamiec {
     private static Semaphore FSBSEM; //semafor wolnej pamięci >0 można dokonać operacje Ay odblokować dostep do wolnej pamieci
     private static Semaphore MEMORY_SEM;//Jesli proces dokonuje próby uzyskania przydziału, ale nie może go otrzymać,
@@ -25,7 +23,6 @@ public class Pamiec {
 
     public static int licznik =0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]
 
-    //typ[][] nazwa_tablicy2 = new typ[liczba1][liczba2]; //deklaracja i przypisanie (utworzenie)
 
     public Pamiec() {
         char[] RAM = new char[MEMORY_SIZE];
@@ -158,7 +155,7 @@ public class Pamiec {
 
 
     //odczyt bzposredni z tablicy RAM
-    //Zwracac Stringa Dominiczce
+    //Zwracac Stringa
     //zwracam null jak nie blad
     public static String OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
