@@ -12,6 +12,10 @@ import interpreter.Interpreter;
 
 public class Nadzorca 
 {
+    public static List<Message> IBSUPmsg = new ArrayList<Message>();
+    
+    
+    
 	public static Boolean end = false;
 	//static Processor Procesor = new Processor();
 	static hdd_commander driver;
@@ -52,19 +56,23 @@ public class Nadzorca
 	public static void IBSUP()
 	{
 		Scanner s = new Scanner(System.in);	    
-	    
+
 		while(true)
 		{
-			if(end == true)
-			{
-			Processor.RUNNING.blocked=true;
-			try {
-				ZarzProc.removeProcess(Processor.RUNNING.name);
-			} catch (procNotFoundError e) {
-				e.printStackTrace();
-			}
-			end = false;
-			}
+			//if(end == true)
+			//{				
+				while(!IBSUPmsg.isEmpty())
+				{Message msg = IBSUPmsg.remove(0);
+				if(msg.content.equals("stopped"))
+				{
+					try {
+						ZarzProc.removeProcess(msg.sender.name);
+						} catch (procNotFoundError e) 
+							{
+							e.printStackTrace();
+							}
+			//end = false;
+				}
 			
 			menu1();
 			String komenda=s.nextLine();   //wybranie opcji z menu
