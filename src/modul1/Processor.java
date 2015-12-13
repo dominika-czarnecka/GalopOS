@@ -8,7 +8,7 @@ public class Processor {
 	
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
-	public static int counter=1;
+	public static int time=1;
 	
 	static public void set_to_run(){ //znajdü pierwszy moøliwy do wykonania
 		
@@ -36,10 +36,10 @@ public class Processor {
 		{
 		if (RUNNING.name!=null)
 		{
-			if (counter<4)
+			if (time<4)
 			{
-				System.out.println("Wykonanie intstrukcji: " + counter + " procesu: " + RUNNING.name);
-				counter++;
+				System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+				time++;
 			}
 			else XPER();
 			}
@@ -51,7 +51,7 @@ public class Processor {
 	{
 		System.out.println("Wyw≥aszczam proces: " + RUNNING.name);
 		save_all_registers();
-		counter = 1;
+		time = 1;
 		set_to_run();
 		}
 	

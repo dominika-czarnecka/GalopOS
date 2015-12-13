@@ -1,6 +1,8 @@
 package modul1;
 
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import modul3.*;
 
@@ -9,41 +11,46 @@ public class tester {
 
 	static int a = 0;
 	
-	static Scanner scanner = new Scanner(System.in);
-	public static void menu()
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void menu() throws procNotFoundError
 	{
-		
-		System.out.println("--=MENU=--: ");
-		System.out.println("1): Set next RUNNING");
-		System.out.println("2): Show processor registers");
-		System.out.println("3): Show process registers");
-		System.out.println("0): Run one instruction");
-		try
+		while(true)
 		{
-			a = scanner.nextInt();
+				String[] input = null;
+				System.out.println("--=MENU=--: ");
+				System.out.println("1): Set next RUNNING");
+				System.out.println("2): Show processor registers");
+				System.out.println("3): Show process registers");
+				System.out.println("0): Run one instruction");
+				try
+					{
+						input = br.readLine().split(" ");
+						switch(input[0])
+						{
+							case "1":
+								Processor.set_to_run();
+								break;
+							case "2":
+								show_registers_processor();
+								break;
+							case "3":
+								show_registers_process();
+								break;
+							case "4":
+								ZarzProc.stopProcess(input[1]);
+								break;
+							case "0":
+								Processor.run_proc();
+								break;
+							default:
+						}
+					}
+		catch(Exception n){n.printStackTrace();}	
 		}
-		catch (Exception ex) {ex.printStackTrace();}
-		switch(a){
-		case 1:
-			Processor.set_to_run();
-			menu();
-			break;
-		case 2:
-			show_registers_processor();
-			menu();
-			break;
-		case 3:
-			show_registers_process();
-			menu();
-			break;
-		case 0:
-			Processor.run_proc();
-			menu();
-			break;
-		default:
-				
-		}
-			
+	}
+	
+	public static void stop_process(){
+		
 	}
 	
 	public static void show_registers_processor(){
@@ -55,7 +62,7 @@ public class tester {
 		System.out.println("");
 	}
 	
-	public static void show_registers_process(){
+	public static void show_registers_process() throws procNotFoundError{
 		try
 		{
 		System.out.println("REJESTR ob: "+Processor.RUNNING.register.A);

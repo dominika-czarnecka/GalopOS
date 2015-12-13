@@ -24,7 +24,7 @@ public class Interpreter{
 		String output = "";
 		String[] buffor= text.split("\n");
 		
-	int i=Processor.RUNNING.Line;
+	int i=Processor.reg.IP;
 				buffor[i]=buffor[i].trim();
 				try {
 					task(buffor[i],buffor);
@@ -37,9 +37,9 @@ public class Interpreter{
 						i = Integer.parseInt(e.getMessage());
 					}
 				}		
-		Processor.counter++;
+		Processor.time++;
 		
-		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.RUNNING.Line + "\n" + output;
+		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.reg.IP + "\n" + output;
 		System.out.println(output);
 	}
 	
@@ -107,18 +107,18 @@ public class Interpreter{
 				
 				case "JNZ":{
 					if(Processor.reg.C!=0){
-						Processor.RUNNING.Line=Integer.parseInt(linia[1]) - 1;//!!!!!!!!!!!!!
+						Processor.reg.IP=Integer.parseInt(linia[1]) - 1;//!!!!!!!!!!!!!
 						//throw new Exception(temp+"");
-						task(buffor[Processor.RUNNING.Line], buffor);
+						task(buffor[Processor.reg.IP], buffor);
 					}
 					break;
 				}
 			
 				case "JZ":{
 					if(Processor.reg.C==0){
-						Processor.RUNNING.Line=Integer.parseInt(linia[1]) - 2;//!!!!!!!!!!!!!!
+						Processor.reg.IP=Integer.parseInt(linia[1]) - 2;//!!!!!!!!!!!!!!
 						//throw new Exception(temp+"");
-						task(buffor[Processor.RUNNING.Line], buffor);
+						task(buffor[Processor.reg.IP], buffor);
 					}
 					break;
 				}
@@ -288,7 +288,7 @@ public class Interpreter{
 				break;
 			}
 		}
-		Processor.RUNNING.Line++;
+		Processor.reg.IP++;
 	}
 }
 /*
