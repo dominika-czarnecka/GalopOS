@@ -8,17 +8,17 @@ import modul3.*;
 
 public class PCB {
 		public String name;
-        public int count_of_istr;
+
         public PCB next;
         public PCB prev;      
         public static PCB first;
-        public PCB next_semaphore_waiter;
+       // public PCB next_semaphore_waiter;
         
         public ArrayList<Message> Messages = new ArrayList<Message>();
         
-        public Semaphores msgSemaphore;
-        public int Line;
-        public String buffor;
+        public Semaphore msgSemaphore;
+        //public int Line;
+        //public String buffor;
         public boolean stopped;
         public boolean blocked;
        
