@@ -142,8 +142,9 @@ public class Nadzorca
 		    break;
 		}
 		  
-		}		
+				}		
 	}
+		}
 	//Tworzenie procesu USERPROG
 	public static void USERPROG(String komenda)
 	{	String nazwa=null;

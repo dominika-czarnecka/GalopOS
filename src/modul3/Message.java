@@ -6,8 +6,8 @@ public class Message {
 		this.sender = sender;
 		this.content = content;
 	}
-	PCB sender;
-	String content;
+	public PCB sender;
+	public String content;
 }
 
 
