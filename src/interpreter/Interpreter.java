@@ -1,6 +1,7 @@
 package interpreter;
 import modul1.*;
 import modul2.Pamiec;
+//import modul3.ZarzProc;
 import modul4.*;
 //import java.awt.EventQueue;
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public class Interpreter{
 		String output = "";
 		String[] buffor= text.split("\n");
 		
-	int i=Processor.counter;
+	int i=Processor.RUNNING.Line;
 				buffor[i]=buffor[i].trim();
 				try {
 					task(buffor[i],buffor);
@@ -37,6 +38,7 @@ public class Interpreter{
 					}
 				}		
 		Processor.counter++;
+		
 		output = "A: " + Processor.reg.A + "\nB: " + Processor.reg.B + "\nC: " + Processor.reg.C + "\nLR:" + Processor.RUNNING.Line + "\n" + output;
 		System.out.println(output);
 	}
@@ -48,10 +50,9 @@ public class Interpreter{
 		
 			case 1:{
 				switch(linia[0]){
-					case "HLT":{
+					case "HLT":{	
 						
-						//
-						
+						//ZarzProc.removeProcess(Processor.RUNNING.name);						
 						throw new Exception("HALT");
 					}
 				/*	
@@ -106,18 +107,18 @@ public class Interpreter{
 				
 				case "JNZ":{
 					if(Processor.reg.C!=0){
-						int temp=Integer.parseInt(linia[1]) - 2;
-						throw new Exception(temp+"");
-						//task(buffor[temp-1], buffor);
+						Processor.RUNNING.Line=Integer.parseInt(linia[1]) - 1;//!!!!!!!!!!!!!
+						//throw new Exception(temp+"");
+						task(buffor[Processor.RUNNING.Line], buffor);
 					}
 					break;
 				}
 			
 				case "JZ":{
 					if(Processor.reg.C==0){
-						int temp=Integer.parseInt(linia[1]) - 2;
-						throw new Exception(temp+"");
-						//task(buffor[temp-1], buffor);
+						Processor.RUNNING.Line=Integer.parseInt(linia[1]) - 2;//!!!!!!!!!!!!!!
+						//throw new Exception(temp+"");
+						task(buffor[Processor.RUNNING.Line], buffor);
 					}
 					break;
 				}
@@ -287,8 +288,8 @@ public class Interpreter{
 				break;
 			}
 		}
+		Processor.RUNNING.Line++;
 	}
-	
 }
 /*
 Queue<String>komendy=new LinkedList<String>();
