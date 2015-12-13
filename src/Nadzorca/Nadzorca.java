@@ -143,11 +143,16 @@ public class Nadzorca
 					{
 						e.printStackTrace();
 					}
+			
 				char[] kod = driver.read(nazwa);
+				char[] dane = new char[pamiec-33];
 				
-				
-				tring dane = String.valueOf();
-				Pamiec.ZapiszDoPamieci(nazwa,dane);
+				for(int i=33; i<=pamiec-33; i++)
+				{
+					dane[i-33] = kod[i];
+				}				
+				String DoPamieci = String.valueOf(dane);
+				Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
 				
 				try 
 				{
