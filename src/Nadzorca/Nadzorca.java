@@ -135,14 +135,19 @@ public class Nadzorca
 			wynik1 = kartaJOB.split(",");
 			if(wynik1[1]=="$JOB");
 			{
-				int Pamiec = Integer.parseInt(wynik1[2]);
+				int pamiec = Integer.parseInt(wynik1[2]);
 				try 
 				{
-					ZarzProc.createProcess(nazwa, Pamiec);
+					ZarzProc.createProcess(nazwa, pamiec);
 				} catch (procCreationError e) 
 					{
 						e.printStackTrace();
 					}
+				char[] kod = driver.read(nazwa);
+				
+				
+				tring dane = String.valueOf();
+				Pamiec.ZapiszDoPamieci(nazwa,dane);
 				
 				try 
 				{
