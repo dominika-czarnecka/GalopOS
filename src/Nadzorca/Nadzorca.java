@@ -23,7 +23,7 @@ public class Nadzorca
 	}
 	
 	static Scanner s = new Scanner(System.in);
-    static String komenda = s.nextLine();
+   
 	@SuppressWarnings("static-access")
 	
 	public static void IPLRTN()
