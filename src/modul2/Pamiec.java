@@ -2,13 +2,11 @@ package modul2;
 import java.lang.*;
 import modul1.Registers;
 import modul1.Semaphore;
-//import java.lang.String
 
 // rejestry.reg2 = FSBSEM.value; /// [!!!] nie potrzebuję rejetrów !
 
 import java.util.*;
 
-//KOMENTARZ DODANY NA NOWO -PROBA
 public class Pamiec {
     private static Semaphore FSBSEM; //semafor wolnej pamięci >0 można dokonać operacje Ay odblokować dostep do wolnej pamieci
     private static Semaphore MEMORY_SEM;//Jesli proces dokonuje próby uzyskania przydziału, ale nie może go otrzymać,
@@ -25,7 +23,6 @@ public class Pamiec {
 
     public static int licznik =0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]
 
-    //typ[][] nazwa_tablicy2 = new typ[liczba1][liczba2]; //deklaracja i przypisanie (utworzenie)
 
     public Pamiec() {
         char[] RAM = new char[MEMORY_SIZE];
@@ -36,7 +33,7 @@ public class Pamiec {
         //=-------------------------------------------------
         // rejestry = new Registers(); // /// [!!!] nie potrzebuję rejetrów !
         //-----------------------------------------------------
-        //System.out.println("Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie");
+        System.out.println("Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie");
 
     }
 
@@ -73,7 +70,7 @@ public class Pamiec {
                 } else {
                     System.out.println("[*] Brak bloku o odpowiednim rozmiarze [*]");
                     System.out.println("Następuje przesunięcie bloków pamięci");
-                    ZajetaLista.Przesun(RAM);
+                    ZajetaLista.Przesun(RAM); //CZEMU DO HOLERY NIE MAM TEJ FUNCKJI?
                     WolnaLista.Wykasuj(ZajetaLista.Ostatni());
                     list_index = WolnaLista.ZnajdzWolne(rozmiar);
                     ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
@@ -110,7 +107,7 @@ public class Pamiec {
     }
 
     //-----------------------------------------------------------------------//
-    public void WyswietlPamiec() {
+    public static void WyswietlPamiec() {
         System.out.println("\n -------------------PAMIEC - zawartość -----------------");
         for (int i = 0; i < MEMORY_SIZE; i++) {
             System.out.print(RAM[i] + " "); //zeby nie interpretowalo znakow nowej linii
@@ -131,7 +128,7 @@ public class Pamiec {
     // -------------------------Zapisywanie danych bezposrednie do tablicy RAM ----------------------------------------//
 ////////////////////////////////////////////////////////////////////////////////
 //zapisywanie danych do już zajętęgo bloku pamięci
-    public void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
+    public static void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
         //P(FSBSEM.value);
 
@@ -158,9 +155,9 @@ public class Pamiec {
 
 
     //odczyt bzposredni z tablicy RAM
-    //Zwracac Stringa Dominiczce
+    //Zwracac Stringa
     //zwracam null jak nie blad
-    public String OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
+    public static String OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
        // FSBSEM.P();
 
@@ -192,7 +189,7 @@ public class Pamiec {
     //odczyt bzposredni z tablicy RAM
     //DoKtoregoZnakuCzytac - znak koncowy komendy podawany przez
     // HALT też wczytam bo dopiero po nim jest '\n'
-    public String OdczytajJednaKomende(String NazwaProcesu){
+    public static String OdczytajJednaKomende(String NazwaProcesu){
         char DoKtoregoZnakuCzytac = '\n';
         // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
@@ -245,7 +242,7 @@ public class Pamiec {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////
-    public void WyswietlRAM() {
+    public static void WyswietlRAM() {
         System.out.println("------------------------ RAM - Zawartość ---------------------------\n");
         for (int i = 0; i < MEMORY_SIZE; i++) {
             System.out.println(RAM[i] + " ");
@@ -254,3 +251,4 @@ public class Pamiec {
     }
     
 }//klamra zamykająca całą klasę
+//fgfdg

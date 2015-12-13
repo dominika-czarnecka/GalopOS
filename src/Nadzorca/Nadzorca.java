@@ -46,7 +46,7 @@ public class Nadzorca
 					e.printStackTrace();
 				}
 		Processor.next_try = PCB.first;	
-		Processor.XPER();		
+		Processor.XPER();
 	}
 	
 	public static void IBSUP()
@@ -85,6 +85,8 @@ public class Nadzorca
 		  
 		  case 3:  //wyswietl dysk
 		  {
+			  
+			  
 			  driver.driver_show();
 			  break;
 		  }
@@ -129,20 +131,31 @@ public class Nadzorca
 		if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
 		{
 			char[] tab = new char[32];
-			tab = driver.read(nazwa, 32);  //funkcja która zwróci mi karte $JOB
+			tab = driver.read(nazwa, 32);  //funkcja ktï¿½ra zwrï¿½ci mi karte $JOB
 			String kartaJOB = String.valueOf(tab);
 			String[] wynik1 = null;
 			wynik1 = kartaJOB.split(",");
 			if(wynik1[1]=="$JOB");
 			{
-				int Pamiec = Integer.parseInt(wynik1[2]);
+				int pamiec = Integer.parseInt(wynik1[2]);
 				try 
 				{
-					ZarzProc.createProcess(nazwa, Pamiec);
+					ZarzProc.createProcess(nazwa, pamiec);
 				} catch (procCreationError e) 
 					{
 						e.printStackTrace();
 					}
+			
+				char[] kod = driver.read(nazwa);
+				char[] dane = new char[pamiec+1];
+				
+				for(int i=33; i<=pamiec; i++)
+				{
+					dane[i-33] = kod[i];
+				}
+				
+				String DoPamieci = String.valueOf(dane);
+				Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
 				
 				try 
 				{
