@@ -14,7 +14,130 @@ public class Nadzorca
 {
     public static List<Message> IBSUPmsg = new ArrayList<Message>();
     
-    
+    //////////
+static Scanner s = new Scanner(System.in);	
+	
+	static String komenda;
+	
+
+	public static String type_cmd()
+	{
+		System.out.print("[User]: ");
+		String cmd=s.nextLine();   //wybranie opcji z menu
+		cmd=cmd.toUpperCase();
+		return cmd;
+	}
+	public static void list_cmd()
+	{
+		System.out.println(
+		"CREATE		tworzy nowy plik.\n"
+	+	"DELETE		usuwa plik.\n"
+	+	"EDIT		edytuj plik.\n"
+	+	"READ		czytaj plik.\n"
+	+	"DIR		wyswietla liste plików.\n"
+	+	"FAT		wyswietla tablice FAT.\n"
+	+	"CHDSK		wyswietla ile jest wolnego miejsca.\n"
+	+	"PNDSK		wyswietla dysk.\n"
+	+   "CRPROC		tworzy nowy proces.\n"
+	+	"PROC		wyswietla liste procesow.\n"
+	+	"CHMEM		wyswietla pamiec.\n"
+	+	"HELP		wyswietla liste komend.\n"
+	+   "SHUTDOWN	zakonczenie pracy.\n");
+	}
+		
+	public static void run_cmd()
+	{
+		list_cmd();
+do {
+	komenda=type_cmd();
+	switch(komenda)
+	{
+	case "CREATE":
+	{
+		System.out.print("Podaj nazwe pliku, ktory ma byc utworzony: "); String nazwa=s.nextLine();
+		System.out.println("Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
+		driver.create(nazwa, zawartosc);
+		break;
+	}
+	case "DELETE":
+	{
+		System.out.print("Podaj nazwe pliku, ktory ma byc usuniety: "); String nazwa=s.nextLine();
+		driver.delete(nazwa);
+		break;
+	}
+	case "EDIT":
+	{
+		System.out.print("Podaj nazwe pliku, ktory ma byc edytowany: "); String nazwa=s.nextLine();
+		System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
+		driver.edit(nazwa, zawartosc);
+		break;
+	}
+	case "READ":
+	{
+		System.out.print("Podaj nazwe pliku, ktory chcesz otworzyc: "); String nazwa=s.nextLine();
+		if(driver.get_file(nazwa)!=null)
+		{
+		System.out.println(driver.get_file(nazwa).name);
+		System.out.println(driver.read(nazwa));
+		}
+		else System.out.println("Plik o podanej nazwie nie istnieje");
+		break;
+	}
+	case "DIR":
+	{
+		driver.catalog_show();
+		break;
+	}
+	case "FAT":
+	{
+		driver.fat_show();
+		break;
+	}
+	case "CHDSK":
+	{
+		int free_blocks=driver.count_free_space();
+		int size_driver=driver.size_block*driver.number_blocks;
+		System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow.\n" + (size_driver-free_blocks) + "bajtow jest zajetych.");
+		break;
+	}
+	case "PNDSK":
+	{
+		driver.driver_show();
+		break;
+	}
+	case "CRPROC":
+	{
+		break;
+	}
+	case "PROC":
+	{
+		break;
+	}
+	case "CHMEM":
+	{
+		break;
+	}
+	case "HELP":
+	{
+		list_cmd();
+		break;
+	}
+	case "":
+	{
+		 //Interpreter.Rozkaz("INR A");
+		 break;
+	}
+	default:
+	{
+		  System.out.println("Wybrano nieznana opcje");
+		  break;
+	}
+	}
+	
+} while(komenda != "SHUTDOWN");
+
+	}
+    /////////
     
 	public static Boolean end = false;
 	//static Processor Procesor = new Processor();
