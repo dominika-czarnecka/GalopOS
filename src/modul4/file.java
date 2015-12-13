@@ -7,7 +7,7 @@ public class file
 	byte busy=-126;
 	byte unoccupied=-125;
 	
-	String name;
+	public String name;
 	int first_node, last_node; 
 	int size, bsize;
 	int access;

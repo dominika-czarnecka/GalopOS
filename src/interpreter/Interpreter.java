@@ -17,7 +17,7 @@ public class Interpreter{
 	}
 
 	public static void Task() throws Exception{
-		String buffor="jhgf";
+		String buffor=Pamiec.KomorkaJump(Processor.RUNNING.name,Processor.reg.IP );
 		String[] line= buffor.split(" ");
 		Boolean jumped=false;
 
