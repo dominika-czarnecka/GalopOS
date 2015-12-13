@@ -22,9 +22,9 @@ public class Main {
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
-		//Interpreter interpreter= new Interpreter(driver, pamiec);
-		//System.out.println("test");
-		driver.create("prog1","$JOB,95,CZYTNIK=*IN,DRUKARKA=*OUT\n" 
+		Interpreter interpreter= new Interpreter(driver, pamiec);
+		
+		driver.create("prog1","$JOB,95,FILEIN=IN,FILEOUT=OUT  \n" 
 				+"MVI C 10\n"
 				+ "MVI B 1\n"
 				+ "ADD A B\n"
@@ -33,8 +33,8 @@ public class Main {
 				+ "DCR C\n"
 				+ "JNZ 2\n"
 				+ "HLT\n");
-		System.out.println(driver.read("prog1",12));
-		driver.create("prog2", "$JOB,173,CZYTNIK=IN,DRUKARKA=OUT\n"
+		
+		driver.create("prog2", "$JOB,173,FILEIN=IN,FILEOUT=OUT \n"
 				+ "OFR prog2dane.txt" + "\n"
 				+ "RF A" + "\n"
 				+ "RF B" + "\n"

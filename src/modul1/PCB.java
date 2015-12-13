@@ -34,5 +34,9 @@ public class PCB {
                 
         }
         
+        boolean moznaUruchomic() {
+        	return !blocked && !stopped;
+        }
+        
         
 }
