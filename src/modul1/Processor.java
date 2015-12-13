@@ -12,7 +12,7 @@ public class Processor {
 	public static boolean waiting = true;
 
 	static public void set_to_run(){ //znajdŸ pierwszy mo¿liwy do wykonania
-
+		waiting = false;
 		try
 		{
 			PCB start = next_try;
@@ -22,7 +22,8 @@ public class Processor {
 			} while (next_try != start);
 			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
 			RUNNING = next_try;
-			next_try = next_try.next;	
+			next_try = next_try.next;
+			
 
 			load_all_registers();
 			System.out.println("NEW RUNNING: "+RUNNING.name);
@@ -31,17 +32,17 @@ public class Processor {
 
 		}
 		catch(Exception ex) {ex.printStackTrace();}
-		//Interpreter.Rozkaz("INR A\nADD A");
+
 	}
 	static public void run_proc(){ //wykonaj instrukcjê
-		//Interpreter.Rozkaz();
 		try
 		{
-			if (RUNNING.name!=null)
+			if (RUNNING.name!=null && waiting == false)
 			{
 				if (time<4)
 				{
 					System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+					Interpreter.Task();
 					time++;
 				}
 				else XPER();
