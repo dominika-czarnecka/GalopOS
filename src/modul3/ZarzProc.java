@@ -2,6 +2,7 @@ package modul3;
 
 import modul1.*;
 import modul2.*;
+import Nadzorca.*;
 
 public class ZarzProc {
 	
@@ -38,6 +39,10 @@ public class ZarzProc {
 	}
 	
 	//XH - zatrzymanie zlecenia i powiadomienie nadzorcy
+	static public void notifySup(PCB stopped) {
+		stopped.stopped = true;
+		Nadzorca.IBSUPmsg.add(new Message(stopped, "stopped"));
+	}
 	
 	static public void popProcess(PCB process) { //usuwa z listy PCB
 		if (process.next==process)
