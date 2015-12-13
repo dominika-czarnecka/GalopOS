@@ -16,7 +16,7 @@ public class Pamiec {
         char[] RAM = new char[MEMORY_SIZE];
         WolnaLista = new Wolna(MEMORY_SIZE);
         ZajetaLista = new Zajeta();
-        System.out.println("/n[*]Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie[*]/n");
+        System.out.println("\n[*]Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie[*]\n");
     }
 
     //[!!!] ----------------------------- [NAJWAZNIEJSZA FUNKCJA]-------------------------------------
@@ -28,10 +28,10 @@ public class Pamiec {
     public static void XA(String NazwaProcesu, int rozmiar) {
 
         if (rozmiar > MEMORY_SIZE) {
-            System.out.println("/n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] /n");
+            System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
         } else {
             if (WolnaLista.Wolna() < rozmiar) {
-                System.out.println("/n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]/n");
+                System.out.println("\n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]\n");
             }
             //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
             else {
@@ -39,14 +39,14 @@ public class Pamiec {
                 if (list_index != -1) { //jesli jest dodstatecznie duży blok aby przydzielic pamiec
                     ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
                 } else {
-                    System.out.println("/n[*] Brak bloku o odpowiednim rozmiarze [*]/n");
-                    System.out.println("/n[*]Następuje przesuniecie blokow pamięci operacyjnej[*]/n"); //kosztowna operacja - unikam jak moge
+                    System.out.println("\n[*] Brak bloku o odpowiednim rozmiarze [*]\n");
+                    System.out.println("\n[*]Następuje przesuniecie blokow pamięci operacyjnej[*]\n"); //kosztowna operacja - unikam jak moge
                     ZajetaLista.Przesun(RAM);
                     WolnaLista.Wykasuj(ZajetaLista.Ostatni());
                     list_index = WolnaLista.ZnajdzWolne(rozmiar);
                     ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
                 }
-                System.out.println("/n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]/n");
+                System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
             }
         }
         Wyswietl(); //wyswietla Wolne bloki Pamieci
@@ -57,7 +57,7 @@ public class Pamiec {
     //@zwraca: brak
     // [!] Po zakończeniu wyswietla bezposrednią pamiec RAM i wolne bloki pamieci
     public static void XF(String NazwaProcesu) {
-        System.out.println("/n[*]Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu + "[*]/n");
+        System.out.println("\n[*]Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu + "[*]\n");
         WolnaLista.DodajWolnyBlok(ZajetaLista.Poczatek(NazwaProcesu), ZajetaLista.Rozmiar(NazwaProcesu));
         ZajetaLista.Usun(NazwaProcesu);
             WyswietlRAM(); //wyswietla bezposredi RAM pamiec po zwolnieniu
@@ -83,9 +83,9 @@ public class Pamiec {
                 for (int i = 0; i < rozmiar; i++) {
                     RAM[indeksPoczatek + i] = daneChar[i];
                 }
-            } else System.out.println("/n [BLAD] Dane wieksze od zaalokowanego obszaru Pamieci Operacyjnej [!]/n");
+            } else System.out.println("\n [BLAD] Dane wieksze od zaalokowanego obszaru Pamieci Operacyjnej [!]\n");
         } else {
-            System.out.println("/n[BLAD]: Blok pamieci: " + NazwaProcesu + " nie istnieje [!]/n");
+            System.out.println("\n[BLAD]: Blok pamieci: " + NazwaProcesu + " nie istnieje [!]\n");
         }
     }
 
@@ -110,8 +110,9 @@ public class Pamiec {
             String str = String.valueOf(fragmentDoZwrocenia);
             return str;
 
-        } else
-            System.out.println("\/n[Blad]: Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "/n");
+        } else {
+            System.out.println("\n[Blad]: Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
+        }
         return null;
     }
 
@@ -120,7 +121,7 @@ public class Pamiec {
     //@Parametry: Nazwa Procesu, NrKomorki - podaje interpreter od ktorej komorki odczytywac pamiec
     //@Zwraca: jedna komede od NrKomorki
     public  static String WczytajRozkaz(String NazwaProcesu, int NrKomorki){
-        char DoKtoregoZnakuCzytac = '/n';
+        char DoKtoregoZnakuCzytac = '\n';
         int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
         int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
 
@@ -151,7 +152,7 @@ public class Pamiec {
     //@oarametry: brak
     //@zwraca: brak
     public static void WyswietlRAM() {
-        System.out.println("/n -------------------PAMIEC - zawartość -----------------/n");
+        System.out.println("\n -------------------PAMIEC - zawartość -----------------\n");
         for (int i = 0; i < MEMORY_SIZE; i++) {
             System.out.print(RAM[i] + " "); //zeby nie interpretowalo znakow nowej linii
         }
