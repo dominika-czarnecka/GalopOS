@@ -5,7 +5,9 @@ public class Registers {
 	public int A,
 	B, 
 	C, 
-	D;
+	D,
+	IP;
+	
 	
 	public Registers()
 	{
@@ -14,9 +16,10 @@ public class Registers {
 	
 	private void ClearRegisters()
 	{
-		A = 0;
+		A =
 		B = 
 		C = 
-		D =  0;
+		D =
+		IP = 0;
 	}
 }
