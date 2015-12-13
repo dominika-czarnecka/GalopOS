@@ -6,6 +6,8 @@ import modul3.*;
 import modul4.*;
 import java.util.*;
 
+import interpreter.Interpreter;
+
 
 
 public class Nadzorca 
@@ -103,6 +105,11 @@ public class Nadzorca
 			  break;
 		  }		  
 		  
+		  case 7: //Takt Procesora
+		  {			  
+			  Interpreter.Rozkaz("INR A");
+			  break;
+		  }		  
 		  
 		  default:
 		    System.out.println("Wybrano nieznana opcje");
@@ -120,10 +127,9 @@ public class Nadzorca
 		
 		if(program=="prog1" || program=="prog2" || program=="program3")
 		{
-			String JOB = null;  // pobranie linijki $JOB  tymczasowo =null;
+			String SS = null;  // pobranie linijki $JOB z dysku (bo dopiero jak bede mial info o pamieci ile jej potrzeba bede mogl cokolwiek do niej zapisac) dostane SUPERMEGAHIPER STRINGA z tym tymczasowo =null;
 			String[] wynik1 = null;
-			String[] karta1 = null;
-			wynik1 = JOB.split(",");
+			wynik1 = SS.split(",");
 			if(wynik1[1]=="$JOB");
 			{
 				int Pamiec = Integer.parseInt(wynik1[2]);
@@ -145,7 +151,9 @@ public class Nadzorca
 		System.out.println("2. Wyswietl pamiec /n");
 		System.out.println("3. Wyswietl dysk /n");
 		System.out.println("4. Wyswietl tablice FAT /n");
-		System.out.println("5. Wyswietl liste procesow /n");
+		System.out.println("5. Wyswietl katalogi");
+		System.out.println("6. Wyswietl liste procesow /n");
+		System.out.println("7. Wykonaj krok procesora /n");		
 	}
 	public static void menu2()
 	{
