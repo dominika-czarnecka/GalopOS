@@ -1,6 +1,8 @@
 package interpreter;
+import Nadzorca.Nadzorca;
 import modul1.*;
 import modul2.Pamiec;
+import modul3.ZarzProc;
 import modul4.*;
 
 public class Interpreter{
@@ -16,29 +18,28 @@ public class Interpreter{
 
 	public static void Task() throws Exception{
 		String buffor="jhgf";
-		String[] linia= buffor.split(" ");
+		String[] line= buffor.split(" ");
 		Boolean jumped=false;
 
-		switch(linia.length){
+		switch(line.length){
 
 		case 1:
-			switch(linia[0]){
+			switch(line[0]){
 			case "HLT":	
-
+				Nadzorca.End=true;
 				//ZarzProc.removeProcess(Processor.RUNNING.name);						
 				throw new Exception("HALT");
 			//break;
 			default:
-				System.out.println("Podano bledna komende");
-				
+				System.out.println("Podano bledna komende");	
 			}
 			break;		
 
 		case 2:
-			switch(linia[0]){
+			switch(line[0]){
 
 			case "INR":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
 					Processor.reg.A+=1;
 					break;
@@ -54,7 +55,7 @@ public class Interpreter{
 				break;			
 
 			case "DCR":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
 					Processor.reg.A--;
 					break;
@@ -70,52 +71,46 @@ public class Interpreter{
 
 			case "JNZ":
 				if(Processor.reg.C!=0){
-					Processor.reg.IP=Integer.parseInt(linia[1]);
+					Processor.reg.IP=Integer.parseInt(line[1]);
 					jumped=true;
 				}
 				break;
 
 			case "JZ":
 				if(Processor.reg.C==0){
-					Processor.reg.IP=Integer.parseInt(linia[1]);					
+					Processor.reg.IP=Integer.parseInt(line[1]);					
 					jumped=true;
 				}
 				break;
 
 			case "WF":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":		
 					driver.edit("prog2dane",Processor.reg.A+"\n");
 					break;
-
 				case "B":
 					driver.edit("prog2dane",Processor.reg.B+"\n");
 					break;
-
 				case "C":
 					driver.edit("prog2dane",Processor.reg.C+"\n");
 					break;
-
 				default:
-					String temp = linia[1].replace("_", " "); 
+					String temp = line[1].replace("_", " "); 
 					System.out.println(temp);
 				}
 				break;
 
 			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
 					driver.read("prog2dane");
 					break;
-
 				case "B":
 					driver.read("prog2dane");
 					break;
-
 				case "C":
 					driver.read("prog2dane");
-					break;
-					
+					break;					
 				default:
 					System.out.println("Podano bledna komende");	
 				}
@@ -126,17 +121,17 @@ public class Interpreter{
 			break;
 			
 		case 3:
-			switch(linia[0]){
+			switch(line[0]){
 			case "MVI":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
-					Processor.reg.A=Integer.parseInt(linia[2]);
+					Processor.reg.A=Integer.parseInt(line[2]);
 					break;
 				case "B":
-					Processor.reg.B=Integer.parseInt(linia[2]);
+					Processor.reg.B=Integer.parseInt(line[2]);
 					break;
 				case "C":
-					Processor.reg.C=Integer.parseInt(linia[2]);
+					Processor.reg.C=Integer.parseInt(line[2]);
 					break;
 				default:
 					System.out.println("Podano bledna komende");
@@ -144,13 +139,12 @@ public class Interpreter{
 				break;
 			
 			case "ADD":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
-					switch(linia[2]){
+					switch(line[2]){
 					case "B":
 						Processor.reg.A+=Processor.reg.B;
 						break;
-
 					case "C":
 						Processor.reg.A+=Processor.reg.C;
 						break;
@@ -160,11 +154,10 @@ public class Interpreter{
 					break;
 				
 				case "B":
-					switch(linia[2]){
+					switch(line[2]){
 					case "A":
 						Processor.reg.B+=Processor.reg.A;
-						break;
-						
+						break;						
 					case "C":
 						Processor.reg.B+=Processor.reg.C;
 						break;
@@ -174,11 +167,10 @@ public class Interpreter{
 					break;
 				
 				case "C":
-					switch(linia[2]){
+					switch(line[2]){
 					case "A":
 						Processor.reg.C+=Processor.reg.A;
-						break;
-						
+						break;						
 					case "B":
 						Processor.reg.C+=Processor.reg.B;
 						break;	
@@ -192,13 +184,12 @@ public class Interpreter{
 				break;
 
 			case "MOD2":
-				switch(linia[1]){
+				switch(line[1]){
 				case "A":
-					switch(linia[2]){
+					switch(line[2]){
 					case "B":
 						Processor.reg.A=Processor.reg.B%2;
-						break;
-						
+						break;						
 					case "C":
 						Processor.reg.A=Processor.reg.C%2;
 						break;	
@@ -208,11 +199,10 @@ public class Interpreter{
 					break;
 				
 				case "B":
-					switch(linia[2]){
+					switch(line[2]){
 					case "A":
 						Processor.reg.B=Processor.reg.A%2;
 						break;
-
 					case "C":
 						Processor.reg.B=Processor.reg.C%2;
 						break;	
@@ -222,7 +212,7 @@ public class Interpreter{
 					break;
 				
 				case "C":
-					switch(linia[2]){
+					switch(line[2]){
 					case "A":
 						Processor.reg.C=Processor.reg.A%2;
 						break;
@@ -240,7 +230,7 @@ public class Interpreter{
 			break;
 			
 		default:
-			System.out.println("B³êdna d³ugoœæ rozkazu");
+			System.out.println("Bledna dlugosc rozkazu");
 		}
 		if(!jumped) Processor.reg.IP+=buffor.length();
 		Processor.time++;
