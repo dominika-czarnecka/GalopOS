@@ -28,8 +28,8 @@
       <file leaf-file-name="Pamiec.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40829694">
-              <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="235" selection-end-column="99" />
+            <state vertical-scroll-proportion="0.55458516">
+              <caret line="48" column="84" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,12 +51,9 @@
         <entry file="file://$PROJECT_DIR$/src/Nadzorca/Nadzorca.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="8" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
+              <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="false" />
-                <marker date="1450033015818" expanded="true" signature="325:373" placeholder="{...}" />
-                <marker date="1450033015818" expanded="true" signature="446:921" placeholder="{...}" />
-                <marker date="1450033015818" expanded="true" signature="953:1024" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -66,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/src/modul1/Processor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
+              <caret line="73" column="35" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -76,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/modul1/Semaphore.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -793,7 +790,7 @@
       <updated>1449597391623</updated>
       <workItem from="1449597401946" duration="8216000" />
       <workItem from="1449608926390" duration="12449000" />
-      <workItem from="1450023825326" duration="13035000" />
+      <workItem from="1450023825326" duration="14991000" />
     </task>
     <task id="LOCAL-00001" summary="fgfdgfgfg">
       <created>1449597510921</created>
@@ -859,7 +856,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33700000" />
+    <option name="totallyTimeSpent" value="35656000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1126,12 +1123,9 @@
     <entry file="file://$PROJECT_DIR$/src/Nadzorca/Nadzorca.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="8" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
+          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1450033015818" expanded="true" signature="325:373" placeholder="{...}" />
-            <marker date="1450033015818" expanded="true" signature="446:921" placeholder="{...}" />
-            <marker date="1450033015818" expanded="true" signature="953:1024" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1139,7 +1133,7 @@
     <entry file="file://$PROJECT_DIR$/src/modul1/Processor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="35" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
+          <caret line="73" column="35" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1147,7 +1141,7 @@
     <entry file="file://$PROJECT_DIR$/src/modul1/Semaphore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1207,8 +1201,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40829694">
-          <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="235" selection-end-column="99" />
+        <state vertical-scroll-proportion="0.55458516">
+          <caret line="48" column="84" selection-start-line="48" selection-start-column="84" selection-end-line="48" selection-end-column="84" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
