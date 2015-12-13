@@ -10,7 +10,7 @@ import Nadzorca.*;
 public class Main {
 
 	public static void main(String[] args) {
-		//start_print();
+		main_interface hehe=new main_interface();
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
@@ -40,6 +40,9 @@ public class Main {
 				+ "WF Suma_nieparzysta" + "\n"
 				+ "CFW" + "\n"
 				+ "HLT"+ "\n");
+	
+		hehe.run_cmd();
+	
 	}
 
 }

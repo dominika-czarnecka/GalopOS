@@ -11,44 +11,44 @@ import java.util.Scanner;
 public class main_interface 
 {
 	static Scanner s = new Scanner(System.in);	
+	static hdd_commander driver= new hdd_commander(16,16);
+	static String komenda;
 	public static void start_print()
 	{
 		System.out.println("Prima [Version 3.0.607]\n(c) 2015 Wszelkie prawa zastrzezone.");
 	}
-	public static void set_cmd()
-	{
-		System.out.print("[User]: ");
-	}
+
 	public static String type_cmd()
 	{
-		set_cmd();
+		System.out.print("[User]: ");
 		String cmd=s.nextLine();   //wybranie opcji z menu
-		cmd.toUpperCase();
+		cmd=cmd.toUpperCase();
 		return cmd;
 	}
 	public static void list_cmd()
 	{
 		System.out.println(
-		"CREATE		tworzy nowy plik."
-	+	"DELETE		usuwa plik."
-	+	"EDIT		edytuj plik."
-	+	"READ		czytaj plik."
-	+	"DIR		wyswietla liste plików."
-	+	"FAT		wyswietla tablice FAT."
-	+	"CHDSK		wyswietla ile jest wolnego miejsca."
-	+	"PNDSK		wyswietla dysk."
-	+   "CRPROC		tworzy nowy proces."
-	+	"PROC		wyswietla liste procesow."
-	+	"CHMEM		wyswietla pamiec."
-	+	"HELP		wyswietla liste komend."
-	+   "SHUTDOWN	zakonczenie pracy.");
+		"CREATE		tworzy nowy plik.\n"
+	+	"DELETE		usuwa plik.\n"
+	+	"EDIT		edytuj plik.\n"
+	+	"READ		czytaj plik.\n"
+	+	"DIR		wyswietla liste plików.\n"
+	+	"FAT		wyswietla tablice FAT.\n"
+	+	"CHDSK		wyswietla ile jest wolnego miejsca.\n"
+	+	"PNDSK		wyswietla dysk.\n"
+	+   "CRPROC		tworzy nowy proces.\n"
+	+	"PROC		wyswietla liste procesow.\n"
+	+	"CHMEM		wyswietla pamiec.\n"
+	+	"HELP		wyswietla liste komend.\n"
+	+   "SHUTDOWN	zakonczenie pracy.\n");
 	}
 		
 	public static void run_cmd()
 	{
 		list_cmd();
 do {
-	switch(type_cmd())
+	komenda=type_cmd();
+	switch(komenda)
 	{
 	case "CREATE":
 	{
@@ -122,7 +122,7 @@ do {
 	}
 	case "":
 	{
-		 Interpreter.Rozkaz("INR A");
+		 //Interpreter.Rozkaz("INR A");
 		 break;
 	}
 	default:
@@ -132,7 +132,7 @@ do {
 	}
 	}
 	
-} while(type_cmd() != "SHUTDOWN");
+} while(komenda != "SHUTDOWN");
 
 	}
 }
