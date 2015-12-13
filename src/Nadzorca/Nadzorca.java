@@ -91,7 +91,7 @@ public class Nadzorca
 
 		  case 2:  //wyswietl pamiec
 		  {
-			  Pamiec.WyswietlPamiec();
+			  Pamiec.Wyswietl();
 			  break;
 		  }
 		  
