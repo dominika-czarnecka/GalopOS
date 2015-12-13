@@ -8,17 +8,9 @@ import Nadzorca.*;
 
 
 public class Main {
-	public static void start_print()
-	{
-		System.out.println("Prima [Version 3.0.607]\n(c) 2015 Wszelkie prawa zastrzezone.");
-	}
-	public static void set_cmd()
-	{
-		System.out.print("[User]: ");
-	}
+
 	public static void main(String[] args) {
-		start_print();
-		set_cmd();
+		//start_print();
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
