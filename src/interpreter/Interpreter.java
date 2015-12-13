@@ -14,7 +14,7 @@ public class Interpreter{
 		this.pamiec=pamiec;
 	}
 
-	public static void task() throws Exception{
+	public static void Task() throws Exception{
 		String buffor="jhgf";
 		String[] linia= buffor.split(" ");
 		Boolean jumped=false;
