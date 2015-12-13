@@ -46,7 +46,7 @@ public class Nadzorca
 					e.printStackTrace();
 				}
 		Processor.next_try = PCB.first;	
-		Processor.PER();
+		Processor.XPER();
 	}
 	
 	public static void IBSUP()
@@ -85,6 +85,8 @@ public class Nadzorca
 		  
 		  case 3:  //wyswietl dysk
 		  {
+			  
+			  
 			  driver.driver_show();
 			  break;
 		  }
@@ -145,12 +147,13 @@ public class Nadzorca
 					}
 			
 				char[] kod = driver.read(nazwa);
-				char[] dane = new char[pamiec-33];
+				char[] dane = new char[pamiec+1];
 				
-				for(int i=33; i<=pamiec-33; i++)
+				for(int i=33; i<=pamiec; i++)
 				{
 					dane[i-33] = kod[i];
-				}				
+				}
+				
 				String DoPamieci = String.valueOf(dane);
 				Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
 				
