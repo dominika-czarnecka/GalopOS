@@ -136,10 +136,17 @@ public class Nadzorca
 			{
 				int Pamiec = Integer.parseInt(wynik1[2]);
 				try 
-				
 				{
 					ZarzProc.createProcess(nazwa, Pamiec);
 				} catch (procCreationError e) 
+					{
+						e.printStackTrace();
+					}
+				
+				try 
+				{
+					ZarzProc.startProcess(nazwa);
+				} catch (procNotFoundError e) 
 					{
 						e.printStackTrace();
 					}
