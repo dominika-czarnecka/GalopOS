@@ -10,7 +10,7 @@ public class Processor {
 	public static PCB next_try = PCB.first;
 	public static int time=1;
 	
-	static public void set_to_run(){ //znajdŸ pierwszy mo¿liwy do wykonania
+	static public void set_to_run(){ //znajdï¿½ pierwszy moï¿½liwy do wykonania
 		
 		try
 		{
@@ -30,7 +30,7 @@ public class Processor {
 		catch(Exception ex) {ex.printStackTrace();}
 		//Interpreter.Rozkaz("INR A\nADD A");
 	}
-	static public void run_proc(){ //wykonaj instrukcjê
+	static public void run_proc(){ //wykonaj instrukcjï¿½
 		//Interpreter.Rozkaz();
 		try
 		{
@@ -41,15 +41,15 @@ public class Processor {
 				System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
 				time++;
 			}
-			else XPER();
+			else PER();
 			}
 		}
 		catch(Exception ex) {System.out.println("Cannot run instruction");}
 	}
 	
-	static public void XPER()
+	static public void PER()
 	{
-		System.out.println("Wyw³aszczam proces: " + RUNNING.name);
+		System.out.println("Wywï¿½aszczam proces: " + RUNNING.name);
 		save_all_registers();
 		time = 1;
 		set_to_run();
