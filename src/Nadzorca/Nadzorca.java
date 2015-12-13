@@ -128,15 +128,15 @@ public class Nadzorca
 		if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
 		{
 			char[] tab = new char[32];
-			tab = ;
-			
-			String kartaJOB = null;  // pobranie linijki $JOB z dysku (bo dopiero jak bede mial info o pamieci ile jej potrzeba bede mogl cokolwiek do niej zapisac) dostane SUPERMEGAHIPER STRINGA z tym tymczasowo =null;
+			tab = driver.read(nazwa, 32);  //funkcja która zwróci mi karte $JOB
+			String kartaJOB = String.valueOf(tab);
 			String[] wynik1 = null;
 			wynik1 = kartaJOB.split(",");
 			if(wynik1[1]=="$JOB");
 			{
 				int Pamiec = Integer.parseInt(wynik1[2]);
 				try 
+				
 				{
 					ZarzProc.createProcess(nazwa, Pamiec);
 				} catch (procCreationError e) 
