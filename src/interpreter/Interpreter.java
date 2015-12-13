@@ -230,7 +230,7 @@ public class Interpreter{
 		default:
 			System.out.println("Bledna dlugosc rozkazu");
 		}
-		if(!jumped) Processor.reg.IP+=buffor.length();
+		if(!jumped) Processor.reg.IP+=rozkaz.length();
 		Processor.time++;
 	}
 }
