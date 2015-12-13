@@ -65,7 +65,7 @@ public class Nadzorca
 		  {
 			  menu2();
 			  komenda=s.nextLine();  // wybranie programu dla ktorego ma zostac utworzony proces 
-			  UtworzProces(komenda);
+			  USERPROG(komenda);
 			  break;
 		  }
 
@@ -119,23 +119,25 @@ public class Nadzorca
 		}		
 	}
 	//Tworzenie procesu USERPROG
-	public static void UtworzProces(String komenda)
-	{	String program=null;
-		if(komenda=="1"){program="prog1";}
-		if(komenda=="2"){program="prog2";}
-		if(komenda=="3"){program="prog3";}
-		
-		if(program=="prog1" || program=="prog2" || program=="program3")
+	public static void USERPROG(String komenda)
+	{	String nazwa=null;
+		if(komenda=="1"){nazwa="prog1";}
+		if(komenda=="2"){nazwa="prog2";}
+		if(komenda=="3"){nazwa="prog3";}
+		if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
 		{
-			String SS = null;  // pobranie linijki $JOB z dysku (bo dopiero jak bede mial info o pamieci ile jej potrzeba bede mogl cokolwiek do niej zapisac) dostane SUPERMEGAHIPER STRINGA z tym tymczasowo =null;
+			char[] tab = new char[32];
+			tab = ;
+			
+			String kartaJOB = null;  // pobranie linijki $JOB z dysku (bo dopiero jak bede mial info o pamieci ile jej potrzeba bede mogl cokolwiek do niej zapisac) dostane SUPERMEGAHIPER STRINGA z tym tymczasowo =null;
 			String[] wynik1 = null;
-			wynik1 = SS.split(",");
+			wynik1 = kartaJOB.split(",");
 			if(wynik1[1]=="$JOB");
 			{
 				int Pamiec = Integer.parseInt(wynik1[2]);
 				try 
 				{
-					ZarzProc.createProcess(program, Pamiec);
+					ZarzProc.createProcess(nazwa, Pamiec);
 				} catch (procCreationError e) 
 					{
 						e.printStackTrace();
@@ -145,7 +147,7 @@ public class Nadzorca
 	}
 	
 	public static void menu1()
-	{
+	{ 	
 		System.out.println("Opcje /n");
 		System.out.println("1. Otworz program /n");
 		System.out.println("2. Wyswietl pamiec /n");
