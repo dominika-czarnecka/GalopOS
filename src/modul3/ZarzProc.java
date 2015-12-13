@@ -19,7 +19,7 @@ public class ZarzProc {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			//XA(name, memory); przydzielanie pamiêci
+			Pamiec.XA(name, memory); //przydzielanie pamiêci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 		}
@@ -83,7 +83,7 @@ public class ZarzProc {
 	
 	static public void sendMessage(PCB sender, PCB receiver, String content) {
 		receiver.Messages.add(new Message(sender, content));
-		receiver.msgSemaphore.XV();
+		receiver.msgSemaphore.V(receiver);
 	}
 	
 	static public Message readMessage(PCB process) {
