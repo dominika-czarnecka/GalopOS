@@ -19,6 +19,13 @@ public class main_interface
 	{
 		System.out.print("[User]: ");
 	}
+	public static String type_cmd()
+	{
+		set_cmd();
+		String cmd=s.nextLine();   //wybranie opcji z menu
+		cmd.toUpperCase();
+		return cmd;
+	}
 	public static void list_cmd()
 	{
 		System.out.println(
@@ -36,14 +43,7 @@ public class main_interface
 	+	"HELP		wyswietla liste komend."
 	+   "SHUTDOWN	zakonczenie pracy.");
 	}
-	public static String type_cmd()
-	{
-		set_cmd();
-		String cmd=s.nextLine();   //wybranie opcji z menu
-		cmd.toUpperCase();
-		return cmd;
-	}
-	
+		
 	public static void run_cmd()
 	{
 		list_cmd();
