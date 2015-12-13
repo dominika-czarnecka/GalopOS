@@ -8,12 +8,7 @@ import modul3.*;
 public class tester {
 
 	static int a = 0;
-	static PCB p1;
-	static PCB p2;
-	static PCB p3;
-	static PCB p4;
-	static PCB p5;
-	static PCB p6;
+	
 	static Scanner scanner = new Scanner(System.in);
 	public static void menu()
 	{
@@ -81,20 +76,23 @@ public class tester {
 	public static void main(String[] args) throws InterruptedException, procCreationError, procNotFoundError {
 		// TODO Auto-generated method stub
 		
-		/*ZarzProc.createProcess("p1", 0);
+		ZarzProc.createProcess("p1", 0);
 		ZarzProc.createProcess("p2", 0);
 		ZarzProc.createProcess("p3", 0);
 		ZarzProc.createProcess("p4", 0);
 		ZarzProc.createProcess("p5", 0);
 		ZarzProc.createProcess("p6", 0);
+		
 		ZarzProc.startProcess("p1");
 		ZarzProc.startProcess("p2");
 		ZarzProc.startProcess("p3");
 		ZarzProc.startProcess("p4");
 		ZarzProc.startProcess("p5");
-		ZarzProc.startProcess("p6");*/
+		ZarzProc.startProcess("p6");
 		
-		p1 = new PCB("p1", 0);
+		ZarzProc.printProcessList();
+		
+		/*p1 = new PCB("p1", 0);
 		p2 = new PCB("p2", 0);
 		p3 = new PCB("p3", 0);
 		p4 = new PCB("p4", 0);
@@ -143,7 +141,7 @@ public class tester {
 		p6.prev = p5;
 		
 		p6.stopped = false;
-		p6.blocked = false;
+		p6.blocked = false;*/
 			
 		menu();
 			
