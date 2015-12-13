@@ -18,7 +18,7 @@ public class Semaphore {
 		if (value < 0) {
 			queue.add(caller);
 			caller.blocked = true;
-			Processor.PER();
+			Processor.XPER();
 		}
 		return value;
 	}
