@@ -35,7 +35,7 @@ public class Pamiec {
         //=-------------------------------------------------
         // rejestry = new Registers(); // /// [!!!] nie potrzebuję rejetrów !
         //-----------------------------------------------------
-        System.out.println("Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie");
+        //System.out.println("Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie");
 
     }
 
@@ -59,7 +59,7 @@ public class Pamiec {
             //rejestry.reg2 = FSBSEM.value; /// [!!!] nie potrzebuję rejetrów !
             if (WolnaLista.Wolna() < rozmiar) {
                 System.out.println("[*]Brak wystarczającej ilości wolnej pamięci [*]\n[!] Zablokowanie procesu[!]");
-                rejestry.reg2 = MEMORY_SEM.value;
+                //rejestry.reg2 = MEMORY_SEM.value;
                 //  Nie moge przydzielic bloku - operacja na semaforach
                 FSBSEM.XP(); //Semafor blokow wolnej pamieci zablokowany
                 MEMORY_SEM.XP(); //Blokuje dostep do struktur pamieci OP
@@ -159,7 +159,7 @@ public class Pamiec {
     //odczyt bzposredni z tablicy RAM
     //Zwracac Stringa Dominiczce
     //zwracam null jak nie blad
-    public String OdczytZPamieci(String NazwaProcesu, int ilePobrac) { //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
+    public String OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
         FSBSEM.XP();
 
@@ -173,8 +173,7 @@ public class Pamiec {
             for (int i = 0; i < ilePobrac; i++)
                 fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i]; //nie kombinuje z generatorami czy yield
 
-
-
+            MEMORY_SEM.XV();
             FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
             //for UTF-8 encoding
             return new String(fragmentDoZwrocenia, "US-ASCII"); //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
@@ -189,7 +188,7 @@ public class Pamiec {
     //odczyt bzposredni z tablicy RAM
     //DoKtoregoZnakuCzytac - znak koncowy komendy podawany przez
     // HALT też wczytam bo dopiero po nim jest '\n'
-    public String OdczytajJednaKomende((String NazwaProcesu, char DoKtoregoZnakuCzytac){
+    public String OdczytajJednaKomende(String NazwaProcesu, char DoKtoregoZnakuCzytac){
         // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
         FSBSEM.XP();
@@ -226,9 +225,8 @@ public class Pamiec {
                     licznik = 0;
                 //---
 
-                String str = new String(fragmentDoZwrocenia, "US-ASCII"); // for UTF-8 encoding
-                return str; //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
-
+                //for UTF-8 encoding
+                return new String(fragmentDoZwrocenia, "US-ASCII"); //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
             }
 
             else{
