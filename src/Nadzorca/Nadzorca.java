@@ -55,6 +55,7 @@ public class Nadzorca
 	    
 		while(true)
 		{
+			
 		menu1();
 		String komenda=s.nextLine();   //wybranie opcji z menu
 		int wybor = Integer.parseInt(komenda);
@@ -161,7 +162,7 @@ public class Nadzorca
 		System.out.println("2. Wyswietl pamiec /n");
 		System.out.println("3. Wyswietl dysk /n");
 		System.out.println("4. Wyswietl tablice FAT /n");
-		System.out.println("5. Wyswietl katalogi");
+		System.out.println("5. Wyswietl katalogi /n");
 		System.out.println("6. Wyswietl liste procesow /n");
 		System.out.println("7. Wykonaj krok procesora /n");		
 	}
