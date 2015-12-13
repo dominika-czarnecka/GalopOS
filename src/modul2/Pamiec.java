@@ -1,7 +1,8 @@
 package modul2;
 import java.lang.*;
 import modul1.Registers;
-import modul1.Semaphores;
+import modul1.Semaphore;
+//import java.lang.String
 
 // rejestry.reg2 = FSBSEM.value; /// [!!!] nie potrzebuję rejetrów !
 
@@ -9,8 +10,8 @@ import java.util.*;
 
 //KOMENTARZ DODANY NA NOWO -PROBA
 public class Pamiec {
-    private static Semaphores FSBSEM; //semafor wolnej pamięci >0 można dokonać operacje Ay odblokować dostep do wolnej pamieci
-    private static Semaphores MEMORY_SEM;//Jesli proces dokonuje próby uzyskania przydziału, ale nie może go otrzymać,
+    private static Semaphore FSBSEM; //semafor wolnej pamięci >0 można dokonać operacje Ay odblokować dostep do wolnej pamieci
+    private static Semaphore MEMORY_SEM;//Jesli proces dokonuje próby uzyskania przydziału, ale nie może go otrzymać,
     // wykonuje operację P a semaforze Memory, w ten sposób zablokowując go. Gdy aktywuje go inny proces zwalniający jakiś fragment pamięci,
     //proces ten ponawia próę uzyskania przydziału, zablokowując się może ponownie dopókiadanie jego nie będzie możliwe
     // (!) Zawsze gdy zwalnia się blok pamięci, na semaforze MEMORY wykonywana jest operacja V.
@@ -20,18 +21,18 @@ public class Pamiec {
 
 
     public static int MEMORY_SIZE = 256;
-    public static byte[] RAM;
+    public static char[] RAM;
 
     public static int licznik =0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]
 
     //typ[][] nazwa_tablicy2 = new typ[liczba1][liczba2]; //deklaracja i przypisanie (utworzenie)
 
     public Pamiec() {
-        byte[] RAM = new byte[MEMORY_SIZE];
+        char[] RAM = new char[MEMORY_SIZE];
         WolnaLista = new Wolna(MEMORY_SIZE);
         ZajetaLista = new Zajeta();
-        MEMORY_SEM = new Semaphores(0);
-        FSBSEM = new Semaphores(1); // na poczatku ma wartosc 1
+      //  MEMORY_SEM = new Semaphore(0);
+      //  FSBSEM = new Semaphore(1); // na poczatku ma wartosc 1
         //=-------------------------------------------------
         // rejestry = new Registers(); // /// [!!!] nie potrzebuję rejetrów !
         //-----------------------------------------------------
@@ -51,8 +52,8 @@ public class Pamiec {
         //2)przeszukuje obszar pamięci aż znajdzie tak duży który się zmieści
         //3) zmiany połączeń elementów w liście dokonuje się za pomocą operacji XB; powrót do XA
 
-        System.out.println("Wartość semafora FSBSEM: " + FSBSEM.value);
-        System.out.println("Wartość semafora MEMORY_SEM: " + MEMORY_SEM.value);
+      //  System.out.println("Wartość semafora FSBSEM: " + FSBSEM.value);
+      //  System.out.println("Wartość semafora MEMORY_SEM: " + MEMORY_SEM.value);
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("[!] BLAD: próba przydzielenia bloku większego od całej pamieci [!] ");
         } else {
@@ -61,8 +62,8 @@ public class Pamiec {
                 System.out.println("[*]Brak wystarczającej ilości wolnej pamięci [*]\n[!] Zablokowanie procesu[!]");
                 //rejestry.reg2 = MEMORY_SEM.value;
                 //  Nie moge przydzielic bloku - operacja na semaforach
-                FSBSEM.XP(); //Semafor blokow wolnej pamieci zablokowany
-                MEMORY_SEM.XP(); //Blokuje dostep do struktur pamieci OP
+            //    P(FSBSEM.value); //Semafor blokow wolnej pamieci zablokowany
+            //    P(MEMORY_SEM.value); //Blokuje dostep do struktur pamieci OP
             }
             //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
             else {
@@ -80,8 +81,8 @@ public class Pamiec {
                 System.out.println("Przydział pamieci dla procesu" + NazwaProcesu);
             }
             // rejestry.reg2 = FSBSEM.value; /// [!!!] nie potrzebuję rejetrów !
-            //Semafory.XV(); Nika zakomentowane
-            FSBSEM.XV(); //znowu można zapisywać
+            //Semafory.V(); Nika zakomentowane
+          //  V(FSBSEM.value); //znowu można zapisywać
 
         }
         Wyswietl();
@@ -93,19 +94,19 @@ public class Pamiec {
     public static void XF(String NazwaProcesu) {
         System.out.println("Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
         //rejestry.reg2=FSBSEM.value;
-        //Semafory.XP();
-        FSBSEM.XP();
-        MEMORY_SEM.XV();
+        //Semafory.P();
+        //P(FSBSEM.value);
+        //V(MEMORY_SEM.value);
         WolnaLista.DodajWolnyBlok(ZajetaLista.Poczatek(NazwaProcesu), ZajetaLista.Rozmiar(NazwaProcesu));
         ZajetaLista.Usun(NazwaProcesu);
 
-        if (MEMORY_SEM.value < 0) {
+      //  if (MEMORY_SEM.value < 0) {
             //  rejestry.reg2 = MEMORY_SEM.value;
-            //Semafory.XV(); //zawsze gsy zwalniany jest blok pamięci wykonywana jest operacja XV; lwywoałanXV == lZwolnienPamieci
-            FSBSEM.XV();
-            MEMORY_SEM.XV(); //Gdy zwolni się blok +1
+            //Semafory.V(); //zawsze gsy zwalniany jest blok pamięci wykonywana jest operacja V; lwywoałanV == lZwolnienPamieci
+           // V(FSBSEM.value);
+           // V(MEMORY_SEM.value); //Gdy zwolni się blok +1
             Wyswietl(); //wyswietla pamiec po zwolnieniu
-        }
+        //}
     }
 
     //-----------------------------------------------------------------------//
@@ -132,7 +133,7 @@ public class Pamiec {
 //zapisywanie danych do już zajętęgo bloku pamięci
     public void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
-        FSBSEM.XP();
+        //P(FSBSEM.value);
 
         //pobranie konkretnego bloku po nazwie
 
@@ -142,16 +143,16 @@ public class Pamiec {
             int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
 
             if (dlugoscDanych <= rozmiar) {
-                byte[] daneByte = daneProcesu.getBytes();
+                char[] daneChar = daneProcesu.toCharArray();
                 //zapisywanie do konkretnego bloku danych bajtowych bit po bicie do Tablicy RAM
                 for (int i = 0; i < rozmiar; i++) {
-                    RAM[indeksPoczatek + i] = daneByte[i];
+                    RAM[indeksPoczatek + i] = daneChar[i];
                 }
             } else System.out.println("[BLAD] Dane większe od zaalokowanego obszaru Pamieci Operacyjnej");
-            FSBSEM.XV(); //odblokowuje semafor - nie wiem czy potrzebnie
+          //  V(FSBSEM.value); //odblokowuje semafor - nie wiem czy potrzebnie
         } else {
             System.out.println("[Błąd] Blok pamieci: " + NazwaProcesu + " nie istnieje !");
-            FSBSEM.XV(); //odblokowuje semafor
+           // FSBSEM.V(FSBSEM.value); //odblokowuje semafor
         }
     }
 
@@ -161,25 +162,28 @@ public class Pamiec {
     //zwracam null jak nie blad
     public String OdczytZPamieci(String NazwaProcesu, int ilePobrac){ //ilePobrac - liczba bajtow ktore chce się odczytac z bloku
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
-        FSBSEM.XP();
+       // FSBSEM.P();
 
         // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
         licznik = ilePobrac; //globalnie dostepny licznik do bloku pamieci - do pobierania kawalków bloku pamieci
         int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu);
         int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
         if (ilePobrac <= rozmiar) {
-            byte[] fragmentDoZwrocenia = new byte[ilePobrac];
+            char[] fragmentDoZwrocenia = new char[ilePobrac];
 
             for (int i = 0; i < ilePobrac; i++)
                 fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i]; //nie kombinuje z generatorami czy yield
 
-            MEMORY_SEM.XV();
-            FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
+          //  MEMORY_SEM.V();
+          //  FSBSEM.V(); //odblokowuje semafor - nie wiem czy porzebnie
             //for UTF-8 encoding
-            return new String(fragmentDoZwrocenia, "US-ASCII"); //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+             //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+            String str = String.valueOf(fragmentDoZwrocenia);
+            return str;
+
         } else
             System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
-        FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
+       // FSBSEM.V(); //odblokowuje semafor - nie wiem czy porzebnie
         return null;
     }
 
@@ -188,11 +192,12 @@ public class Pamiec {
     //odczyt bzposredni z tablicy RAM
     //DoKtoregoZnakuCzytac - znak koncowy komendy podawany przez
     // HALT też wczytam bo dopiero po nim jest '\n'
-    public String OdczytajJednaKomende(String NazwaProcesu, char DoKtoregoZnakuCzytac){
+    public String OdczytajJednaKomende(String NazwaProcesu){
+        char DoKtoregoZnakuCzytac = '\n';
         // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
         //1 blokuje semafor żeby nikt w tym czasie nie zapisywal
-        FSBSEM.XP();
-        MEMORY_SEM.XP();
+       // FSBSEM.P();
+       // MEMORY_SEM.P();
         int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
         int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
 
@@ -206,33 +211,34 @@ public class Pamiec {
         {
             ilePobrac++;
             //zeby zwracac od miejsca na ktorym skonczyl Interpreter - potrojne dodawanie
-        }while( (char)RAM[indeksPoczatek + ilePobrac + ilePobrac] != DoKtoregoZnakuCzytac) //zrzucam byte na chara do porownania
+        }while(RAM[indeksPoczatek + ilePobrac + ilePobrac] != DoKtoregoZnakuCzytac) //zrzucam byte na chara do porownania
 
         licznik += ilePobrac; //Musze jakos ustawic gdzie ostanio interpreter czytał
 
             if (ilePobrac <= rozmiar) {
-                byte[] fragmentDoZwrocenia = new byte[ilePobrac];
+                char[] fragmentDoZwrocenia = new char[ilePobrac];
 
                 for (int i = 0; i<ilePobrac; i++) //zliczam sobie łopatologicznie ile znaków mam zwrocic
                     fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i]; //nie kombinuje z generatorami czy yield
 
 
-                FSBSEM.XV(); //odblokowuje semafory
-                MEMORY_SEM.XV();
+                //FSBSEM.V(); //odblokowuje semafory
+               // MEMORY_SEM.V();
 
                 //---zerowanie globalnego licznika
                 if (licznik == rozmiar)
                     licznik = 0;
                 //---
 
-                //for UTF-8 encoding
-                return new String(fragmentDoZwrocenia, "US-ASCII"); //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+                //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+                String str = String.valueOf(fragmentDoZwrocenia);
+                return str;
             }
 
             else{
                 System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
-                FSBSEM.XV(); //odblokowuje semafor - nie wiem czy porzebnie
-                MEMORY_SEM.XP();
+               // FSBSEM.V(); //odblokowuje semafor - nie wiem czy porzebnie
+              //  MEMORY_SEM.P();
                 return null;
             }
     }
