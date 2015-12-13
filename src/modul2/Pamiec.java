@@ -45,13 +45,13 @@ public class Pamiec {
                     ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
                 } else {
                     System.out.println("[*] Brak bloku o odpowiednim rozmiarze [*]");
-                    System.out.println("Następuje przesunięcie bloków pamięci");
-                    ZajetaLista.Przesun(RAM); //CZEMU DO HOLERY NIE MAM TEJ FUNCKJI?
+                    System.out.println("Następuje przesuniecie blokow pamięci");
+                    ZajetaLista.Przesun(RAM);
                     WolnaLista.Wykasuj(ZajetaLista.Ostatni());
                     list_index = WolnaLista.ZnajdzWolne(rozmiar);
                     ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
                 }
-                System.out.println("Przydział pamieci dla procesu" + NazwaProcesu);
+                System.out.println("Przydzial pamieci dla procesu" + NazwaProcesu);
             }
         }
         Wyswietl(); //wyswietla Wolne bloki Pamieci
@@ -120,53 +120,11 @@ public class Pamiec {
         return null;
     }
 
-//-------------------------- [Odczytywanie Z RAMU Jednego Rozkazu (do Znaku '\n')] ----------------------------------------
-    // @parametry: Nazwa procesu
-    // @zwraca: String
-    //odczyt bzposredni z tablicy RAM jednej komendy
-    // [!] Zmienna Globalna Licznik - zliczam za kazdym wywołaniem funkcji
-    // [!] ZEROWANIE LICZNIKA GDY DOJDZIE DO KONCA PLIKU
-    public static String OdczytajJednaKomende(String NazwaProcesu){
-        char DoKtoregoZnakuCzytac = '\n'; //Java - brak parametrów domyslnych
-        // [licznik] zapamiętuje w którym miejscu zatrzymało się ostatnio pobieranie bloku - ZMIENNA GLOBALNA potrzebna interpretorowi
-        int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
-        int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
 
-        int ilePobrac=0;
-        do{
-            ilePobrac++;
-        }while(RAM[indeksPoczatek + licznik + ilePobrac] != DoKtoregoZnakuCzytac);//zeby zwracac od miejsca na ktorym skonczyl Interpreter - potrojne dodawanie
-
-        licznik += ilePobrac; //GLoBALNA ZMIENNA
-
-            if (ilePobrac <= rozmiar) {//zliczam  ile znaków mam zwrocic
-                char[] fragmentDoZwrocenia = new char[ilePobrac];
-
-                for (int i = 0; i<ilePobrac; i++)
-                    fragmentDoZwrocenia[i] = RAM[indeksPoczatek + i];
-
-                //---zerowanie globalnego licznika
-                if (licznik == rozmiar)
-                    licznik = 0;
-                //---
-
-                //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
-                String str = String.valueOf(fragmentDoZwrocenia);
-                return str;
-            }
-
-            else{
-                System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
-                return null;
-            }
-    }
-
-
-//------------------------------------------------[JUMP - potrzbne interpreterowi]---------------------------------------------------------
-//Interpreter do używa do jumpa
+//------------------------------------------------[WCZYTAJROZKAZ - potrzbne interpreterowi]---------------------------------------------------------
     //@Parametry: Nazwa Procesu, NrKomorki - podaje interpreter od ktorej komorki odczytywac pamiec
     //@Zwraca: jedna komede od NrKomorki
-    public  static String KomorkaJump(String NazwaProcesu, int NrKomorki){
+    public  static String WczytajRozkaz(String NazwaProcesu, int NrKomorki){
         char DoKtoregoZnakuCzytac = '\n';
         int indeksPoczatek = ZajetaLista.Poczatek(NazwaProcesu); //Potrzebuje zeby znac poczatek bloku z ktorego czytam
         int rozmiar = ZajetaLista.Rozmiar(NazwaProcesu);
@@ -180,16 +138,16 @@ public class Pamiec {
         if (ilePobrac <= rozmiar) {
             char[] fragmentDoZwrocenia = new char[ilePobrac];
 
-            for (int i = 0; i<ilePobrac; i++) //zliczam sobie łopatologicznie ile znaków mam zwrocic
-                fragmentDoZwrocenia[i] = RAM[indeksPoczatek + NrKomorki +  i]; //nie kombinuje z generatorami czy yield
+            for (int i = 0; i<ilePobrac; i++) //zliczam ile znakow mam zwrocic
+                fragmentDoZwrocenia[i] = RAM[indeksPoczatek + NrKomorki +  i];
 
-            //Zwraca taką ilosć danych z bloku jaki chciał ktoś wywołujacy funkcje
+            //Zwraca taką ilosc danych z bloku jaki chcial ktos wywolujacy funkcje
             String str = String.valueOf(fragmentDoZwrocenia); //fragment zrzucam na stringa i daje interpreterowi
             return str;
         }
 
         else{
-            System.out.println("[Blad] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
+            System.out.println("[BLAD] Proba pobrania wiekszej ilosci danych niz posiada zaalokowanej pamieci proces: " + NazwaProcesu + "\n");
             return null;
         }
     }
@@ -217,4 +175,4 @@ public class Pamiec {
         String string = s.nextLine();
     }
 
-}//klamra zamykająca całą klasę Pamiec
+}//klamra zamykająca cala klase Pamiec
