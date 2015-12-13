@@ -85,10 +85,10 @@ public class tester {
 				System.out.println("--=MENU=--: ");
 				System.out.println("1): Set next RUNNING");
 				System.out.println("2): Show processor registers");
-				System.out.println("3): Show process registers");
-				System.out.println("4): Show process registers");
-				System.out.println("5): Show process registers");
-				System.out.println("6): Show process registers");
+				System.out.println("3): Show process register with name");
+				System.out.println("4): Stop process with name");
+				System.out.println("P): Semaphore operation P on: ");
+				System.out.println("V): Semaphore operation V on: ");
 				
 				System.out.println("0): Run one instruction");
 				try
