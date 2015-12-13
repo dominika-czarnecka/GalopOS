@@ -19,7 +19,7 @@ public class ZarzProc {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			Pamiec.XA(name, memory); //przydzielanie pamiêci
+			Pamiec.XA(name, memory); //przydzielanie pamiï¿½ci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 		}
@@ -33,7 +33,7 @@ public class ZarzProc {
 		else {
 			popProcess(process);
 			process.Messages.clear(); //bufor czyszczony wiadomosci 
-			Pamiec.XF(process.name); //zwalnianie pamiêci
+			Pamiec.XF(process.name); //zwalnianie pamiï¿½ci
 		}
 	}
 	
@@ -68,13 +68,13 @@ public class ZarzProc {
 	static public void startProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
-		//wpisywanie stanu rejestrów
+		//wpisywanie stanu rejestrï¿½w
 		process.stopped = false;
 	}
 	
 	
 	static public void stopProcess(String name) throws procNotFoundError {
-		if (name.startsWith("*")) return; //proces systemowy nie mo¿e byæ zatrzymany
+		if (name.startsWith("*")) return; //proces systemowy nie moï¿½e byï¿½ zatrzymany
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
 		process.stopped = true;

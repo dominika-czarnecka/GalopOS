@@ -47,7 +47,7 @@ public class Zajeta {
     }
 
 
-    public void Przesun(byte[] RAM){
+    public void Przesun(char[] RAM){
         int nastepny=0;
         int przesuniecie;
 
