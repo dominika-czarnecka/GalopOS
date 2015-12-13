@@ -5,81 +5,86 @@ import interpreter.*;
 public class Processor {
 
 	public static Registers reg = new Registers();
-	
+
 	public static PCB RUNNING = null;
 	public static PCB next_try = PCB.first;
 	public static int time=1;
-	
-	static public void set_to_run(){ //znajdï¿½ pierwszy moï¿½liwy do wykonania
-		
+	public static boolean waiting = true;
+
+	static public void set_to_run(){ //znajdŸ pierwszy mo¿liwy do wykonania
+
 		try
 		{
-		while(next_try.blocked == true || next_try.stopped == true )
-		{
+			PCB start = next_try;
+			do {
+				if (next_try.moznaUruchomic()) break;
+				next_try = next_try.next;
+			} while (next_try != start);
+			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
+			RUNNING = next_try;
 			next_try = next_try.next;	
-		}
-		RUNNING = next_try;
-		next_try = next_try.next;	
-				
-		load_all_registers();
-		System.out.println("NEW RUNNING: "+RUNNING.name);
-		System.out.println("");
-		System.out.println("");
-		
+
+			load_all_registers();
+			System.out.println("NEW RUNNING: "+RUNNING.name);
+			System.out.println("");
+			System.out.println("");
+
 		}
 		catch(Exception ex) {ex.printStackTrace();}
 		//Interpreter.Rozkaz("INR A\nADD A");
 	}
-	static public void run_proc(){ //wykonaj instrukcjï¿½
+	static public void run_proc(){ //wykonaj instrukcjê
 		//Interpreter.Rozkaz();
 		try
 		{
-		if (RUNNING.name!=null)
-		{
-			if (time<4)
+			if (RUNNING.name!=null)
 			{
-				System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
-				time++;
-			}
-			else PER();
+				if (time<4)
+				{
+					System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+					time++;
+				}
+				else XPER();
 			}
 		}
 		catch(Exception ex) {System.out.println("Cannot run instruction");}
 	}
-	
-	static public void PER()
+
+	static public void XPER()
 	{
-		System.out.println("Wywï¿½aszczam proces: " + RUNNING.name);
+		System.out.println("Wyw³aszczam proces: " + RUNNING.name);
 		save_all_registers();
 		time = 1;
 		set_to_run();
-		}
-	
+	}
+
 	static private void save_all_registers(){
 		try
 		{
-		RUNNING.register.A = reg.A;
-		RUNNING.register.B = reg.B;
-		RUNNING.register.C = reg.C;
-		RUNNING.register.D = reg.D;
+			RUNNING.register.A = reg.A;
+			RUNNING.register.B = reg.B;
+			RUNNING.register.C = reg.C;
+			RUNNING.register.D = reg.D;
+			RUNNING.register.IP = reg.IP;
 		}
 		catch(Exception e){System.out.println("");}
-		 
+
 	}
 	static private void load_all_registers(){
 		reg.A = RUNNING.register.A;
 		reg.B = RUNNING.register.B;
 		reg.C = RUNNING.register.C;
 		reg.D = RUNNING.register.D;
+		reg.IP = RUNNING.register.IP;
 	}	
-	
-	
-			
+
+
+
 
 	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		
+
+
 	}*/
 
 }
