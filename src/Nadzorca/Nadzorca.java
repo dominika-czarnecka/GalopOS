@@ -46,7 +46,7 @@ public class Nadzorca
 					e.printStackTrace();
 				}
 		Processor.next_try = PCB.first;	
-		Processor.XPER();		
+		Processor.PER();
 	}
 	
 	public static void IBSUP()
@@ -129,7 +129,7 @@ public class Nadzorca
 		if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
 		{
 			char[] tab = new char[32];
-			tab = driver.read(nazwa, 32);  //funkcja która zwróci mi karte $JOB
+			tab = driver.read(nazwa, 32);  //funkcja ktï¿½ra zwrï¿½ci mi karte $JOB
 			String kartaJOB = String.valueOf(tab);
 			String[] wynik1 = null;
 			wynik1 = kartaJOB.split(",");
