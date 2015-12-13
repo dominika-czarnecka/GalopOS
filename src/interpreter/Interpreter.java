@@ -8,17 +8,16 @@ import modul4.*;
 public class Interpreter{
 
 	static hdd_commander driver;
-	static Pamiec pamiec;
+	
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
 		this.driver=driver;
-		this.pamiec=pamiec;
 	}
 
 	public static void Task() throws Exception{
-		String buffor=Pamiec.KomorkaJump(Processor.RUNNING.name,Processor.reg.IP );
-		String[] line= buffor.split(" ");
+		String rozkaz=Pamiec.WczytajRozkaz(Processor.RUNNING.name,Processor.reg.IP );
+		String[] line= rozkaz.split(" ");
 		Boolean jumped=false;
 
 		switch(line.length){
@@ -26,8 +25,7 @@ public class Interpreter{
 		case 1:
 			switch(line[0]){
 			case "HLT":	
-				Nadzorca.end=true;
-				//ZarzProc.removeProcess(Processor.RUNNING.name);						
+				ZarzProc.notifySup(Processor.RUNNING);				
 				throw new Exception("HALT");
 			//break;
 			default:
