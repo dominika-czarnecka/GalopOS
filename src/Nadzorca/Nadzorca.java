@@ -19,7 +19,7 @@ public class Nadzorca
 	public static List<Message> IBSUPmsg = new ArrayList<Message>();
 
 	//////////
-	static Scanner s = new Scanner(System.in);	
+	public static Scanner s = new Scanner(System.in);	
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	static String komenda;
@@ -252,6 +252,10 @@ public class Nadzorca
 				e.printStackTrace();
 				}
 							
+		}
+		else
+		{
+			System.out.println("Nie ma takiego programu na dysku");
 		}
 	}
 	public static int SprawdzJOB(String KartaJOB)
