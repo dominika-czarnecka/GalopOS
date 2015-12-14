@@ -6,7 +6,7 @@ import java.util.List;
 public class Semaphore {
 
 	public int value;
-	List<PCB> queue; 
+	public List<PCB> queue; 
 	
 	public Semaphore(int value) {
 		this.value = value;

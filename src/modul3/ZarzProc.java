@@ -5,7 +5,7 @@ import modul2.*;
 import Nadzorca.*;
 
 public class ZarzProc {
-	
+
 	static public PCB findProcess(String name) {
 		if(PCB.first==null) return null;
 		PCB it = PCB.first;
@@ -15,17 +15,18 @@ public class ZarzProc {
 		} while (it != PCB.first);
 		return null;
 	}
-	
-	static public void createProcess(String name, int memory) throws procCreationError {
+
+	static public PCB createProcess(String name, int memory) throws procCreationError {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			Pamiec.XA(name, memory); //przydzielanie pami�ci
+			//Pamiec.XA(name, memory); //przydzielanie pami�ci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
+			return process;
 		}
 	}
-	
+
 	static public void removeProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) {
@@ -34,16 +35,16 @@ public class ZarzProc {
 		else {
 			popProcess(process);
 			process.Messages.clear(); //bufor czyszczony wiadomosci 
-			Pamiec.XF(process.name); //zwalnianie pami�ci
+			//Pamiec.XF(process.name); //zwalnianie pami�ci
 		}
 	}
-	
+
 	//XH - zatrzymanie zlecenia i powiadomienie nadzorcy
 	static public void notifySup(PCB stopped) {
 		stopped.stopped = true;
 		Nadzorca.IBSUPmsg.add(new Message(stopped, "stopped"));
 	}
-	
+
 	static public void popProcess(PCB process) { //usuwa z listy PCB
 		if (process.next==process)
 			PCB.first = null;
@@ -76,27 +77,33 @@ public class ZarzProc {
 		//wpisywanie stanu rejestr�w
 		process.stopped = false;
 	}
-	
-	
+
+
 	static public void stopProcess(String name) throws procNotFoundError {
 		if (name.startsWith("*")) return; //proces systemowy nie mo�e by� zatrzymany
 		PCB process = findProcess(name);
 		if (process == null) throw new procNotFoundError();
 		process.stopped = true;
 	}
-	
-	
+
+
 	static public void sendMessage(PCB sender, PCB receiver, String content) {
 		receiver.Messages.add(new Message(sender, content));
 		receiver.msgSemaphore.V(receiver);
 	}
-	
+
 	static public Message readMessage(PCB process) {
-		//P na semaforze
+		if (!process.waitingForMessage) {
+			if (process.msgSemaphore.P(process) < 0) {
+				process.waitingForMessage = true;
+				return null;
+			}
+		}
+		process.waitingForMessage = false;
 		return process.Messages.remove(0);
 	}
-	
-	
+
+
 	static public void printProcessList() {
 		if (PCB.first == null) System.out.println("Puste");
 		else {
@@ -110,7 +117,7 @@ public class ZarzProc {
 			System.out.print("\n");
 		}
 	}
-	
+
 	static public void printProcessListBack() {
 		if (PCB.first == null) System.out.println("Puste");
 		else {

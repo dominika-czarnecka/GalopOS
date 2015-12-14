@@ -15,8 +15,9 @@ public class PCB {
        // public PCB next_semaphore_waiter;
         
         public ArrayList<Message> Messages = new ArrayList<Message>();
+        public Semaphore msgSemaphore = new Semaphore(0);
+        public boolean waitingForMessage;
         
-        public Semaphore msgSemaphore;
         //public int Line;
         //public String buffor;
         public boolean stopped;
@@ -31,7 +32,7 @@ public class PCB {
                 this.memoryLimit = memory;
                 stopped = true;
                 blocked = false;
-                
+                waitingForMessage = false;
         }
         
         boolean moznaUruchomic() {
