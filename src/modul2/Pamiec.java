@@ -166,6 +166,8 @@ public class Pamiec {
     //@oarametry: brak
     //@zwraca: brak
     public static void WyswietlRAM() {
+
+        try{
         System.out.println("\n -------------------PAMIEC - zawartość -----------------\n");
         for (int i = 0; i < MEMORY_SIZE; i++) {
             System.out.print(RAM[i] + " "); //zeby nie interpretowalo znakow nowej linii
@@ -173,6 +175,10 @@ public class Pamiec {
 
         Scanner s = new Scanner(System.in);
         String string = s.nextLine();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     //---------------------[WYSWIETL Wyswietlanie WOLNYCH i ZAJETYCH blokow pamieci]--------------------------------------//
