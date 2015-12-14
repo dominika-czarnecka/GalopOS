@@ -27,6 +27,8 @@ public class Pamiec {
     //Calkowicie rezygnuje z rejestrow - bo nie korzystamy z assemblera
     public static void XA(String NazwaProcesu, int rozmiar) {
 
+        System.out.println(WolnaLista.Wolna());
+
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
         } else {
