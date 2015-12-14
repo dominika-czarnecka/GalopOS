@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fad9f648-fa8f-4ec1-82e2-4fb4be7c7ffa" name="Default" comment="Zwracam stringi i zapamietuje w ktorym miejscu interpreter skonczyl czytac&#10;+ zerowanie pamietanego licznika gdy osiganie rozmiar bloku calego procesu">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modul2/Pamiec.java" afterPath="$PROJECT_DIR$/src/modul2/Pamiec.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modul2/Wolna.java" afterPath="$PROJECT_DIR$/src/modul2/Wolna.java" />
     </list>
     <ignored path="GalopOS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="Pamiec.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5994358">
-              <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.62341326">
+              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,8 +123,8 @@
       <file leaf-file-name="Wolna.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modul2/Wolna.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.551724">
-              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+            <state vertical-scroll-proportion="-9.379311">
+              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -679,7 +680,7 @@
       <workItem from="1449608926390" duration="12449000" />
       <workItem from="1450023825326" duration="17386000" />
       <workItem from="1450047210857" duration="125000" />
-      <workItem from="1450123010633" duration="4996000" />
+      <workItem from="1450123010633" duration="5185000" />
     </task>
     <task id="LOCAL-00001" summary="fgfdgfgfg">
       <created>1449597510921</created>
@@ -745,7 +746,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43172000" />
+    <option name="totallyTimeSpent" value="43361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -1240,16 +1241,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modul2/Wolna.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.551724">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        <state vertical-scroll-proportion="-9.379311">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modul2/Pamiec.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5994358">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.62341326">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

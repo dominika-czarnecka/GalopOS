@@ -28,6 +28,7 @@ public class Pamiec {
     public static void XA(String NazwaProcesu, int rozmiar) {
 
         System.out.println(WolnaLista.Wolna());
+      //  System.out.println(WolnaLista.get(0).);
 
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");

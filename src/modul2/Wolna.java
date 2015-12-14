@@ -14,7 +14,7 @@ public class Wolna {
     //konstruktor
     public Wolna(int rozmiar){ //jako rozmiar podac cały MEMORY_SIZE
         List = new ArrayList<Element>() ; //zaalokowanie pamieci
-        Element e= new Element(0, Pamiec.MEMORY_SIZE);
+        Element e= new Element(300, Pamiec.MEMORY_SIZE);
         List.add(e); //na poczatku calosc wolna 0-pierwszy indeks
         wolna = Pamiec.MEMORY_SIZE;
 
