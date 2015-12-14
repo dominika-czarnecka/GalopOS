@@ -272,7 +272,7 @@ public void edit(String name, String data) // dwie weryfikacje: czy udalo sie ot
  }
 else System.out.println("Plik jest juz otwarty lub nie istnieje.");
 }
-public char[] read(String name)
+public String read(String name)
 { 
 	if(open(name))
 	{  	
@@ -282,11 +282,11 @@ public char[] read(String name)
 		content=recc_read(read.first_node, read.size, read.bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content;
+		return content.toString();
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
-public char[] read(String name, int content_size)
+public String read(String name, int content_size)
 { 
 	if(open(name))
 	{  	
@@ -303,7 +303,7 @@ public char[] read(String name, int content_size)
 		content=recc_read(read.first_node, content_size, bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content;
+		return content.toString();
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }

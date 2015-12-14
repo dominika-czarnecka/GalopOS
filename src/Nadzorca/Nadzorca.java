@@ -53,100 +53,94 @@ public class Nadzorca
 	{
 		list_cmd();
 		do {
-			//try {
-				komenda=type_cmd();
-				switch(komenda.toUpperCase())
+			komenda=type_cmd();
+			switch(komenda.toUpperCase())
+			{
+			case "CREATE":
+			{
+				System.out.print("Podaj nazwe pliku, ktory ma byc utworzony: "); String nazwa=s.nextLine();
+				System.out.println("Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
+				driver.create(nazwa, zawartosc);
+				break;
+			}
+			case "DELETE":
+			{
+				System.out.print("Podaj nazwe pliku, ktory ma byc usuniety: "); String nazwa=s.nextLine();
+				driver.delete(nazwa);
+				break;
+			}
+			case "EDIT":
+			{
+				System.out.print("Podaj nazwe pliku, ktory ma byc edytowany: "); String nazwa=s.nextLine();
+				if(driver.get_file(nazwa)!=null)
 				{
-				case "CREATE":
+					System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
+					driver.edit(nazwa, zawartosc);
+				}
+				else System.out.println("Plik o podanej nazwie nie istnieje");
+				break;
+			}
+			case "READ":
+			{
+				System.out.print("Podaj nazwe pliku, ktory chcesz otworzyc: "); String nazwa=s.nextLine();
+				if(driver.get_file(nazwa)!=null)
 				{
-					System.out.print("Podaj nazwe pliku, ktory ma byc utworzony: "); String nazwa=s.nextLine();
-					System.out.println("Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
-					driver.create(nazwa, zawartosc);
-					break;
+					System.out.println(driver.get_file(nazwa).name);
+					System.out.println(driver.read(nazwa));
 				}
-				case "DELETE":
-				{
-					System.out.print("Podaj nazwe pliku, ktory ma byc usuniety: "); String nazwa=s.nextLine();
-					driver.delete(nazwa);
-					break;
-				}
-				case "EDIT":
-				{
-					System.out.print("Podaj nazwe pliku, ktory ma byc edytowany: "); String nazwa=s.nextLine();
-					if(driver.get_file(nazwa)!=null)
-					{
-						System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
-						driver.edit(nazwa, zawartosc);
-					}
-					else System.out.println("Plik o podanej nazwie nie istnieje");
-					break;
-				}
-				case "READ":
-				{
-					System.out.print("Podaj nazwe pliku, ktory chcesz otworzyc: "); String nazwa=s.nextLine();
-					if(driver.get_file(nazwa)!=null)
-					{
-						System.out.println(driver.get_file(nazwa).name);
-						System.out.println(driver.read(nazwa));
-					}
-					else System.out.println("Plik o podanej nazwie nie istnieje");
-					break;
-				}
-				case "DIR":
-				{
-					driver.catalog_show();
-					break;
-				}
-				case "FAT":
-				{
-					driver.fat_show();
-					break;
-				}
-				case "CHDSK":
-				{
-					int free_blocks=driver.count_free_space();
-					int size_driver=driver.size_block*driver.number_blocks;
-					System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow, " + (size_driver -free_blocks*driver.size_block) + " bajtow jest zajetych.");
-					break;
-				}
-				case "PNDSK":
-				{
-					driver.driver_show();
-					break;
-				}
-				case "CRPROC":
-				{
-					break;
-				}
-				case "PROC":
-				{
-					break;
-				}
-				case "CHMEM":
-				{
-					break;
-				}
-				case "HELP":
-				{
-					list_cmd();
-					break;
-				}
-				case "":
-				{
-					//Interpreter.Rozkaz("INR A");
-					break;
-				}
-				default:
-				{
-					System.out.println("'"+ komenda + "'" + " nieznana komenda");
-					break;
-				}
-				}
-
-			//}
-			/*catch (IOException e) {
-				e.printStackTrace();
-			}*/
+				else System.out.println("Plik o podanej nazwie nie istnieje");
+				break;
+			}
+			case "DIR":
+			{
+				driver.catalog_show();
+				break;
+			}
+			case "FAT":
+			{
+				driver.fat_show();
+				break;
+			}
+			case "CHDSK":
+			{
+				int free_blocks=driver.count_free_space();
+				int size_driver=driver.size_block*driver.number_blocks;
+				System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow, " + (size_driver -free_blocks*driver.size_block) + " bajtow jest zajetych.");
+				break;
+			}
+			case "PNDSK":
+			{
+				driver.driver_show();
+				break;
+			}
+			case "CRPROC":
+			{
+				break;
+			}
+			case "PROC":
+			{
+				break;
+			}
+			case "CHMEM":
+			{
+				break;
+			}
+			case "HELP":
+			{
+				list_cmd();
+				break;
+			}
+			case "":
+			{
+				//Interpreter.Rozkaz("INR A");
+				break;
+			}
+			default:
+			{
+				System.out.println("'"+ komenda + "'" + " nieznana komenda");
+				break;
+			}
+			}
 		} while(komenda != "SHUTDOWN");
 
 	}
