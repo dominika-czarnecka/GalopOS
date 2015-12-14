@@ -56,7 +56,7 @@ private int search_next_free_space() // THE INDEX OF SECOND FAT'S EMPTY SPACE
 public file get_file(String name)
 {
 	for(int i=0;i<main_catalog.size();i++)
-		if(main_catalog.get(i).name==name) return main_catalog.get(i);
+		if(main_catalog.get(i).name.equals(name)) return main_catalog.get(i);
 	return null;
 }
 private boolean is_enough_space(int bsize)
