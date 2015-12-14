@@ -31,28 +31,30 @@ public class Pamiec {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
         } else {
 
-            try
-            {
-            if (WolnaLista.Wolna() < rozmiar) {
-                System.out.println("\n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]\n");
-            }
-            //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
-            else {
-                int list_index = WolnaLista.ZnajdzWolne(rozmiar); //list_index przechwuje tylkoe rozmiar wolnego obszaru
-                if (list_index != -1) { //jesli jest dodstatecznie duży blok aby przydzielic pamiec
-                    ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
-                } else {
-                    System.out.println("\n[*] Brak bloku o odpowiednim rozmiarze [*]\n");
-                    System.out.println("\n[*]Następuje przesuniecie blokow pamięci operacyjnej[*]\n"); //kosztowna operacja - unikam jak moge
-                    ZajetaLista.Przesun(RAM);
-                    WolnaLista.Wykasuj(ZajetaLista.Ostatni());
-                    list_index = WolnaLista.ZnajdzWolne(rozmiar);
-                    ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
+            try {
+                if (WolnaLista.Wolna() < rozmiar) {
+                    System.out.println("\n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]\n");
                 }
-                System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
-            }
-        } catch (Exception ex) {ex.printStackTrace();} ///////////////////////////////////////////////////////najwyżej do zmiany
-        Wyswietl(); //wyswietla Wolne bloki Pamieci
+                //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
+                else {
+                    int list_index = WolnaLista.ZnajdzWolne(rozmiar); //list_index przechwuje tylkoe rozmiar wolnego obszaru
+                    if (list_index != -1) { //jesli jest dodstatecznie duży blok aby przydzielic pamiec
+                        ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
+                    } else {
+                        System.out.println("\n[*] Brak bloku o odpowiednim rozmiarze [*]\n");
+                        System.out.println("\n[*]Następuje przesuniecie blokow pamięci operacyjnej[*]\n"); //kosztowna operacja - unikam jak moge
+                        ZajetaLista.Przesun(RAM);
+                        WolnaLista.Wykasuj(ZajetaLista.Ostatni());
+                        list_index = WolnaLista.ZnajdzWolne(rozmiar);
+                        ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
+                    }
+                    System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } ///////////////////////////////////////////////////////najwyżej do zmiany
+            Wyswietl(); //wyswietla Wolne bloki Pamieci
+        }
     }
 
     //--------------------------[XF - Usuwanie procesu po nazwie]---------------------------------------//
@@ -168,7 +170,7 @@ public class Pamiec {
     //@parametr: brak
     //@zwraca brak
     public static void Wyswietl() {
-        WolnaLista.Wyswietl();
+        WolnaLista.Wyswietl();  //Tutaj blad
         ZajetaLista.Wyswietl(); //Wyswetlanie Zajetych Blokow
         Scanner s = new Scanner(System.in);
         String string = s.nextLine();

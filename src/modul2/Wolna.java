@@ -9,7 +9,7 @@ public class Wolna {
 
     private List<Element> List;
     //UNUSED - niewykorzystane
-    private int wolna; //dodatkowa zmienna na wolne bloki; przyda się przy scalaniu
+    public static int wolna; //dodatkowa zmienna na wolne bloki; przyda się przy scalaniu
 
     //konstruktor
     public Wolna(int rozmiar){ //jako rozmiar podac cały MEMORY_SIZE
@@ -26,13 +26,18 @@ public class Wolna {
 
     public void Wyswietl(){
 
+        try{
         System.out.println("-----LISTA WOLNA-------");
         for(int i=0; i< List.size(); i++){
             int nr = i+1;
             System.out.println( nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
         }
         System.out.println("Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
+    }    catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
+
 
     public void Ostatni(){
 

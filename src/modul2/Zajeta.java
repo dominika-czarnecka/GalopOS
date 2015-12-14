@@ -6,8 +6,10 @@ import java.util.*;
 public class Zajeta {
     private static List<Element2> List;
 
+    public static int zajeta;
     public Zajeta(){
         List= new ArrayList<Element2>();
+        zajeta = 0;
     }
 
 
@@ -70,13 +72,19 @@ public class Zajeta {
 
     public  static void Wyswietl(){
         int indeks, rozmiar =0;
-       System.out.println("---------------Zajęta Lista - bloki ------------------");
-        for(int i=0; i< List.size(); i++){
-            indeks = i+1;
-            rozmiar += List.get(i).ZwrocRozmiar();
-            System.out.println("["+indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "identyfikator procesu: " + List.get(i).NAZWA() + "Rozmiar bloku:" + List.get(i).ZwrocRozmiar());
+
+        try {
+            System.out.println("---------------Zajęta Lista - bloki ------------------");
+            for (int i = 0; i < List.size(); i++) {
+                indeks = i + 1;
+                rozmiar += List.get(i).ZwrocRozmiar();
+                System.out.println("[" + indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "identyfikator procesu: " + List.get(i).NAZWA() + "Rozmiar bloku:" + List.get(i).ZwrocRozmiar());
+            }
+            System.out.println("Rozmiar Pamieci zajętej: " + rozmiar + "\n");
         }
-        System.out.println("Rozmiar Pamieci zajętej: " + rozmiar + "\n");
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 }
 
