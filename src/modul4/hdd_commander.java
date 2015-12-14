@@ -6,8 +6,8 @@ import java.util.*;
 public class hdd_commander
 {
 	
-byte end_of_file=-110; // CODE EOF
-byte empty_slot=-1; // CODE OF EMPLY SLOT
+static byte end_of_file=-110; // CODE EOF
+static byte empty_slot=-1; // CODE OF EMPLY SLOT
 
 
 int []fat;
@@ -16,7 +16,6 @@ List<file> main_catalog;
 
 public int number_blocks;
 public int size_block;
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -60,17 +59,25 @@ public file get_file(String name)
 		if(main_catalog.get(i).name==name) return main_catalog.get(i);
 	return null;
 }
-private boolean open(String name){
-	if (get_file(name)!=null && get_file(name).access==get_file(name).unoccupied){	
-		get_file(name).access=get_file(name).busy;
-		return true;}
-	else return false;
-}
 private boolean is_enough_space(int bsize)
 {
 	if(bsize<=count_free_space()) return true;
 	else return false;
 	}
+public void close(file file)
+{ 
+	file.access=file.free;
+}
+public boolean open(String name)
+{
+	if (get_file(name)!=null && 
+			get_file(name).access==file.free)
+		{	
+		get_file(name).access=file.in_use;
+		return true;
+		}
+	else return false;
+}
 //////////////////////////////////// INIT METHODS ////////////////////////////////////////////
 
 private void driver_init(int number_blocks, int size_block)
@@ -149,29 +156,6 @@ private char[] recc_read(int location, int size, int bsize, int index, char[]con
 		return recc_read(fat[location],size,bsize,index,content);
 	}
 }
-private char[] recc_read(int location, int size, int bsize, int index, char[]content, int content_size)
-{	
-	if(bsize==1)
-	{
-		for(int j=0; j<size; j++){
-			content[index]=(char)driver[location][j]; 
-			index++;
-			if(index==content_size) return content;
-		}
-		bsize--;
-		return content;
-	}
-	else
-	{
-		for(int i=0;i<size_block;i++){
-			content[index]=(char)driver[location][i]; 
-			index++;
-			if(index==content_size) return content;}
-		bsize--;
-		size-=size_block;
-		return recc_read(fat[location],size,bsize,index,content, content_size);
-	}
-}
 private void recc_delete(int location, int bsize)
 {
 	int removable=fat[location];
@@ -238,51 +222,51 @@ public void create(String name, String data)
 		new_file=save(content,size,bsize,index,new_file);
 		main_catalog.add(new_file);
 		}
-		else System.out.println("Sorry, not possible: not enough space for this operation"); 
+		else System.out.println("Sorry, not possible: not enough space for this operation");
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
- if(open(name))
- {  																					
-	file edit=get_file(name);
-	byte[] content=new byte[data.length()]; 
-	content=data.getBytes();
+	if(open(name))
+	{  	
+		file edit=get_file(name);
+		byte[] content=new byte[data.length()]; 
+		content=data.getBytes();
 	
-	int index=0;
-	int index_last_character=edit.size%size_block; 			// indeks ostatniego znaku
-	int fill=size_block-(edit.size%size_block);				// liczba wolnych bajtow w bloku
-	int size=data.length()-fill;							// ilosc znakow ktore trzeba zapisac PO dopelnieniu, jezeli ujemna to znaczy ze nie dojdzie do dopelnienia
-	int bsize;												//ILE MUSI BYC DOPISANYCH BLOKOW POZA DOPELNIENIEM DO BLOKU
-	if(size%size_block==0)bsize=(data.length()-fill)/size_block; else bsize=((data.length()-fill)/size_block)+1;
-	if(size<0) ///////SYTUACJA KIEDY NAWET BLOK SIE NIE SKONCZY
-	{
-		for(int j=index_last_character; j<index_last_character+data.length(); j++)		// dopelnienie ostatniego bloku
+		int index=0;
+		int index_last_character=edit.size%size_block; 			// indeks ostatniego znaku
+		int fill=size_block-(edit.size%size_block);				// liczba wolnych bajtow w bloku
+		int size=data.length()-fill;							// ilosc znakow ktore trzeba zapisac PO dopelnieniu, jezeli ujemna to znaczy ze nie dojdzie do dopelnienia
+		int bsize;												//ILE MUSI BYC DOPISANYCH BLOKOW POZA DOPELNIENIEM DO BLOKU
+		if(size%size_block==0)bsize=(data.length()-fill)/size_block; else bsize=((data.length()-fill)/size_block)+1;
+		if(size<0) ///////SYTUACJA KIEDY NAWET BLOK SIE NIE SKONCZY
+		{
+			for(int j=index_last_character; j<index_last_character+data.length(); j++)		// dopelnienie ostatniego bloku
 																						// PRZY DUZYCH WIELKOSCIACH INDEX_LAST CHARACTER BYL WIEKSZY OD DATA LENGTH
-		{
-			driver[edit.last_node][j]=content[index];
-			index++;
+			{
+				driver[edit.last_node][j]=content[index];
+				index++;
+			}
+			edit.size+=data.length();
+			close(edit);
+			return;  // nie idzie dalej
 		}
-		edit.size+=data.length();
-		edit.close();
-		return;  // nie idzie dalej
-	}
-	if(is_enough_space(bsize))
-	{
-		for(int j=index_last_character; j<size_block; j++)		// dopelnienie ostatniego bloku
+		if(is_enough_space(bsize))
 		{
-		driver[edit.last_node][j]=content[index];
-		index++;
-		}
-		edit.size+=data.length();
-		edit.bsize+=bsize;
+			for(int j=index_last_character; j<size_block; j++)		// dopelnienie ostatniego bloku
+			{
+				driver[edit.last_node][j]=content[index];
+				index++;
+			}
+			edit.size+=data.length();
+			edit.bsize+=bsize;
 	
-		if(data.length()>fill) 									// jezeli wiecej niz dopelnienie
-		{
-			fat[edit.last_node]=search_free_space();
-			save(content,size, bsize, index,edit);
-		}
+			if(data.length()>fill) 									// jezeli wiecej niz dopelnienie
+			{
+				fat[edit.last_node]=search_free_space();
+				save(content,size, bsize, index,edit);
+			}
 	
-		edit.close();
+			close(edit);
 	}
 	else System.out.println("Sorry, not possible: not enough space");
  }
@@ -291,12 +275,12 @@ else System.out.println("Sorry, not possible: file is arleady opened or file is 
 public char[] read(String name)
 { 
 	if(open(name))
-	{  																						//jezeli mozemy dzialac
-		file read=get_file(name);  															//plik z ktorego czytamy
+	{  	
+		file read=get_file(name);  															//plik z ktorego czytamy//jezeli mozemy dzialac
 		char[]content=new char[read.size]; 													//bufor do ktorego zostana wczytane dane
 		int index=0;
 		content=recc_read(read.first_node, read.size, read.bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
-		read.close();																//zamyka plik
+		close(read);																//zamyka plik
 		
 		return content;
 	}
@@ -305,17 +289,19 @@ public char[] read(String name)
 public char[] read(String name, int content_size)
 { 
 	if(open(name))
-	{  																						//jezeli mozemy dzialac
-		file read=get_file(name);  														//plik z ktorego czytamy
+	{  	
+		file read=get_file(name);  	
 		if(content_size>read.size)
 		{
 			System.out.println("File is not as large as you think");
 			return null;
 		}
 		char[]content=new char[content_size]; 													//bufor do ktorego zostana wczytane dane
+		int bsize;
+		if(content_size%size_block==0)bsize=content_size/size_block; else bsize=(content_size/size_block)+1;
 		int index=0;
-		content=recc_read(read.first_node, read.size, read.bsize, index, content, content_size);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
-		read.close();																//zamyka plik
+		content=recc_read(read.first_node, content_size, bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
+		close(read);																//zamyka plik
 		
 		return content;
 	}
@@ -328,15 +314,8 @@ public void delete(String name)
 		file delete=get_file(name);
 		recc_delete(delete.first_node,delete.bsize);            // wywolanie funkcji rekurencyjnej
 		main_catalog.remove(get_file(name));					// usuniecie z katalogu
-		delete.close();
+		close(delete);
 	}
 	else System.out.println("Sorry, not possible: file is arleady opened or file is not existing.");
 }
 }
-
-	
-									  
-
-
-
-

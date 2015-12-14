@@ -4,9 +4,10 @@ import java.util.*;
 
 public class file
 {
-	byte busy=-126;
-	byte unoccupied=-125;
-	
+	//access signs
+	static byte in_use=-85;
+	static byte free=-70;
+
 	public String name;
 	int first_node, last_node; 
 	int size, bsize;
@@ -17,10 +18,6 @@ public class file
 		this.name=name;
 		this.size=size;
 		this.bsize=bsize;
-		access=unoccupied;
+		access=free;
 	}
-	public file(){}
-	public void close(){ this.access=unoccupied;}
-	
-
 }
