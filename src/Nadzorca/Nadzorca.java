@@ -34,7 +34,7 @@ static Scanner s = new Scanner(System.in);
 	+	"DELETE		usuwa plik.\n"
 	+	"EDIT		edytuj plik.\n"
 	+	"READ		czytaj plik.\n"
-	+	"DIR		wyswietla liste plik�w.\n"
+	+	"DIR		wyswietla liste plików.\n"
 	+	"FAT		wyswietla tablice FAT.\n"
 	+	"CHDSK		wyswietla ile jest wolnego miejsca.\n"
 	+	"PNDSK		wyswietla dysk.\n"
@@ -129,7 +129,7 @@ do {
 	}
 	default:
 	{
-		  System.out.println("'"+ komenda + "'" + " nieznana komenda");
+		  System.out.println("ಠ_ಠ	'"+ komenda + "'" + " nieznana komenda");
 		  break;
 	}
 	}
@@ -277,7 +277,7 @@ do {
 		if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
 		{
 			char[] tab = new char[32];
-			tab = driver.read(nazwa, 32);  //funkcja kt�ra zwr�ci mi karte $JOB
+			tab = driver.read(nazwa, 32);  //funkcja ktďż˝ra zwrďż˝ci mi karte $JOB
 			String kartaJOB = String.valueOf(tab);
 			String[] wynik1 = null;
 			wynik1 = kartaJOB.split(",");
