@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Pamiec {
 
-    private static Wolna WolnaLista;
-    private static Zajeta ZajetaLista;
+    public static Wolna WolnaLista;
+    public static Zajeta ZajetaLista;
     public static int MEMORY_SIZE = 256;
     public static char[] RAM;
 
@@ -43,6 +43,7 @@ public class Pamiec {
                     int list_index = WolnaLista.ZnajdzWolne(rozmiar); //list_index przechwuje tylkoe rozmiar wolnego obszaru
                     if (list_index != -1) { //jesli jest dodstatecznie duży blok aby przydzielic pamiec
                         ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);//Zajecie bloku
+                        System.out.println(WolnaLista.Wolna());
                     } else {
                         System.out.println("\n[*] Brak bloku o odpowiednim rozmiarze [*]\n");
                         System.out.println("\n[*]Następuje przesuniecie blokow pamięci operacyjnej[*]\n"); //kosztowna operacja - unikam jak moge
@@ -52,6 +53,8 @@ public class Pamiec {
                         ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
                     }
                     System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
+                    System.out.println(WolnaLista.Wolna());
+
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
