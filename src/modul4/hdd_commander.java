@@ -222,7 +222,7 @@ public void create(String name, String data)
 		new_file=save(content,size,bsize,index,new_file);
 		main_catalog.add(new_file);
 		}
-		else System.out.println("Sorry, not possible: not enough space for this operation");
+		else System.out.println("Brak miejsca na dysku.");
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
@@ -268,9 +268,9 @@ public void edit(String name, String data) // dwie weryfikacje: czy udalo sie ot
 	
 			close(edit);
 	}
-	else System.out.println("Sorry, not possible: not enough space");
+	else System.out.println("Brak miejsca na dysku.");
  }
-else System.out.println("Sorry, not possible: file is arleady opened or file is not existing");
+else System.out.println("Plik jest juz otwarty lub nie istnieje.");
 }
 public char[] read(String name)
 { 
@@ -284,7 +284,7 @@ public char[] read(String name)
 		
 		return content;
 	}
-	else {System.out.println("Sorry, not possible: file is arleady opened or file is not existing."); return null;}
+	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public char[] read(String name, int content_size)
 { 
@@ -293,7 +293,7 @@ public char[] read(String name, int content_size)
 		file read=get_file(name);  	
 		if(content_size>read.size)
 		{
-			System.out.println("File is not as large as you think");
+			System.out.println("Plik nie ma tylu znakow");
 			return null;
 		}
 		char[]content=new char[content_size]; 													//bufor do ktorego zostana wczytane dane
@@ -305,7 +305,7 @@ public char[] read(String name, int content_size)
 		
 		return content;
 	}
-	else {System.out.println("Sorry, not possible: file is arleady opened or file is not existing."); return null;}
+	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public void delete(String name)
 {
@@ -316,6 +316,6 @@ public void delete(String name)
 		main_catalog.remove(get_file(name));					// usuniecie z katalogu
 		close(delete);
 	}
-	else System.out.println("Sorry, not possible: file is arleady opened or file is not existing.");
+	else System.out.println("Plik jest juz otwarty lub nie istnieje.");
 }
 }

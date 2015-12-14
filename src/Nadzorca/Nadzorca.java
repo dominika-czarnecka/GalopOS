@@ -96,7 +96,7 @@ do {
 	{
 		int free_blocks=driver.count_free_space();
 		int size_driver=driver.size_block*driver.number_blocks;
-		System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow.\n" + (size_driver-free_blocks) + "bajtow jest zajetych.");
+		System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow, " + (size_driver -free_blocks*driver.size_block) + " bajtow jest zajetych.");
 		break;
 	}
 	case "PNDSK":
