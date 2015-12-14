@@ -15,30 +15,26 @@ public class Main {
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		
-		driver.create("prog1","$JOB,95,FILEIN=IN,FILEOUT=OUT  \n" 
-				+"MVI C 10\n"
+		driver.create("prog1","$JOB,59,FILEIN=IN,FILEOUT=OUT  \n" 
+				+ "MVI C 10\n"
 				+ "MVI B 1\n"
 				+ "ADD A B\n"
 				+ "INR B\n"
 				+ "INR B\n"
 				+ "DCR C\n"
-				+ "JNZ 2\n"
+				+ "JNZ 10\n"
 				+ "HLT\n");
 		
-		driver.create("prog2", "$JOB,173,FILEIN=IN,FILEOUT=OUT \n"
-				+ "OFR prog2dane.txt" + "\n"
-				+ "RF A" + "\n"
-				+ "RF B" + "\n"
-				+ "ADD A B" + "\n"
-				+ "MOD2 C A" + "\n"
-				+ "CFR" + "\n"
-				+ "OFW prog2wynik.txt" + "\n"
-				+ "JNZ 11" + "\n"
-				+ "WF Suma_parzysta" + "\n"
-				+ "JZ 13" + "\n"
-				+ "WF Suma_nieparzysta" + "\n"
-				+ "CFW" + "\n"
-				+ "HLT"+ "\n");
+		driver.create("prog2", "$JOB,104,FILEIN=IN,FILEOUT=OUT \n"
+				+ "RF A prog2l1\n"//13
+				+ "RF B prog2l2\n"//13
+				+ "ADD A B\n"//8
+				+ "MOD2 C A\n"//9
+				+ "JNZ 68\n"//7
+				+ "WF Suma_parzysta\n"//17
+				+ "JZ 94\n"//6
+				+ "WF Suma_nieparzysta\n"//20
+				+ "HLT\n");//4
 
 		nadzorca.run_cmd();
 	

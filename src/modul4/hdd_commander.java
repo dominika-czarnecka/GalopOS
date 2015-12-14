@@ -56,7 +56,7 @@ private int search_next_free_space() // THE INDEX OF SECOND FAT'S EMPTY SPACE
 public file get_file(String name)
 {
 	for(int i=0;i<main_catalog.size();i++)
-		if(main_catalog.get(i).name==name) return main_catalog.get(i);
+		if(main_catalog.get(i).name.equals(name)) return main_catalog.get(i);
 	return null;
 }
 private boolean is_enough_space(int bsize)
@@ -205,7 +205,8 @@ private file save(byte[] content, int size, int bsize, int index, file save)
 
 public void create(String name, String data)
 {
-
+		if(this.get_file(name)!=null)
+		{
 		int size=data.length();  									//ilosc znakow w data
 		
 		int bsize;
@@ -223,6 +224,8 @@ public void create(String name, String data)
 		main_catalog.add(new_file);
 		}
 		else System.out.println("Brak miejsca na dysku.");
+		}
+		else System.out.println("Istnieje juz plik o podanej nazwie.");
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
@@ -272,7 +275,7 @@ public void edit(String name, String data) // dwie weryfikacje: czy udalo sie ot
  }
 else System.out.println("Plik jest juz otwarty lub nie istnieje.");
 }
-public char[] read(String name)
+public String read(String name)
 { 
 	if(open(name))
 	{  	
@@ -282,11 +285,11 @@ public char[] read(String name)
 		content=recc_read(read.first_node, read.size, read.bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content;
+		return content.toString();
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
-public char[] read(String name, int content_size)
+public String read(String name, int content_size)
 { 
 	if(open(name))
 	{  	
@@ -303,7 +306,7 @@ public char[] read(String name, int content_size)
 		content=recc_read(read.first_node, content_size, bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content;
+		return content.toString();
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
