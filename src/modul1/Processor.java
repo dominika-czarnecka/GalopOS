@@ -79,8 +79,12 @@ public class Processor {
 		reg.IP = RUNNING.register.IP;
 	}	
 	
-	static public void show_register_process(){
+	static public void show_register_processor(){
 		System.out.println("Rejestry procesora: "+'\n'+"Rejestr A: "+Processor.reg.A+'\n'+"Rejestr B: "+Processor.reg.B+'\n'+"Rejestr C: "+Processor.reg.C+'\n'+"Rejestr D: "+Processor.reg.D+'\n'+"Rejestr IP: "+Processor.reg.IP+'\n');
+	}
+	
+	static public void show_register_process(){
+		System.out.println("Rejestry procesora: "+'\n'+"Rejestr A: "+RUNNING.register.A+'\n'+"Rejestr B: "+RUNNING.register.B+'\n'+"Rejestr C: "+RUNNING.register.C+'\n'+"Rejestr D: "+RUNNING.register.D+'\n'+"Rejestr IP: "+RUNNING.register.IP+'\n');
 	}
 
 

@@ -73,7 +73,7 @@ public class Zajeta {
     public  static void Wyswietl(){
         int indeks, rozmiar =0;
 
-        try {
+        if(List.size() >0) {
             System.out.println("---------------Zajęta Lista - bloki ------------------");
             for (int i = 0; i < List.size(); i++) {
                 indeks = i + 1;
@@ -82,9 +82,10 @@ public class Zajeta {
             }
             System.out.println("Rozmiar Pamieci zajętej: " + rozmiar + "\n");
         }
-        catch(Exception ex){
-            ex.printStackTrace();
+        else{
+            System.out.println("Lista Zajeta jest pusta\n");
         }
+
     }
 }
 

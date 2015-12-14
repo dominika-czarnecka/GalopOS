@@ -6,7 +6,7 @@ import java.util.*;
     //Dwa bloki nigdy ze sobą nie graniczą bo wedy zostałyby scalone w jeden (!)
 
 public class Wolna {
-
+///
     private List<Element> List;
     //UNUSED - niewykorzystane
     public static int wolna; //dodatkowa zmienna na wolne bloki; przyda się przy scalaniu
@@ -14,28 +14,32 @@ public class Wolna {
     //konstruktor
     public Wolna(int rozmiar){ //jako rozmiar podac cały MEMORY_SIZE
         List = new ArrayList<Element>() ; //zaalokowanie pamieci
-        List.add(new Element(0, rozmiar)); //na poczatku calosc wolna 0-pierwszy indeks
+        List.add(new Element(0, Pamiec.MEMORY_SIZE)); //na poczatku calosc wolna 0-pierwszy indeks
         wolna = Pamiec.MEMORY_SIZE;
 
     }
 
-    public int Wolna(){ //zwraca całkowitą ilość wolnego miejsca
+    public static int Wolna(){ //zwraca całkowitą ilość wolnego miejsca
         return wolna;
     }
 
 
     public void Wyswietl(){
 
-        try{
+
+        if (List.size() >0){
         System.out.println("-----LISTA WOLNA-------");
         for(int i=0; i< List.size(); i++){
             int nr = i+1;
             System.out.println( nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
         }
         System.out.println("Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
-    }    catch(Exception ex){
-            ex.printStackTrace();
         }
+        else{
+            System.out.println("Pamiec wolna jest pusta\n");
+        }
+
+
     }
 
 
@@ -93,11 +97,16 @@ public class Wolna {
     }
 
     public int ZnajdzWolne( int size){ //szukaj wolnego obszaru o rozmiarze size
-        for(int i=0; i<List.size(); i++){
-            if(List.get(i).ZwrocRozmiar() >= size)
-                return i;
+        if(List.size() > 0) {
+            for (int i = 0; i < List.size(); i++) {
+                if (List.get(i).ZwrocRozmiar() >= size)
+                    return i;
+                else
+                    return -1; //-1 jak nie ma wolnego bloku
+            }
         }
-        return -1; //-1 jak nie ma wolnego bloku
+        System.out.println("Brak Blokow wolnej pamieci\n");
+        return -1;
     }
 
     public void Wykasuj(int indeks){
