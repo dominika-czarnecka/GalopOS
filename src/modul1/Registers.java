@@ -2,12 +2,12 @@ package modul1;
 
 public class Registers {
 	
+	public static Boolean Z, S;
 	public int A,
 	B, 
 	C, 
 	D,
 	IP;
-	
 	
 	public Registers()
 	{
@@ -21,5 +21,7 @@ public class Registers {
 		C = 
 		D = 0;
 		IP = 33;
+		Z=
+		S=false;		
 	}
 }

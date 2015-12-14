@@ -103,43 +103,43 @@ public class Interpreter{
 				switch(line[1]){
 				case "A":
 					Processor.reg.A--;
-					if(Processor.reg.A==0) Processor.reg.Z=1;
+					if(Processor.reg.A==0) Processor.reg.Z=true;
 					break;
 				case "B":
 					Processor.reg.B--;
-					if(Processor.reg.B==0) Processor.reg.Z=1;
+					if(Processor.reg.B==0) Processor.reg.Z=true;
 					break;
 				case "C":
 					Processor.reg.C--;
-					if(Processor.reg.C==0) Processor.reg.Z=1;
+					if(Processor.reg.C==0) Processor.reg.Z=true;
 					break;
 				default:
 					System.out.println("Podano bledna komende");
 				}		
 
 			case "JNZ":
-				if(Processor.reg.Z!=0){
+				if(Processor.reg.Z==true){
 					Processor.reg.IP=Integer.parseInt(line[1]);
 					jumped=true;
 				}
 				break;
 
 			case "JZ":
-				if(Processor.reg.Z==0){
+				if(Processor.reg.Z==false){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
 					jumped=true;
 				}
 				break;
 				
 			case "JS":
-				if(Processor.reg.S==0){
+				if(Processor.reg.S==false){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
 				jumped=true;
 				}
 				break;
 				
 			case "JNS":
-				if(Processor.reg.S!=0){
+				if(Processor.reg.S==true){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
 				jumped=true;
 				}
@@ -163,7 +163,7 @@ public class Interpreter{
 				int a=Integer.parseInt(line[1]);
 				int b=Integer.parseInt(line[2]);
 				int c=a-b;
-				if(c<0) Processor.reg.S=1;			
+				if(c<0) Processor.reg.S=true;			
 				break;
 			
 			case "WF":
@@ -273,7 +273,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
-					if(Processor.reg.A==0) Processor.reg.Z=1;
+					if(Processor.reg.A==0) Processor.reg.Z=true;
 					break;
 				
 				case "B":
@@ -287,7 +287,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
-					if(Processor.reg.B==0) Processor.reg.Z=1;
+					if(Processor.reg.B==0) Processor.reg.Z=true;
 					break;
 				
 				case "C":
@@ -301,7 +301,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
-					if(Processor.reg.C==0) Processor.reg.Z=1;
+					if(Processor.reg.C==0) Processor.reg.Z=true;
 					break;
 				default:
 					System.out.println("Podano bledna komende");

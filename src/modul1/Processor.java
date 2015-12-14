@@ -67,6 +67,8 @@ public class Processor {
 			RUNNING.register.C = reg.C;
 			RUNNING.register.D = reg.D;
 			RUNNING.register.IP = reg.IP;
+			RUNNING.register.Z = reg.Z;
+			RUNNING.register.S = reg.S;
 		}
 		catch(Exception e){System.out.println("");}
 
@@ -77,6 +79,8 @@ public class Processor {
 		reg.C = RUNNING.register.C;
 		reg.D = RUNNING.register.D;
 		reg.IP = RUNNING.register.IP;
+		reg.Z = RUNNING.register.Z;
+		reg.S = RUNNING.register.S;
 	}	
 	
 	static public void show_register_processor(){
