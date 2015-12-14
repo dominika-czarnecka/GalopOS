@@ -39,7 +39,7 @@ public class Main {
 				+ "WF Suma_nieparzysta" + "\n"
 				+ "CFW" + "\n"
 				+ "HLT"+ "\n");
-	
+
 		nadzorca.run_cmd();
 	
 	}
