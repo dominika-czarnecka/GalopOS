@@ -93,26 +93,9 @@ public class Interpreter{
 					driver.edit("prog2dane",Processor.reg.C+"\n");
 					break;
 				default:
-					String temp = line[1].replace("_", " "); 
-					System.out.println(temp);
+					System.out.println("Podano bledna komende");
 				}
 				break;
-
-			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
-				switch(line[1]){
-				case "A":
-					driver.read("prog2dane");
-					break;
-				case "B":
-					driver.read("prog2dane");
-					break;
-				case "C":
-					driver.read("prog2dane");
-					break;					
-				default:
-					System.out.println("Podano bledna komende");	
-				}
-			break;
 			default:
 				System.out.println("Podano bledna komende");	
 			}
@@ -120,6 +103,22 @@ public class Interpreter{
 			
 		case 3:
 			switch(line[0]){
+			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
+				String plik=line[2]; 
+				switch(line[1]){
+				case "A":
+					Processor.reg.A=Integer.parseInt(driver.read(plik));
+					break;
+				case "B":
+					Processor.reg.A=Integer.parseInt(driver.read(plik));
+					break;
+				case "C":
+					Processor.reg.A=Integer.parseInt(driver.read(plik));
+					break;					
+				default:
+					System.out.println("Podano bledna komende");	
+				}
+			break;
 			case "MVI":
 				switch(line[1]){
 				case "A":
