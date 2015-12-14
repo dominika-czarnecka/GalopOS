@@ -129,7 +129,7 @@ do {
 	}
 	default:
 	{
-		  System.out.println("ಠ_ಠ	'"+ komenda + "'" + " nieznana komenda");
+		  System.out.println("'"+ komenda + "'" + " nieznana komenda");
 		  break;
 	}
 	}

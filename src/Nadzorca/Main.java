@@ -14,6 +14,7 @@ public class Main {
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
+		nadzorca.run_cmd();
 		
 		driver.create("prog1","$JOB,95,FILEIN=IN,FILEOUT=OUT  \n" 
 				+"MVI C 10\n"
