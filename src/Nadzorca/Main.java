@@ -16,13 +16,13 @@ public class Main {
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		
 		driver.create("prog1","$JOB,59,FILEIN=IN,FILEOUT=OUT  \n" 
-				+ "MVI C 10\n"
-				+ "MVI B 1\n"
+				+ "MVI C 10\n"//8
+				+ "MVI B 1\n"//7
 				+ "ADD A B\n"
 				+ "INR B\n"
 				+ "INR B\n"
 				+ "DCR C\n"
-				+ "JNZ 10\n"
+				+ "JNZ 16\n"
 				+ "HLT\n");
 		
 		driver.create("prog2", "$JOB,104,FILEIN=IN,FILEOUT=OUT \n"
