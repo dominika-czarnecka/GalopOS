@@ -24,7 +24,6 @@ static Scanner s = new Scanner(System.in);
 	{
 		System.out.print("[User]: ");
 		String cmd=s.nextLine();   //wybranie opcji z menu
-		cmd=cmd.toUpperCase();
 		return cmd;
 	}
 	public static void list_cmd()
@@ -50,7 +49,7 @@ static Scanner s = new Scanner(System.in);
 		list_cmd();
 do {
 	komenda=type_cmd();
-	switch(komenda)
+	switch(komenda.toUpperCase())
 	{
 	case "CREATE":
 	{
