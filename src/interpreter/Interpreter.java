@@ -54,7 +54,7 @@ public class Interpreter{
 				}
 				break;			
 
-			case "UW":
+			case "IN":
 				System.out.print("Podaj liczbe calkowita: ");
 				switch(line[1]){
 					case "A":
@@ -63,51 +63,88 @@ public class Interpreter{
 						catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
 							}
-				break;
+					break;
 					case "B":
 						try{
 							Processor.reg.B=Nadzorca.s.nextInt();}
 						catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
 							}
-				break;
+					break;
 					case "C":
 						try{
 							Processor.reg.C=Nadzorca.s.nextInt();}
 						catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
 							}
-				break;
-
+					break;
+					default:
+						System.out.println("Podano bledna komende");
 				}
+				break;
+				
+			case "OUT":
+				switch(line[1]){
+				case "A":
+					System.out.println(Processor.reg.A);
+					break;
+				case "B":
+					System.out.println(Processor.reg.B);
+					break;
+				case "C":
+					System.out.println(Processor.reg.C);
+					break;
+				default:
+					System.out.println("Podano bledna komende");
+				}
+				break;
+				
 			case "DCR":
 				switch(line[1]){
 				case "A":
 					Processor.reg.A--;
+					if(Processor.reg.A==0) Processor.reg.Z=1;
 					break;
 				case "B":
 					Processor.reg.B--;
+					if(Processor.reg.B==0) Processor.reg.Z=1;
 					break;
 				case "C":
 					Processor.reg.C--;
+					if(Processor.reg.C==0) Processor.reg.Z=1;
 					break;
 				default:
 					System.out.println("Podano bledna komende");
 				}		
 
 			case "JNZ":
-				if(Processor.reg.C!=0){
+				if(Processor.reg.Z!=0){
 					Processor.reg.IP=Integer.parseInt(line[1]);
 					jumped=true;
 				}
 				break;
 
 			case "JZ":
-				if(Processor.reg.C==0){
+				if(Processor.reg.Z==0){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
 					jumped=true;
 				}
 				break;
+				
+			case "JS":
+				if(Processor.reg.S==0){
+					Processor.reg.IP=Integer.parseInt(line[1]);					
+				jumped=true;
+				}
+				break;
+				
+			case "JNS":
+				if(Processor.reg.S!=0){
+					Processor.reg.IP=Integer.parseInt(line[1]);					
+				jumped=true;
+				}
+				break;
+				
 			default:
 				System.out.println("Podano bledna komende");	
 			}
@@ -115,6 +152,19 @@ public class Interpreter{
 			
 		case 3:
 			switch(line[0]){
+			
+			case "PR":
+				switch(line[1]){
+				///////////////////////////////////////
+				}
+				break;
+			
+			case "CMP":
+				int a=Integer.parseInt(line[1]);
+				int b=Integer.parseInt(line[2]);
+				int c=a-b;
+				if(c<0) Processor.reg.S=1;			
+				break;
 			
 			case "WF":
 				String plikw=line[2];				
@@ -223,6 +273,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
+					if(Processor.reg.A==0) Processor.reg.Z=1;
 					break;
 				
 				case "B":
@@ -236,6 +287,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
+					if(Processor.reg.B==0) Processor.reg.Z=1;
 					break;
 				
 				case "C":
@@ -249,6 +301,7 @@ public class Interpreter{
 					default:
 						System.out.println("Podano bledna komende");
 					}
+					if(Processor.reg.C==0) Processor.reg.Z=1;
 					break;
 				default:
 					System.out.println("Podano bledna komende");
