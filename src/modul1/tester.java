@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import modul3.*;
+import modul2.*;
 
 
 public class tester {
@@ -52,12 +53,14 @@ public class tester {
 	public static void main(String[] args) throws InterruptedException, procCreationError, procNotFoundError {
 		// TODO Auto-generated method stub
 		
-		ZarzProc.createProcess("p1", 0);
-		ZarzProc.createProcess("p2", 0);
-		ZarzProc.createProcess("p3", 0);
-		ZarzProc.createProcess("p4", 0);
-		ZarzProc.createProcess("p5", 0);
-		ZarzProc.createProcess("p6", 0);
+		Pamiec pamiecioszki = new Pamiec();
+		
+		ZarzProc.createProcess("p1", 10);
+		ZarzProc.createProcess("p2", 5);
+		ZarzProc.createProcess("p3", 300);
+		ZarzProc.createProcess("p4", 5);
+		ZarzProc.createProcess("p5", 5);
+		ZarzProc.createProcess("p6", 10);
 		
 		try {
 			ZarzProc.findProcess("p1").register.A = 1;
