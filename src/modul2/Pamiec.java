@@ -30,6 +30,9 @@ public class Pamiec {
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
         } else {
+
+            try
+            {
             if (WolnaLista.Wolna() < rozmiar) {
                 System.out.println("\n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]\n");
             }
@@ -48,7 +51,7 @@ public class Pamiec {
                 }
                 System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
             }
-        }
+        } catch (Exception ex) {ex.printStackTrace();} ///////////////////////////////////////////////////////najwyżej do zmiany
         Wyswietl(); //wyswietla Wolne bloki Pamieci
     }
 
