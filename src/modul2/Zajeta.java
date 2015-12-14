@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class Zajeta {
-    private static List<Element2> List;
+    private static ArrayList<Element2> List;
 
     public static int zajeta;
     public Zajeta(){
