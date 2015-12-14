@@ -97,11 +97,16 @@ public class Wolna {
     }
 
     public int ZnajdzWolne( int size){ //szukaj wolnego obszaru o rozmiarze size
-        for(int i=0; i<List.size(); i++){
-            if(List.get(i).ZwrocRozmiar() >= size)
-                return i;
+        if(List.size() > 0) {
+            for (int i = 0; i < List.size(); i++) {
+                if (List.get(i).ZwrocRozmiar() >= size)
+                    return i;
+                else
+                    return -1; //-1 jak nie ma wolnego bloku
+            }
         }
-        return -1; //-1 jak nie ma wolnego bloku
+        System.out.println("Brak Blokow wolnej pamieci\n");
+        return -1;
     }
 
     public void Wykasuj(int indeks){
