@@ -1,6 +1,11 @@
 package modul2;
 import java.lang.*;
+
 import java.util.*;
+
+import modul3.ZarzProc;
+import modul3.*;
+
 
 public class Pamiec {
 
@@ -25,7 +30,7 @@ public class Pamiec {
     //@zwraca: brak
 
     //Calkowicie rezygnuje z rejestrow - bo nie korzystamy z assemblera
-    public static void XA(String NazwaProcesu, int rozmiar) {
+    public static void XA(String NazwaProcesu, int rozmiar) throws procNotFoundError {
 
         System.out.println( " XA poczatek:" + WolnaLista.Wolna());
       //  System.out.println(WolnaLista.get(0).);
@@ -34,12 +39,18 @@ public class Pamiec {
         System.out.println("Memory Size" + MEMORY_SIZE);
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
+            try{
+            	
+            ZarzProc.removeProcess(NazwaProcesu);
+            
+            }catch(Exception ex){System.out.println("NIE WCHODZ� UWAGA");}
         }
         else {
 
             try {
                 if (WolnaLista.Wolna() < rozmiar) {
                     System.out.println("\n[BLAD]: Brak wystarczającej ilosci wolnej pamieci [!]\n");
+                        ZarzProc.removeProcess(NazwaProcesu);
                 }
                 //Gdy blok przydzielania jest prawidlowo mniejszy od Pamieci Operacyjnej
                 else {
@@ -63,6 +74,8 @@ public class Pamiec {
                 ex.printStackTrace();
             } ///////////////////////////////////////////////////////najwyżej do zmiany
             Wyswietl(); //wyswietla Wolne bloki Pamieci
+            System.out.println( " XA rozmiar:" + rozmiar);
+            System.out.println("Memory Size" + MEMORY_SIZE);
         }
     }
 

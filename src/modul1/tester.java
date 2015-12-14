@@ -57,7 +57,7 @@ public class tester {
 		
 		ZarzProc.createProcess("p1", 10);
 		ZarzProc.createProcess("p2", 5);
-		ZarzProc.createProcess("p3", 300);
+		ZarzProc.createProcess("p3", 50);
 		ZarzProc.createProcess("p4", 5);
 		ZarzProc.createProcess("p5", 5);
 		ZarzProc.createProcess("p6", 10);
@@ -109,7 +109,8 @@ public class tester {
 								show_registers_process(input[1]);
 								break;
 							case "4":
-								ZarzProc.stopProcess(input[1]);
+								//ZarzProc.stopProcess(input[1]);
+								Pamiec.XF(input[1]);
 								break;
 							case "P":
 								s.P(ZarzProc.findProcess(input[1]));

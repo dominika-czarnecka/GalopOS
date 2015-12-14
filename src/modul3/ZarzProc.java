@@ -16,7 +16,7 @@ public class ZarzProc {
 		return null;
 	}
 
-	static public PCB createProcess(String name, int memory) throws procCreationError {
+	static public PCB createProcess(String name, int memory) throws procCreationError, procNotFoundError {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
