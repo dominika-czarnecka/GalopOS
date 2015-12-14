@@ -108,9 +108,9 @@ public class Wolna {
             }
         }
         System.out.println("Brak Blokow wolnej pamieci\n");
-        return -1;
-    }catch(Exception ex){ ex.printStackTrace();}
 
+    }catch(Exception ex){ ex.printStackTrace();}
+        return -1;
     }
 
     public void Wykasuj(int indeks){
