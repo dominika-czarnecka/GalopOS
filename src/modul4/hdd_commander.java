@@ -205,7 +205,8 @@ private file save(byte[] content, int size, int bsize, int index, file save)
 
 public void create(String name, String data)
 {
-
+		if(this.get_file(name)!=null)
+		{
 		int size=data.length();  									//ilosc znakow w data
 		
 		int bsize;
@@ -223,6 +224,8 @@ public void create(String name, String data)
 		main_catalog.add(new_file);
 		}
 		else System.out.println("Brak miejsca na dysku.");
+		}
+		else System.out.println("Istnieje juz plik o podanej nazwie.");
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
