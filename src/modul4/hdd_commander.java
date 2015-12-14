@@ -30,7 +30,7 @@ public hdd_commander(int number_blocks, int size_block)     /// ONLY ONE BUILDER
 	main_catalog= new ArrayList<file>();
 	this.number_blocks=number_blocks;
 	this.size_block=size_block;
-	System.out.println("Utworzony dysk o rozmiarze "+number_blocks*size_block+" bajtow.");
+	System.out.println("Inicjalizacja dysku o rozmiarze "+number_blocks*size_block+" bajtow zakonczona pomyslnie.");
 	
 }
 public int count_free_space()

@@ -16,7 +16,7 @@ public class Pamiec {
         char[] RAM = new char[MEMORY_SIZE];
         WolnaLista = new Wolna(MEMORY_SIZE);
         ZajetaLista = new Zajeta();
-        System.out.println("\n[*]Inicjalizacja Pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie[*]\n");
+        System.out.println("Inicjalizacja pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie.");
     }
 
     //[!!!] ----------------------------- [NAJWAZNIEJSZA FUNKCJA]-------------------------------------
