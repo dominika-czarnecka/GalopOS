@@ -27,7 +27,7 @@ public class Pamiec {
     //Calkowicie rezygnuje z rejestrow - bo nie korzystamy z assemblera
     public static void XA(String NazwaProcesu, int rozmiar) {
 
-        System.out.println(WolnaLista.Wolna());
+        System.out.println( " XA poczatek:" + WolnaLista.Wolna());
       //  System.out.println(WolnaLista.get(0).);
 
         if (rozmiar > MEMORY_SIZE) {
@@ -53,7 +53,7 @@ public class Pamiec {
                         ZajetaLista.Dodaj(WolnaLista.Wpisz(list_index, rozmiar), rozmiar, NazwaProcesu);
                     }
                     System.out.println("\n[*]Przydzial pamieci dla procesu: " + NazwaProcesu + "[*]\n");
-                    System.out.println(WolnaLista.Wolna());
+                    System.out.println("XA koniec:" + WolnaLista.Wolna());
 
                 }
             } catch (Exception ex) {
