@@ -30,9 +30,12 @@ public class Pamiec {
         System.out.println( " XA poczatek:" + WolnaLista.Wolna());
       //  System.out.println(WolnaLista.get(0).);
 
+        System.out.println( " XA rozmiar:" + rozmiar);
+        System.out.println("Memory Size" + MEMORY_SIZE);
         if (rozmiar > MEMORY_SIZE) {
             System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
-        } else {
+        }
+        else {
 
             try {
                 if (WolnaLista.Wolna() < rozmiar) {
