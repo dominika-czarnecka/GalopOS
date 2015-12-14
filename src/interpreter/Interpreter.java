@@ -1,4 +1,6 @@
 package interpreter;
+import java.util.InputMismatchException;
+
 import Nadzorca.Nadzorca;
 import modul1.*;
 import modul2.Pamiec;
@@ -52,6 +54,32 @@ public class Interpreter{
 				}
 				break;			
 
+			case "UW":
+				System.out.print("Podaj liczbe calkowita: ");
+				switch(line[1]){
+					case "A":
+						try{
+							Processor.reg.A=Nadzorca.s.nextInt();}
+						catch(InputMismatchException e) {
+						System.out.println("Nie podano liczby");
+							}
+				break;
+					case "B":
+						try{
+							Processor.reg.B=Nadzorca.s.nextInt();}
+						catch(InputMismatchException e) {
+						System.out.println("Nie podano liczby");
+							}
+				break;
+					case "C":
+						try{
+							Processor.reg.C=Nadzorca.s.nextInt();}
+						catch(InputMismatchException e) {
+						System.out.println("Nie podano liczby");
+							}
+				break;
+
+				}
 			case "DCR":
 				switch(line[1]){
 				case "A":
@@ -80,22 +108,6 @@ public class Interpreter{
 					jumped=true;
 				}
 				break;
-
-			case "WF":
-				switch(line[1]){
-				case "A":		
-					driver.edit("prog2dane",Processor.reg.A+"\n");
-					break;
-				case "B":
-					driver.edit("prog2dane",Processor.reg.B+"\n");
-					break;
-				case "C":
-					driver.edit("prog2dane",Processor.reg.C+"\n");
-					break;
-				default:
-					System.out.println("Podano bledna komende");
-				}
-				break;
 			default:
 				System.out.println("Podano bledna komende");	
 			}
@@ -103,17 +115,35 @@ public class Interpreter{
 			
 		case 3:
 			switch(line[0]){
-			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
-				String plik=line[2]; 
+			
+			case "WF":
+				String plikw=line[2];				
 				switch(line[1]){
-				case "A":
-					Processor.reg.A=Integer.parseInt(driver.read(plik));
+				case "A":		
+					driver.edit(plikw,Processor.reg.A+"\n");
 					break;
 				case "B":
-					Processor.reg.A=Integer.parseInt(driver.read(plik));
+					driver.edit(plikw,Processor.reg.B+"\n");
 					break;
 				case "C":
-					Processor.reg.A=Integer.parseInt(driver.read(plik));
+					driver.edit(plikw,Processor.reg.C+"\n");
+					break;
+				default:
+					driver.edit(plikw,line[2]);
+				}
+				break;
+				
+			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
+				String plikr=line[2]; 
+				switch(line[1]){
+				case "A":
+					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					break;
+				case "B":
+					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					break;
+				case "C":
+					Processor.reg.A=Integer.parseInt(driver.read(plikr));
 					break;					
 				default:
 					System.out.println("Podano bledna komende");	
