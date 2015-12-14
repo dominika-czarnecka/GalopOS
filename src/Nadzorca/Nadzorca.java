@@ -67,8 +67,12 @@ do {
 	case "EDIT":
 	{
 		System.out.print("Podaj nazwe pliku, ktory ma byc edytowany: "); String nazwa=s.nextLine();
+		if(driver.get_file(nazwa)!=null)
+		{
 		System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
 		driver.edit(nazwa, zawartosc);
+		}
+		else System.out.println("Plik o podanej nazwie nie istnieje");
 		break;
 	}
 	case "READ":

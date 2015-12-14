@@ -64,9 +64,9 @@ private boolean is_enough_space(int bsize)
 	if(bsize<=count_free_space()) return true;
 	else return false;
 	}
-public void close(file file)
+public void close(file file_to_close)
 { 
-	file.access=file.free;
+	file_to_close.access=file.free;
 }
 public boolean open(String name)
 {
