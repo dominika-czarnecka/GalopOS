@@ -7,14 +7,15 @@ import java.util.*;
 
 public class Wolna {
 ///
-    private List<Element> List;
+    private ArrayList<Element> List;
     //UNUSED - niewykorzystane
     public static int wolna; //dodatkowa zmienna na wolne bloki; przyda się przy scalaniu
 
     //konstruktor
     public Wolna(int rozmiar){ //jako rozmiar podac cały MEMORY_SIZE
         List = new ArrayList<Element>() ; //zaalokowanie pamieci
-        List.add(new Element(0, Pamiec.MEMORY_SIZE)); //na poczatku calosc wolna 0-pierwszy indeks
+        Element e= new Element(0, Pamiec.MEMORY_SIZE);
+        List.add(e); //na poczatku calosc wolna 0-pierwszy indeks
         wolna = Pamiec.MEMORY_SIZE;
 
     }
@@ -28,10 +29,10 @@ public class Wolna {
 
 
         if (List.size() >0){
-        System.out.println("-----LISTA WOLNA-------");
-        for(int i=0; i< List.size(); i++){
-            int nr = i+1;
-            System.out.println( nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
+            System.out.println("-----LISTA WOLNA-------");
+            for(int i=0; i< List.size(); i++){
+                int nr = i+1;
+                System.out.println( nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
         }
         System.out.println("Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
         }
@@ -97,6 +98,7 @@ public class Wolna {
     }
 
     public int ZnajdzWolne( int size){ //szukaj wolnego obszaru o rozmiarze size
+        try{
         if(List.size() > 0) {
             for (int i = 0; i < List.size(); i++) {
                 if (List.get(i).ZwrocRozmiar() >= size)
@@ -106,6 +108,8 @@ public class Wolna {
             }
         }
         System.out.println("Brak Blokow wolnej pamieci\n");
+
+    }catch(Exception ex){ ex.printStackTrace();}
         return -1;
     }
 

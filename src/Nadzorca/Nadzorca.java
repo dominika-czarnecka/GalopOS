@@ -44,15 +44,36 @@ public class Nadzorca
 						+	"PNDSK		wyswietla dysk.\n"
 						+   "CRPROC		tworzy nowy proces.\n"
 						+	"PROC		wyswietla liste procesow.\n"
+						+   "PROCB      wyswietla liste procesow od tylu"
 						+	"CHMEM		wyswietla pamiec.\n"
 						+	"HELP		wyswietla liste komend.\n"
 						+   "SHUTDOWN	zakonczenie pracy.\n");
 	}
 
-	public static void run_cmd()
+	public static void StanProcesu()  //Sprawdzanie stanu listy wiadomosci, jesli cos jest to usuwa proces
+	{
+		while(!IBSUPmsg.isEmpty())
+		{
+		Message msg = IBSUPmsg.remove(0);
+		if(msg.content.equals("stopped"))
+			{
+				try {
+					ZarzProc.removeProcess(msg.sender.name);
+					} catch (procNotFoundError e) 
+				{	
+				e.printStackTrace();
+				}
+			//end = false;
+			}
+		}
+	}
+	
+	public static void IBSUP()
 	{
 		list_cmd();
 		do {
+			StanProcesu();
+			
 			komenda=type_cmd();
 			switch(komenda.toUpperCase())
 			{
@@ -113,12 +134,20 @@ public class Nadzorca
 				driver.driver_show();
 				break;
 			}
-			case "CRPROC":
-			{
+			case "CRPROC": 
+			{	
+				System.out.print("Podaj nazwe procesu ktory ma zostac utworzony: ");
+				USERPROG(s.nextLine());
 				break;
 			}
 			case "PROC":
 			{
+				ZarzProc.printProcessList();
+				break;
+			}
+			case "PROCB":
+			{
+				ZarzProc.printProcessListBack();
 				break;
 			}
 			case "CHMEM":
@@ -132,7 +161,11 @@ public class Nadzorca
 			}
 			case "":
 			{
-				//Interpreter.Rozkaz("INR A");
+				try {
+					Interpreter.Task();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			}
 			default:
@@ -144,10 +177,7 @@ public class Nadzorca
 		} while(komenda != "SHUTDOWN");
 
 	}
-	/////////
 
-	public static Boolean end = false;
-	//static Processor Procesor = new Processor();
 	static hdd_commander driver;
 	static Pamiec pamiec;
 	public Nadzorca(hdd_commander driver,Pamiec pamiec)
@@ -183,161 +213,61 @@ public class Nadzorca
 		Processor.XPER();
 	}
 
-	public static void IBSUP()
+	//Tworzenie procesu USERPROG
+	public static void USERPROG(String nazwa)
 	{
-		Scanner s = new Scanner(System.in);	    
-
-		while(true)
+		if(nazwa.equals("prog1") || nazwa.equals("prog2") || nazwa.equals("prog3"))
 		{
-			//if(end == true)
-			//{				
-			while(!IBSUPmsg.isEmpty())
-			{Message msg = IBSUPmsg.remove(0);
-			if(msg.content.equals("stopped"))
+			String kod = driver.read(nazwa);
+			String[] komendy = kod.split("\n");
+			System.out.println(komendy[0]); // $JOB/
+			int p = SprawdzJOB(komendy[0]);
+			if(p==-1)
 			{
-				try {
-					ZarzProc.removeProcess(msg.sender.name);
-				} catch (procNotFoundError e) 
+				System.out.println("Błędny program");
+			}
+			else 
+			{
+				try 
+				{
+					ZarzProc.createProcess(nazwa, p);
+				} catch (procCreationError e) 
 				{
 					e.printStackTrace();
 				}
-				//end = false;
 			}
-
-			menu1();
-			String komenda=s.nextLine();   //wybranie opcji z menu
-			int wybor = Integer.parseInt(komenda);
-
-
-			switch (wybor) 
-			{
-			case 1:   //utworz proces 
-			{
-				menu2();
-				komenda=s.nextLine();  // wybranie programu dla ktorego ma zostac utworzony proces 
-				USERPROG(komenda);
-				break;
-			}
-
-			case 2:  //wyswietl pamiec
-			{
-				Pamiec.Wyswietl();
-				break;
-			}
-
-			case 10:  //wyswietl RAM
-			{
-				Pamiec.WyswietlRAM();
-				break;
-			}
-
-			case 3:  //wyswietl dysk
-			{
-
-
-				driver.driver_show();
-				break;
-			}
-
-			case 4: //wyswietl tablice FAT
-			{
-				driver.fat_show();
-				break;
-			}
-
-			case 5: //wyswietl katalogi
-			{
-				driver.catalog_show();
-				break;
-			}
-
-			case 6: //wyswietl liste procesow
-			{
-				ZarzProc.printProcessList();
-				break;
-			}		  
-
-			case 7: //Takt Procesora
-			{			  
-				try {
-					Interpreter.Task();
-				} catch (Exception e) {				
-					e.printStackTrace();
+				String DoPamieci = null;
+				for(int i=1;i<komendy.length;i++)
+				{
+					DoPamieci+=komendy[i];
 				}
-				break;
-			}		  
-
-			default:
-				System.out.println("Wybrano nieznana opcje");
-				break;
-			}
-
-			}		
+			
+				Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
+		
+				try 
+				{
+					ZarzProc.startProcess(nazwa);
+				} catch (procNotFoundError e) 
+				{
+				e.printStackTrace();
+				}
+							
 		}
 	}
-	//Tworzenie procesu USERPROG
-	public static void USERPROG(String komenda)
-	{	String nazwa=null;
-	if(komenda=="1"){nazwa="prog1";}
-	if(komenda=="2"){nazwa="prog2";}
-	if(komenda=="3"){nazwa="prog3";}
-	if(nazwa=="prog1" || nazwa=="prog2" || nazwa=="prog3")
+	public static int SprawdzJOB(String KartaJOB)
 	{
-		char[] tab = new char[32];
-		tab = driver.read(nazwa, 32);  //funkcja ktďż˝ra zwrďż˝ci mi karte $JOB
-		String kartaJOB = String.valueOf(tab);
-		String[] wynik1 = null;
-		wynik1 = kartaJOB.split(",");
-		if(wynik1[1]=="$JOB");
-		{
-			int pamiec = Integer.parseInt(wynik1[2]);
-			try 
+		String[] tmp;
+		int pamiec;
+		tmp = KartaJOB.split(",");
+			if(tmp[0].equals("$JOB"))
 			{
-				ZarzProc.createProcess(nazwa, pamiec);
-			} catch (procCreationError e) 
-			{
-				e.printStackTrace();
+				pamiec = Integer.parseInt(tmp[1]);
+				return pamiec;
 			}
-
-			char[] kod = driver.read(nazwa);
-			char[] dane = new char[pamiec+1];
-
-			for(int i=33; i<=pamiec; i++)
-			{
-				dane[i-33] = kod[i];
-			}
-
-			String DoPamieci = String.valueOf(dane);
-			Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
-
-			try 
-			{
-				ZarzProc.startProcess(nazwa);
-			} catch (procNotFoundError e) 
-			{
-				e.printStackTrace();
-			}
-		}				
-	}
+			else
+				return -1;
 	}
 
-	public static void menu1()
-	{ 	
-		System.out.println("Opcje /n");
-		System.out.println("1. Otworz program /n");
-		System.out.println("2. Wyswietl pamiec /n");
-		System.out.println("3. Wyswietl dysk /n");
-		System.out.println("4. Wyswietl tablice FAT /n");
-		System.out.println("5. Wyswietl katalogi /n");
-		System.out.println("6. Wyswietl liste procesow /n");
-		System.out.println("7. Wykonaj krok procesora /n");		
-	}
-	public static void menu2()
-	{
-		System.out.println("1. Prog1 /n");
-		System.out.println("2. Prog2 /n");
-		System.out.println("3. Prog3 /n");
-	}
 	public static void start()
 	{
 		IPLRTN();
