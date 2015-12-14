@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Wolna {
 ///
-    private List<Element> List;
+    private ArrayList<Element> List;
     //UNUSED - niewykorzystane
     public static int wolna; //dodatkowa zmienna na wolne bloki; przyda się przy scalaniu
 
