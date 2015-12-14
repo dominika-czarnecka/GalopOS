@@ -129,7 +129,7 @@ do {
 	}
 	default:
 	{
-		  System.out.println("Wybrano nieznana opcje");
+		  System.out.println("'"+ komenda + "'" + " nieznana komenda");
 		  break;
 	}
 	}
