@@ -1,7 +1,9 @@
 ////////////////// SZYMON KO£ODZIEJCZAK
 package modul4;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 public class hdd_commander
 {
@@ -58,6 +60,12 @@ public file get_file(String name)
 	for(int i=0;i<main_catalog.size();i++)
 		if(main_catalog.get(i).name.equals(name)) return main_catalog.get(i);
 	return null;
+}
+public boolean find_file(String name)
+{
+	for(int i=0;i<main_catalog.size();i++)
+		if(main_catalog.get(i).name.equals(name)) return true;
+	return false;
 }
 private boolean is_enough_space(int bsize)
 {
@@ -117,10 +125,19 @@ public void driver_show()
 }
 public void fat_show()
 {
+	int counter1 =0;
+	int counter2=0;
+	System.out.println("   |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |\n" +
+			 "----------------------------------------------------------------------------------------------------");
+	System.out.print(" 0 |");
 	for(int i=0;i<number_blocks;i++)
 	{
-		System.out.println("["+ i +":" +fat[i] +"]");
+		if(counter1 == 16 && number_blocks != size_block){System.out.println();counter1 =0; counter2++; System.out.print(" " +counter2+ " |");}
+		System.out.printf(" %-5d",fat[i]); counter1++;
 	}
+	System.out.println("\n----------------------------------------------------------------------------------------------------");
+
+	
 }
 public void catalog_show()
 {
@@ -128,7 +145,7 @@ public void catalog_show()
 	else{
 	for(int i=0;i<main_catalog.size();i++)
 	{
-		System.out.println(main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
+		System.out.println(main_catalog.get(i).date + " " + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
 	}
 	}
 }
@@ -138,19 +155,19 @@ public void catalog_show()
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-private char[] recc_read(int location, int size, int bsize, int index, char[]content)
+private byte[] recc_read(int location, int size, int bsize, int index, byte[]content)
 {	
 	if(bsize==1)
 	{
 		for(int j=0; j<size; j++){
-			content[index]=(char)driver[location][j]; index++;}
+			content[index]=driver[location][j]; index++;}
 		bsize--;
 		return content;
 	}
 	else
 	{
 		for(int i=0;i<size_block;i++){
-			content[index]=(char)driver[location][i]; index++;}
+			content[index]=driver[location][i]; index++;}
 		bsize--;
 		size-=size_block;
 		return recc_read(fat[location],size,bsize,index,content);
@@ -205,7 +222,7 @@ private file save(byte[] content, int size, int bsize, int index, file save)
 
 public void create(String name, String data)
 {
-		if(this.get_file(name)!=null)
+	if(!find_file(name))
 		{
 		int size=data.length();  									//ilosc znakow w data
 		
@@ -229,12 +246,12 @@ public void create(String name, String data)
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
-	if(open(name))
-	{  	
+	if(find_file(name))
+	{
 		file edit=get_file(name);
+		edit.set_date();
 		byte[] content=new byte[data.length()]; 
 		content=data.getBytes();
-	
 		int index=0;
 		int index_last_character=edit.size%size_block; 			// indeks ostatniego znaku
 		int fill=size_block-(edit.size%size_block);				// liczba wolnych bajtow w bloku
@@ -277,21 +294,21 @@ else System.out.println("Plik jest juz otwarty lub nie istnieje.");
 }
 public String read(String name)
 { 
-	if(open(name))
+	if(find_file(name))
 	{  	
 		file read=get_file(name);  															//plik z ktorego czytamy//jezeli mozemy dzialac
-		char[]content=new char[read.size]; 													//bufor do ktorego zostana wczytane dane
+		byte[]content=new byte[read.size]; 													//bufor do ktorego zostana wczytane dane
 		int index=0;
 		content=recc_read(read.first_node, read.size, read.bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content.toString();
+		return new String(content);
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public String read(String name, int content_size)
 { 
-	if(open(name))
+	if(find_file(name))
 	{  	
 		file read=get_file(name);  	
 		if(content_size>read.size)
@@ -299,20 +316,20 @@ public String read(String name, int content_size)
 			System.out.println("Plik nie ma tylu znakow");
 			return null;
 		}
-		char[]content=new char[content_size]; 													//bufor do ktorego zostana wczytane dane
+		byte[]content=new byte[content_size]; 													//bufor do ktorego zostana wczytane dane
 		int bsize;
 		if(content_size%size_block==0)bsize=content_size/size_block; else bsize=(content_size/size_block)+1;
 		int index=0;
 		content=recc_read(read.first_node, content_size, bsize, index, content);  		//wywolanie funkcji z rekurencja(odczyt i przepis)
 		close(read);																//zamyka plik
 		
-		return content.toString();
+		return new String(content);
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public void delete(String name)
 {
-	if(open(name))
+	if(find_file(name))
 	{  
 		file delete=get_file(name);
 		recc_delete(delete.first_node,delete.bsize);            // wywolanie funkcji rekurencyjnej
