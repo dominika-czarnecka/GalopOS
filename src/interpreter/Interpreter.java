@@ -39,7 +39,11 @@ public class Interpreter{
 			switch(line[0]){
 			
 			case "PR":			
-				Nadzorca.USERPROG(line[1]);						
+				try{
+				Nadzorca.USERPROG(line[1]);	}
+				catch(Exception e){
+					System.out.println("Podany program nie istnieje.");
+				}
 				break;
 
 			case "INR":
