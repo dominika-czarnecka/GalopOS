@@ -12,19 +12,25 @@ public class tester {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			Processor.RUNNING = Processor.next_try = ZarzProc.createProcess("p1", 0);
+			ZarzProc.startProcess("p1");
 		} catch (procCreationError | procNotFoundError e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
+		Processor.waiting = false;
+
 		String[] cmd = null;
+		System.out.println("New, Delete, Print, Send, Read");
+
 		do {
 			try {
 				cmd = br.readLine().split(" ");
-				
+
 				switch (cmd[0]) {
 				case "n":
 					ZarzProc.createProcess(cmd[1], 0);
+					ZarzProc.startProcess(cmd[1]);
 					break;
 				case "d":
 					ZarzProc.removeProcess(cmd[1]);
@@ -32,13 +38,25 @@ public class tester {
 				case "p":
 					ZarzProc.printProcessList();
 					break;
-				case "s":
-					ZarzProc.sendMessage(ZarzProc.findProcess(cmd[1]), ZarzProc.findProcess(cmd[2]), cmd[3]);
+				case "b":
+					ZarzProc.printProcessListBack();
 					break;
-				case "r":
+				case "pd":
+					ZarzProc.printDetailedList();
+					break;
+				case "send":
+					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(cmd[1]), cmd[2]);
+					break;
+				case "read":
 					Message msg = ZarzProc.readMessage(ZarzProc.findProcess(cmd[1]));
 					if (msg!=null) System.out.println(msg.content);
 					else System.out.println("nie zczytano");
+					break;
+				case "r":
+					Processor.run_proc();
+					break;
+				default:
+					System.out.println("blad");
 					break;
 				}
 			} catch(Exception e) {e.printStackTrace();}

@@ -74,7 +74,7 @@ private boolean is_enough_space(int bsize)
 	}
 public void close(file file_to_close)
 { 
-	file_to_close.access=file.free;
+	//file_to_close.access=file.free;
 }
 public boolean open(String name)
 {
@@ -84,8 +84,8 @@ public boolean open(String name)
 		get_file(name).access=file.in_use;
 		return true;
 		}
-	else return false;
-}
+	else return false;}
+
 //////////////////////////////////// INIT METHODS ////////////////////////////////////////////
 
 private void driver_init(int number_blocks, int size_block)

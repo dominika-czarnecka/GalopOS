@@ -20,7 +20,7 @@ public class ZarzProc {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			Pamiec.XA(name, memory); //przydzielanie pami�ci
+			//Pamiec.XA(name, memory); //przydzielanie pami�ci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 			return process;
@@ -130,5 +130,23 @@ public class ZarzProc {
 			}
 			System.out.print("\n");
 		}
+	}
+	
+	static public void printDetailedList() {
+		if (PCB.first == null) {
+			System.out.println("lista jest pusta"); 
+			return;
+		}
+		
+		System.out.println("nazwa\tblocked\tstopped\tmsgSem");
+		System.out.println("--------------------------------");
+		PCB it = PCB.first;
+		do {
+			System.out.print(it.name);
+			if (it == Processor.RUNNING) System.out.print(" <-");
+			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value);
+			
+			it=it.next;
+		} while(it!=PCB.first);
 	}
 }

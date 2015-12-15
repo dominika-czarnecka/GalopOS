@@ -24,4 +24,8 @@ public class Registers {
 		Z=
 		S=false;		
 	}
+	
+	public String toString() {
+		return 
+	}
 }

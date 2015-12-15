@@ -20,7 +20,7 @@ public class Interpreter{
 	public static void Task() throws Exception{
 		String rozkaz=Pamiec.WczytajRozkaz(Processor.RUNNING.name,Processor.reg.IP );
 		String[] line= rozkaz.split(" ");
-		Boolean jumped=false;
+		Boolean dontIncIP=false;
 
 		switch(line.length){
 
@@ -118,30 +118,30 @@ public class Interpreter{
 				}		
 
 			case "JNZ":
-				if(Processor.reg.Z==true){
+				if(!Processor.reg.Z){
 					Processor.reg.IP=Integer.parseInt(line[1]);
-					jumped=true;
+					dontIncIP=true;
 				}
 				break;
 
 			case "JZ":
-				if(Processor.reg.Z==false){
+				if(Processor.reg.Z){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
-					jumped=true;
+					dontIncIP=true;
 				}
 				break;
 				
 			case "JS":
-				if(Processor.reg.S==false){
+				if(Processor.reg.S){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
-				jumped=true;
+				dontIncIP=true;
 				}
 				break;
 				
 			case "JNS":
-				if(Processor.reg.S==true){
+				if(!Processor.reg.S){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
-				jumped=true;
+				dontIncIP=true;
 				}
 				break;
 				
@@ -310,7 +310,7 @@ public class Interpreter{
 		default:
 			System.out.println("Bledna dlugosc rozkazu");
 		}
-		if(!jumped) Processor.reg.IP+=rozkaz.length();
+		if(!dontIncIP) Processor.reg.IP+=rozkaz.length();
 		Processor.time++;
 	}
 }

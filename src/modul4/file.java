@@ -3,6 +3,8 @@ package modul4;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import modul1.Semaphore;
+
 public class file
 {
 
@@ -14,6 +16,7 @@ public class file
 	int first_node, last_node; 
 	int size, bsize;
 	int access;
+	Semaphore file_sem = new Semaphore(1);
 	String date;
 	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"); //format daty
 
