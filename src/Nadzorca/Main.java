@@ -23,6 +23,7 @@ public class Main {
 				+ "INR B\n"
 				+ "DCR C\n"
 				+ "JNZ 16\n"
+				+ "SM prog3 A\n"
 				+ "OUT A\n"
 				+ "HLT\n");
 		
@@ -40,8 +41,8 @@ public class Main {
 
 		driver.create("prog3", "$JOB,63,FILEIN=IN,FILEOUT=OUT \n"
 				+ "IN A\n"//5
-				+ "IN B\n"//5
 				+ "PR prog1\n"//11
+				+ "RM B\n"
 				+ "CMP A B\n"//8
 				+ "JS 40\n"//6
 				+ "OUT A\n"//6
@@ -52,6 +53,7 @@ public class Main {
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
 	
+		
 	}
 
 }

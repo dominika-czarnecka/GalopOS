@@ -83,6 +83,9 @@ public class Nadzorca
 			case 1:
 				switch(komenda[0])
 				{
+				case "WPISZ":
+					Pamiec.RAM[4]='\n';
+					break;
 				
 				case "DIR":
 					driver.catalog_show();
@@ -105,6 +108,7 @@ public class Nadzorca
 					break;
 
 				case "CHMEM":
+					Pamiec.WyswietlRAM();
 					break;
 
 				case "HELP":
@@ -188,8 +192,9 @@ public class Nadzorca
 			ZarzProc.createProcess("*IBSUP", 0);
 			ZarzProc.createProcess("*IN", 0);
 			ZarzProc.createProcess("*OUT", 0);
-		} catch (procCreationError | procNotFoundError e1) 
-		{
+
+		} catch (procCreationError e1){
+
 			e1.printStackTrace();
 		}
 		try {
@@ -211,7 +216,7 @@ public class Nadzorca
 		{
 			String kod = driver.read(nazwa);
 	//		System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
-			String[] komendy = kod.split("\n");
+			String[] komendy = kod.split("\n", 2);
 			System.out.println("Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
 			if(p==-1)
@@ -223,13 +228,13 @@ public class Nadzorca
 				try 
 				{
 					ZarzProc.createProcess(nazwa, p);
-				} catch (procCreationError | procNotFoundError e) 
-				{
-					e.printStackTrace();
+
+				} catch (procCreationError e){ 
+						e.printStackTrace();
 				}
 			}
-			String DoPamieci = null;
-			for(int i=1;i<komendy.length;i++)
+			String DoPamieci = komendy[1];
+			for(int i=2;i<komendy.length;i++)
 			{
 				DoPamieci+=komendy[i];
 			}

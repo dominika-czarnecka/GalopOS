@@ -17,7 +17,7 @@ public class Pamiec {
 	// public static int licznik = 0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]
 
 	public Pamiec() {
-		char[] RAM = new char[MEMORY_SIZE];
+		RAM = new char[MEMORY_SIZE];
 		WolnaLista = new Wolna(MEMORY_SIZE);
 		ZajetaLista = new Zajeta();
 		System.out.println("Inicjalizacja pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie.");
@@ -25,9 +25,6 @@ public class Pamiec {
 
 	//Alokacja
 	public static void XA(String NazwaProcesu, int rozmiar) throws Exception {
-
-		System.out.println( " XA wolna pamiec:" + Wolna.iloscWolnej());
-		System.out.println( " XA rozmiar:" + rozmiar);
 
 		if (rozmiar > MEMORY_SIZE) {
 			System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
@@ -60,15 +57,13 @@ public class Pamiec {
 				}
 
 				System.out.println("[*]Przydzial pamieci dla procesu: " + NazwaProcesu);
-				System.out.println("XA wolna pozostala:" + Wolna.iloscWolnej());
-
 			}
 		}
 	}
 
 	//Zwalnianie pamieci
 	public static void XF(String NazwaProcesu) {
-		System.out.println("[*]Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
+		System.out.println("[*]Zwolnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
 		WolnaLista.DodajWolnyBlok(Zajeta.Poczatek(NazwaProcesu), ZajetaLista.Rozmiar(NazwaProcesu));
 		ZajetaLista.Usun(NazwaProcesu);
 	}
@@ -76,11 +71,12 @@ public class Pamiec {
 	//Przepisuje dane juz zaalokowanego procesu
 	public static void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
 
-		char[] daneChar = daneProcesu.toCharArray();
-		int ile = daneChar.length;
+		int ile = daneProcesu.length();
+		char[] daneChar=daneProcesu.toCharArray();
+		
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
-		System.out.println("Zapisuje " + ile + " charow od" + indeksPoczatek);
+		System.out.println("Zapisuje " + ile + " charow od " + indeksPoczatek);
 
 		if (indeksPoczatek != -1) {
 			for (int i = 0; i < ile; i++) {
@@ -113,7 +109,8 @@ public class Pamiec {
 	public static void WyswietlRAM() {
 		System.out.println("\n -------------------PAMIEC - zawartosc-----------------\n");
 		for (int i = 0; i < MEMORY_SIZE; i++) {
-			System.out.print(RAM[i] + " "); //zeby nie interpretowalo znakow nowej linii
+			System.out.print(String.valueOf(RAM[i]).replace('\n', '\\') + " "); //zeby nie interpretowalo znakow nowej linii
+			if (i%64==63) System.out.println("\n");
 		}
 	}
 

@@ -4,13 +4,13 @@ import java.util.InputMismatchException;
 import Nadzorca.Nadzorca;
 import modul1.*;
 import modul2.Pamiec;
+import modul3.Message;
 import modul3.ZarzProc;
 import modul4.*;
 
 public class Interpreter{
 
 	static hdd_commander driver;
-
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
@@ -42,6 +42,25 @@ public class Interpreter{
 		case 2:
 			switch(line[0]){
 			
+			case "RM":
+				Message temp=ZarzProc.readMessage(Processor.RUNNING);
+				if(temp!=null){
+				
+				switch(line[1]){
+				case "A":
+				Processor.reg.A=Integer.parseInt(temp.content);
+				 break;
+				case "B":
+					Processor.reg.B=Integer.parseInt(temp.content);
+					 break;
+				case "C":
+					Processor.reg.C=Integer.parseInt(temp.content);
+					 break;
+				}
+				}
+				else dontIncIP=true;
+				break;
+				
 			case "PR":			
 				try{
 				Nadzorca.USERPROG(line[1]);	}
@@ -165,6 +184,23 @@ public class Interpreter{
 		case 3:
 			switch(line[0]){
 
+			case "SM":
+				switch(line[2]){
+				case "A":
+					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(line[1]),
+							Integer.toString(Processor.reg.A));
+					break;
+				case "B":
+					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(line[1]),
+							Integer.toString(Processor.reg.B));
+					break;
+				case "C":
+					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(line[1]),
+							Integer.toString(Processor.reg.C));
+					break;
+				}
+				break;
+			
 			case "CMP":
 				int a=Integer.parseInt(line[1]);
 				int b=Integer.parseInt(line[2]);
