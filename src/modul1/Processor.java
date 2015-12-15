@@ -23,7 +23,6 @@ public class Processor {
 			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
 			RUNNING = next_try;
 			next_try = next_try.next;
-			
 
 			load_all_registers();
 			System.out.println("NEW RUNNING: "+RUNNING.name);
@@ -53,6 +52,7 @@ public class Processor {
 
 	static public void XPER()
 	{
+		next_try = RUNNING.next;
 		System.out.println("Wyw³aszczam proces: " + RUNNING.name);
 		save_all_registers();
 		time = 1;

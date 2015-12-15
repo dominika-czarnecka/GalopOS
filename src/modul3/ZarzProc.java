@@ -21,7 +21,7 @@ public class ZarzProc {
 			throw new procCreationError();
 		else {
 			try {
-				Pamiec.XA(name, memory);
+				//Pamiec.XA(name, memory);
 			} catch (Exception e) {
 				throw new procCreationError();
 			}
