@@ -17,7 +17,7 @@ public class Pamiec {
 	// public static int licznik = 0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]
 
 	public Pamiec() {
-		char[] RAM = new char[MEMORY_SIZE];
+		RAM = new char[MEMORY_SIZE];
 		WolnaLista = new Wolna(MEMORY_SIZE);
 		ZajetaLista = new Zajeta();
 		System.out.println("Inicjalizacja pamieci o rozmiarze " + MEMORY_SIZE + " zakonczona pomyslnie.");
@@ -76,8 +76,12 @@ public class Pamiec {
 	//Przepisuje dane juz zaalokowanego procesu
 	public static void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
 
-		char[] daneChar = daneProcesu.toCharArray();
-		int ile = daneChar.length;
+		int ile = daneProcesu.length();
+		
+		byte[] content = new byte[daneProcesu.length()]; // tablica byte
+		char[] daneChar=new char [daneProcesu.length()]; // tablica charow 
+		content=daneProcesu.getBytes();                  // content to tablica ktora zawiera string w ascii
+		for(int i=0;i<ile;i++) { daneChar[i]=(char)content[i];} //tablica charow tworzona z tablicy bytow
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
 		System.out.println("Zapisuje " + ile + " charow od" + indeksPoczatek);
