@@ -115,9 +115,12 @@ private void format() // CATALOG, DRIVE & FAT
 /////////////////////////////////////////////////////////////////////////////////////
 public void driver_show()
 {
+	System.out.printf("%-6s","");
+	for(int j=0; j<size_block; j++){System.out.printf("%-6s","["+j+"]");} System.out.println("\n");
 		for(int i=0; i<number_blocks; i++){
+			System.out.printf("%-7s","["+i+"]  ");
 			for(int j=0; j<size_block; j++){
-				System.out.print(driver[i][j] + " ");
+				System.out.printf("%-6s",driver[i][j] + " ");
 			 }							
 			System.out.println();
 		 }
@@ -132,7 +135,7 @@ public void fat_show()
 	System.out.print(" 0 |");
 	for(int i=0;i<number_blocks;i++)
 	{
-		if(counter1 == 16 && number_blocks != size_block){System.out.println();counter1 =0; counter2++; System.out.print(" " +counter2+ " |");}
+		if(counter1 == 16){System.out.println("\n");counter1 =0; counter2++; System.out.print(" " +counter2+ " |");}
 		System.out.printf(" %-5d",fat[i]); counter1++;
 	}
 	System.out.println("\n----------------------------------------------------------------------------------------------------");

@@ -47,7 +47,7 @@ public class Main {
 				+ "JNS 50\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
-		//nadzorca.run_cmd();
+		nadzorca.run_cmd();
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
 	
