@@ -12,7 +12,7 @@ public class tester {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			Processor.RUNNING = Processor.next_try = ZarzProc.createProcess("p1", 0);
-		} catch (procCreationError e1) {
+		} catch (procCreationError | procNotFoundError e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

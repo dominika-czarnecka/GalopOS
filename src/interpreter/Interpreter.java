@@ -153,10 +153,8 @@ public class Interpreter{
 		case 3:
 			switch(line[0]){
 			
-			case "PR":
-				switch(line[1]){
-				///////////////////////////////////////
-				}
+			case "PR":				
+				Nadzorca.USERPROG(line[1]);///////////////////////////////////////				
 				break;
 			
 			case "CMP":
