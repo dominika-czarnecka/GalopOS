@@ -81,6 +81,10 @@ public class Nadzorca
 			komenda[0] = komenda[0].toUpperCase();
 
 			switch(komenda.length) {
+			case 0:
+				Processor.run_proc();
+				break;
+				
 			case 1:
 				switch(komenda[0])
 				{
