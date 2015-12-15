@@ -210,7 +210,7 @@ public class Nadzorca
 			e.printStackTrace();
 		}
 		Processor.next_try = PCB.first;	
-		Processor.XPER();
+	//	Processor.XPER();
 	}
 
 	//Tworzenie procesu USERPROG
@@ -219,6 +219,7 @@ public class Nadzorca
 		if(nazwa.equals("prog1") || nazwa.equals("prog2") || nazwa.equals("prog3"))
 		{
 			String kod = driver.read(nazwa);
+			System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
 			String[] komendy = kod.split("\n");
 			System.out.println(komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
