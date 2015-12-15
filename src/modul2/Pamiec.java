@@ -109,7 +109,8 @@ public class Pamiec {
 	public static void WyswietlRAM() {
 		System.out.println("\n -------------------PAMIEC - zawartosc-----------------\n");
 		for (int i = 0; i < MEMORY_SIZE; i++) {
-			System.out.print(RAM[i] + " "); //zeby nie interpretowalo znakow nowej linii
+			System.out.print(String.valueOf(RAM[i]).replace('\n', '\\') + " "); //zeby nie interpretowalo znakow nowej linii
+			if (i%64==63) System.out.println("\n");
 		}
 	}
 

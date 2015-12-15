@@ -53,6 +53,7 @@ public class Main {
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
 	
+		
 	}
 
 }
