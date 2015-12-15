@@ -23,6 +23,7 @@ public class ZarzProc {
 			Pamiec.XA(name, memory); //przydzielanie pami�ci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
+			System.out.println("Utworzono proces: "+process.name);
 			return process;
 		}
 	}
