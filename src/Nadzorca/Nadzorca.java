@@ -182,9 +182,6 @@ public class Nadzorca
 		this.pamiec=pamiec;
 	}
 
-
-	@SuppressWarnings("static-access")
-
 	public static void IPLRTN()
 	{
 		try {
@@ -267,9 +264,4 @@ public class Nadzorca
 			return -1;
 	}
 
-	public static void start()
-	{
-		IPLRTN();
-		IBSUP();
-	}
 }
