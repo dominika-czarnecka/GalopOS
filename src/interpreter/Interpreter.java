@@ -27,8 +27,12 @@ public class Interpreter{
 		case 1:
 			switch(line[0]){
 			case "HLT":	
+				if(Processor.RUNNING.name=="prog3" && ZarzProc.findProcess("prog1")!=null){
+						dontIncIP=true;
+				}
+				else{
 				ZarzProc.notifySup(Processor.RUNNING);				
-				throw new Exception("HALT");
+				throw new Exception("HALT");}
 				//break;
 			default:
 				System.out.println("Podano bledna komende");	
