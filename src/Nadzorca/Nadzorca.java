@@ -212,9 +212,9 @@ public class Nadzorca
 		if(driver.find_file(nazwa))
 		{
 			String kod = driver.read(nazwa);
-			System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
+	//		System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
 			String[] komendy = kod.split("\n");
-			System.out.println(komendy[0]); // $JOB/
+			System.out.println("Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
 			if(p==-1)
 			{
