@@ -43,8 +43,9 @@ public class Nadzorca
 						+	"PNDSK			wyswietla dysk.\n"
 						+   "CRPROC	nazwa	\ttworzy nowy proces.\n"
 						+	"PROC			wyswietla liste procesow.\n"
-						+   "PROCB			wyswietla liste procesow od tylu \n"
+						+   "PROCB			wyswietla liste procesow od tylu. \n"
 						+	"CHMEM			wyswietla pamiec.\n"
+						+   "PROCD			wyswietla szczegolowa liste procesow. \n" 			
 						+	"HELP			wyswietla liste komend.\n"
 						+   "SHUTDOWN		zakonczenie pracy.\n");
 	}
@@ -113,6 +114,10 @@ public class Nadzorca
 
 				case "HELP":
 					list_cmd();
+					break;
+					
+				case "PROCD":
+					ZarzProc.printDetailedList();
 					break;
 
 				case "":
@@ -189,7 +194,8 @@ public class Nadzorca
 	public static void IPLRTN()
 	{
 		try {
-			ZarzProc.createProcess("*IBSUP", 0);
+			
+			Processor.next_try=ZarzProc.createProcess("*IBSUP", 0);
 			ZarzProc.createProcess("*IN", 0);
 			ZarzProc.createProcess("*OUT", 0);
 
