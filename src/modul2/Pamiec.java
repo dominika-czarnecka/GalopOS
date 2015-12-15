@@ -26,9 +26,6 @@ public class Pamiec {
 	//Alokacja
 	public static void XA(String NazwaProcesu, int rozmiar) throws Exception {
 
-		System.out.println( " XA wolna pamiec:" + Wolna.iloscWolnej());
-		System.out.println( " XA rozmiar:" + rozmiar);
-
 		if (rozmiar > MEMORY_SIZE) {
 			System.out.println("\n[BLAD]: proba przydzielenia bloku wiekszego od calej pamieci [!] \n");
 			throw new Exception("nie ma tyle pamieci w systemie");
@@ -60,15 +57,13 @@ public class Pamiec {
 				}
 
 				System.out.println("[*]Przydzial pamieci dla procesu: " + NazwaProcesu);
-				System.out.println("XA wolna pozostala:" + Wolna.iloscWolnej());
-
 			}
 		}
 	}
 
 	//Zwalnianie pamieci
 	public static void XF(String NazwaProcesu) {
-		System.out.println("[*]Zowlnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
+		System.out.println("[*]Zwolnienie pamieci zajmowanej przez proces: " + NazwaProcesu);
 		WolnaLista.DodajWolnyBlok(Zajeta.Poczatek(NazwaProcesu), ZajetaLista.Rozmiar(NazwaProcesu));
 		ZajetaLista.Usun(NazwaProcesu);
 	}
@@ -81,7 +76,7 @@ public class Pamiec {
 		
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
-		System.out.println("Zapisuje " + ile + " charow od" + indeksPoczatek);
+		System.out.println("Zapisuje " + ile + " charow od " + indeksPoczatek);
 
 		if (indeksPoczatek != -1) {
 			for (int i = 0; i < ile; i++) {
