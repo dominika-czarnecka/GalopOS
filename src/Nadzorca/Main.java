@@ -38,13 +38,14 @@ public class Main {
 				+ "OUT C\n"
 				+ "HLT\n");//4
 
-		driver.create("prog3", "$JOB,59,FILEIN=IN,FILEOUT=OUT \n"
+		driver.create("prog3", "$JOB,63,FILEIN=IN,FILEOUT=OUT \n"
 				+ "IN A\n"//5
-				+ "PR B prog1\n"//11
+				+ "IN B\n"//5
+				+ "PR prog1\n"//11
 				+ "CMP A B\n"//8
-				+ "JS 37\n"//6
+				+ "JS 40\n"//6
 				+ "OUT A\n"//6
-				+ "JNS 50\n"//7
+				+ "JNS 53\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
 
