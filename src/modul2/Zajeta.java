@@ -4,11 +4,11 @@ import java.util.*;
 
 
 public class Zajeta {
-    private static ArrayList<Element2> List;
+    private static ArrayList<ElementZaj> List;
 
     public static int zajeta;
     public Zajeta(){
-        List= new ArrayList<Element2>();
+        List= new ArrayList<ElementZaj>();
         zajeta = 0;
     }
 
@@ -25,11 +25,11 @@ public class Zajeta {
     public void Dodaj(int indeks, int rozmiar, String NazwaProcesu){
         for(int i=0; i< List.size(); i++){
             if(List.get(i).Poczatek() > indeks ) {
-                List.set(i, new Element2(indeks, rozmiar, NazwaProcesu));
+                List.set(i, new ElementZaj(indeks, rozmiar, NazwaProcesu));
                 return;
             }
         }
-        List.add(new Element2(indeks, rozmiar, NazwaProcesu));
+        List.add(new ElementZaj(indeks, rozmiar, NazwaProcesu));
     }
 
     public void Usun(String NazwaProcesu){
