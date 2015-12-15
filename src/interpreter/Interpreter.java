@@ -11,6 +11,7 @@ import modul4.*;
 public class Interpreter{
 
 	static hdd_commander driver;
+	public static boolean mozliwe = true;
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
@@ -18,6 +19,7 @@ public class Interpreter{
 	}
 
 	public static void Task() throws Exception{
+		
 		String rozkaz=Pamiec.WczytajRozkaz(Processor.RUNNING.name,Processor.reg.IP );
 		System.out.println(rozkaz);
 		
@@ -25,19 +27,23 @@ public class Interpreter{
 		Boolean dontIncIP=false;
 
 		switch(line.length) {
-
+		
 		case 1:
 			switch(line[0]){
 			case "HLT":	
 				if(Processor.RUNNING.name=="prog3" && ZarzProc.findProcess("prog1")!=null){
 						dontIncIP=true;
 				}
-				else{
-				ZarzProc.notifySup(Processor.RUNNING);				
-				throw new Exception("HALT");}
-				//break;
+				else
+				{
+				ZarzProc.notifySup(Processor.RUNNING);	
+				dontIncIP = false;
+				//throw new Exception("HALT");
+				}
+				break;
 			default:
-				System.out.println("Podano bledna komende");	
+				System.out.println("Podano bledna komende");
+				break;
 			}
 			break;		
 
@@ -380,7 +386,8 @@ public class Interpreter{
 		default:
 			System.out.println("Bledna dlugosc rozkazu");
 		}
+		
 		if(!dontIncIP) Processor.reg.IP+=rozkaz.length()+1;
 		//Processor.time++;
-	}
+		}
 }

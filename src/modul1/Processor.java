@@ -50,7 +50,7 @@ public class Processor {
 				else XPER();
 			}
 		}
-		catch(Exception ex) {System.out.println("Cannot run instruction");}
+		catch(Exception ex) {ex.printStackTrace();;}
 	}
 
 	static public void XPER()

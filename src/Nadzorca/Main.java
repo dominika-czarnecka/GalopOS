@@ -15,7 +15,7 @@ public class Main {
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		
-		driver.create("prog1","$JOB,79,FILEIN=IN,FILEOUT=OUT  \n" 
+		driver.create("prog1","$JOB,68,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 10\n"//8
 				+ "MVI B 1\n"//7
 				+ "ADD A B\n"
@@ -25,7 +25,7 @@ public class Main {
 				+ "JNZ 17\n"
 				+ "SM prog3 A\n"
 				+ "OUT A\n"
-				+ "HLT\n");
+				+ "HLT\n\n"); //niepotrzebne XD
 		
 		driver.create("prog2", "$JOB,123,FILEIN=IN,FILEOUT=OUT \n"
 				+ "RF A prog2l1\n"//13
