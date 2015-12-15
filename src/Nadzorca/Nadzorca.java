@@ -189,12 +189,9 @@ public class Nadzorca
 			ZarzProc.createProcess("*IBSUP", 0);
 			ZarzProc.createProcess("*IN", 0);
 			ZarzProc.createProcess("*OUT", 0);
-<<<<<<< HEAD
-		} catch (procCreationError e1) 
-=======
-		} catch (procCreationError  e1) 
->>>>>>> origin/master
-		{
+
+		} catch (procCreationError e1){
+
 			e1.printStackTrace();
 		}
 		try {
@@ -228,13 +225,9 @@ public class Nadzorca
 				try 
 				{
 					ZarzProc.createProcess(nazwa, p);
-<<<<<<< HEAD
-				} catch (procCreationError e) 
-=======
-				} catch (procCreationError   e) 
->>>>>>> origin/master
-				{
-					e.printStackTrace();
+
+				} catch (procCreationError e){ 
+						e.printStackTrace();
 				}
 			}
 			String DoPamieci = komendy[1];
