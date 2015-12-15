@@ -44,7 +44,7 @@ public class Nadzorca
 						+	"PNDSK		wyswietla dysk.\n"
 						+   "CRPROC		tworzy nowy proces.\n"
 						+	"PROC		wyswietla liste procesow.\n"
-						+   "PROCB      wyswietla liste procesow od tylu"
+						+   "PROCB		wyswietla liste procesow od tylu \n"
 						+	"CHMEM		wyswietla pamiec.\n"
 						+	"HELP		wyswietla liste komend.\n"
 						+   "SHUTDOWN	zakonczenie pracy.\n");
@@ -194,9 +194,9 @@ public class Nadzorca
 
 		Pamiec pamiec = new Pamiec();
 		try {
-			ZarzProc.createProcess("*IPSUB", 0);
-			ZarzProc.createProcess("*IN", 0);
-			ZarzProc.createProcess("*OUT", 0);
+			ZarzProc.createProcess("*IPSUB ", 0);
+			ZarzProc.createProcess("*IN ", 0);
+			ZarzProc.createProcess("*OUT ", 0);
 		} catch (procCreationError | procNotFoundError e1) 
 		{
 			e1.printStackTrace();
