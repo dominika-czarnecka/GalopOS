@@ -19,6 +19,8 @@ public class Interpreter{
 
 	public static void Task() throws Exception{
 		String rozkaz=Pamiec.WczytajRozkaz(Processor.RUNNING.name,Processor.reg.IP );
+		System.out.println(rozkaz);
+		
 		String[] line= rozkaz.split(" ");
 		Boolean dontIncIP=false;
 
@@ -146,7 +148,8 @@ public class Interpreter{
 					break;
 				default:
 					System.out.println("Podano bledna komende");
-				}		
+				}
+				break;
 
 			case "JNZ":
 				if(!Processor.reg.Z){
@@ -202,9 +205,32 @@ public class Interpreter{
 				break;
 			
 			case "CMP":
-				int a=Integer.parseInt(line[1]);
-				int b=Integer.parseInt(line[2]);
-				int c=a-b;
+				int a=0,b=0,c;
+				switch(line[1]){
+				case "A":
+					a=Processor.reg.A;
+					break;
+				case "B":
+					a=Processor.reg.B;
+					break;
+				case "C":
+					a=Processor.reg.C;
+					break;
+				}
+				
+				switch(line[2]){
+				case "A":
+					b=Processor.reg.A;
+					break;
+				case "B":
+					b=Processor.reg.B;
+					break;
+				case "C":
+					b=Processor.reg.C;
+					break;
+				}
+				
+				c=a-b;
 				if(c<0) Processor.reg.S=true;			
 				break;
 
@@ -253,7 +279,7 @@ public class Interpreter{
 					Processor.reg.C=Integer.parseInt(line[2]);
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("Podano bledna komende MVI");
 				}
 				break;
 
@@ -354,7 +380,7 @@ public class Interpreter{
 		default:
 			System.out.println("Bledna dlugosc rozkazu");
 		}
-		if(!dontIncIP) Processor.reg.IP+=rozkaz.length();
-		Processor.time++;
+		if(!dontIncIP) Processor.reg.IP+=rozkaz.length()+1;
+		//Processor.time++;
 	}
 }

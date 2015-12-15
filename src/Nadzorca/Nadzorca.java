@@ -123,13 +123,17 @@ public class Nadzorca
 				case "PROCD":
 					ZarzProc.printDetailedList();
 					break;
-
+					
+				case "WB":
+					Pamiec.WyswietlWolZaj();
+					break;
+					
+				case "REG":
+					Processor.show_register_processor();
+					break;
+					
 				case "":
-					try {
-						Interpreter.Task();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					Processor.run_proc();
 					break;
 
 				default:
@@ -202,6 +206,11 @@ public class Nadzorca
 			Processor.next_try=ZarzProc.createProcess("*IBSUP", 0);
 			ZarzProc.createProcess("*IN", 0);
 			ZarzProc.createProcess("*OUT", 0);
+			
+			ZarzProc.findProcess("*IBSUP").blocked = true;
+			ZarzProc.findProcess("*IN").blocked = true;
+			ZarzProc.findProcess("*OUT").blocked = true;
+			Processor.set_to_run();
 
 		} catch (procCreationError e1){
 

@@ -21,13 +21,14 @@ public class ZarzProc {
 			throw new procCreationError();
 		else {
 			try {
-				//Pamiec.XA(name, memory);
+				Pamiec.XA(name, memory);
 			} catch (Exception e) {
 				throw new procCreationError();
 			}
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 			System.out.println("Utworzono proces: "+process.name);
+			Processor.waiting = false;
 			return process;
 		}
 	}

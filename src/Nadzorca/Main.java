@@ -15,14 +15,14 @@ public class Main {
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		
-		driver.create("prog1","$JOB,66,FILEIN=IN,FILEOUT=OUT  \n" 
+		driver.create("prog1","$JOB,79,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 10\n"//8
 				+ "MVI B 1\n"//7
 				+ "ADD A B\n"
 				+ "INR B\n"
 				+ "INR B\n"
 				+ "DCR C\n"
-				+ "JNZ 16\n"
+				+ "JNZ 17\n"
 				+ "SM prog3 A\n"
 				+ "OUT A\n"
 				+ "HLT\n");

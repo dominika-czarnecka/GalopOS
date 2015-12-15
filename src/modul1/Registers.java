@@ -20,7 +20,7 @@ public class Registers {
 		B = 
 		C = 
 		D = 0;
-		IP = 33;
+		IP = 0;
 		Z=
 		S=false;		
 	}
