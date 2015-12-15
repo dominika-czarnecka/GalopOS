@@ -58,7 +58,7 @@ public class Zajeta {
             for (int i = 0; i < List.size(); i++) {
                 indeks = i + 1;
                 rozmiar += List.get(i).ZwrocRozmiar();
-                System.out.println("[" + indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "identyfikator procesu: " + List.get(i).pobierzNazwe() + "Rozmiar bloku:" + List.get(i).ZwrocRozmiar());
+                System.out.println("[" + indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "\tID procesu: " + List.get(i).pobierzNazwe() + "\tRozmiar bloku: " + List.get(i).ZwrocRozmiar());
             }
             System.out.println("Rozmiar Pamieci zajetej: " + rozmiar + "\n");
         }

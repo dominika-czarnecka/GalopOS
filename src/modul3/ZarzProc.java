@@ -40,7 +40,7 @@ public class ZarzProc {
 		else {
 			popProcess(process);
 			process.Messages.clear(); //bufor czyszczony wiadomosci
-			//Pamiec.XF(process.name); //zwalnianie pamiï¿½ci
+			Pamiec.XF(process.name); //zwalnianie pamieci
 			System.out.println("Usuniêto proces: "+process.name);
 		}
 	}
