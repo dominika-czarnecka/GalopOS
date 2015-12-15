@@ -39,5 +39,10 @@ public class PCB {
         	return !blocked && !stopped;
         }
         
+        public void changebitBlocked(){
+        	if(this.blocked == true) blocked = false;
+        	else blocked = true;
+        } 
+        
         
 }
