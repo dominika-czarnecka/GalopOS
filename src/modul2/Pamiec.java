@@ -77,11 +77,8 @@ public class Pamiec {
 	public static void ZapiszDoPamieci(String NazwaProcesu, String daneProcesu) {
 
 		int ile = daneProcesu.length();
+		char[] daneChar=daneProcesu.toCharArray();
 		
-		byte[] content = new byte[daneProcesu.length()]; // tablica byte
-		char[] daneChar=new char [daneProcesu.length()]; // tablica charow 
-		content=daneProcesu.getBytes();                  // content to tablica ktora zawiera string w ascii
-		for(int i=0;i<ile;i++) { daneChar[i]=(char)content[i];} //tablica charow tworzona z tablicy bytow
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
 		System.out.println("Zapisuje " + ile + " charow od" + indeksPoczatek);
