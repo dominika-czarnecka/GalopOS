@@ -186,12 +186,10 @@ public class Nadzorca
 
 	public static void IPLRTN()
 	{
-
-		Pamiec pamiec = new Pamiec();
 		try {
-			ZarzProc.createProcess("*IPSUB ", 0);
-			ZarzProc.createProcess("*IN ", 0);
-			ZarzProc.createProcess("*OUT ", 0);
+			ZarzProc.createProcess("*IBSUP", 0);
+			ZarzProc.createProcess("*IN", 0);
+			ZarzProc.createProcess("*OUT", 0);
 		} catch (procCreationError | procNotFoundError e1) 
 		{
 			e1.printStackTrace();
@@ -211,7 +209,7 @@ public class Nadzorca
 	//Tworzenie procesu USERPROG
 	public static void USERPROG(String nazwa)
 	{
-		if(nazwa.equals("prog1") || nazwa.equals("prog2") || nazwa.equals("prog3"))
+		if(driver.find_file(nazwa))
 		{
 			String kod = driver.read(nazwa);
 			System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla

@@ -48,7 +48,7 @@ public class Main {
 				+ "OUT B\n"//6
 				+ "HLT\n");
 		//nadzorca.run_cmd();
-	//	nadzorca.IPLRTN();
+		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
 	
 	}
