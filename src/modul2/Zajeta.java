@@ -15,7 +15,8 @@ public class Zajeta {
 
     public static int Poczatek(String NazwaProcesu){
         for(int i=0; i<List.size(); i++){
-            if(List.get(i).NAZWA() == NazwaProcesu )
+        	System.out.println("hynhjnyh");
+            if(List.get(i).NAZWA().equals(NazwaProcesu) )
                 return List.get(i).Poczatek();
         }
         return -1;

@@ -20,7 +20,7 @@ public class ZarzProc {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			//Pamiec.XA(name, memory); //przydzielanie pami�ci
+			Pamiec.XA(name, memory); //przydzielanie pami�ci
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 			return process;
