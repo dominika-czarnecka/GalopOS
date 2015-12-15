@@ -9,7 +9,7 @@ class ElementZaj extends Element{
         this.nazwa_procesu = NazwaProcesu;
     }
 
-    public String NAZWA(){
+    public String pobierzNazwe(){
         return nazwa_procesu;
     }
 }

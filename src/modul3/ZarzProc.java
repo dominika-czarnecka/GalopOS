@@ -16,11 +16,15 @@ public class ZarzProc {
 		return null;
 	}
 
-	static public PCB createProcess(String name, int memory) throws procCreationError, procNotFoundError {
+	static public PCB createProcess(String name, int memory) throws procCreationError {
 		if (findProcess(name)!=null)
 			throw new procCreationError();
 		else {
-			Pamiec.XA(name, memory); //przydzielanie pami�ci
+			try {
+				Pamiec.XA(name, memory);
+			} catch (Exception e) {
+				throw new procCreationError();
+			}
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
 			System.out.println("Utworzono proces: "+process.name);

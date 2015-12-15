@@ -6,15 +6,19 @@ public class Element {
     private int indeks;
     private int rozmiar;
 
-    public Element(int i, int r){
-        this.indeks = i;
-        this.rozmiar = r;
+    public Element(int indeks, int rozmiar){
+        this.indeks = indeks;
+        this.rozmiar = rozmiar;
     }
 
     public int Poczatek(){ //jakby wskaznik poczatkowy do bloku - potrzebne przy scalaniu
         return indeks;
     }
 
+    public void ustawPoczatek(int i){
+        indeks = i;
+    }
+    
     public int ZwrocRozmiar(){
         return rozmiar;
     }
@@ -31,16 +35,10 @@ public class Element {
         this.indeks = rozmiar;
     }
 
-    public boolean Porownaj ( Element inny){ //sprawdza czy bloki ze soba sąsiadują
-        if( (indeks + rozmiar) == inny.indeks){
+    public boolean czySasiaduja ( Element inny){
+        if( (indeks + rozmiar) == inny.indeks || (inny.indeks + inny.rozmiar) == indeks){
             return true;
         }
         return false;
     }
-
-    //Dwa bloki nigdy ze sobą nie graniczą bo wedy zostałyby scalone w jeden (!)
-    public void Scal(Element inny){
-        rozmiar += inny.rozmiar;
-    }
-
 }
