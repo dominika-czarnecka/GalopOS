@@ -20,9 +20,9 @@ public class Nadzorca
 
 	//////////
 	public static Scanner s = new Scanner(System.in);	
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	static String komenda;
+	static String[] komenda;
+	static String input;
 
 
 	public static String type_cmd()
@@ -34,147 +34,142 @@ public class Nadzorca
 	public static void list_cmd()
 	{
 		System.out.println(
-				"CREATE		tworzy nowy plik.\n"
-						+	"DELETE		usuwa plik.\n"
-						+	"EDIT		edytuj plik.\n"
-						+	"READ		czytaj plik.\n"
-						+	"DIR		wyswietla liste plików.\n"
-						+	"FAT		wyswietla tablice FAT.\n"
-						+	"CHDSK		wyswietla ile jest wolnego miejsca.\n"
-						+	"PNDSK		wyswietla dysk.\n"
-						+   "CRPROC		tworzy nowy proces.\n"
-						+	"PROC		wyswietla liste procesow.\n"
-						+   "PROCB		wyswietla liste procesow od tylu \n"
-						+	"CHMEM		wyswietla pamiec.\n"
-						+	"HELP		wyswietla liste komend.\n"
-						+   "SHUTDOWN	zakonczenie pracy.\n");
+				"CREATE		\ttworzy nowy plik.\n"
+						+	"DELETE	plik	\tusuwa plik.\n"
+						+	"EDIT plik		edytuj plik.\n"
+						+	"READ plik		czytaj plik.\n"
+						+	"DIR			wyswietla liste plików.\n"
+						+	"FAT			wyswietla tablice FAT.\n"
+						+	"PNDSK			wyswietla dysk.\n"
+						+   "CRPROC	nazwa	\ttworzy nowy proces.\n"
+						+	"PROC			wyswietla liste procesow.\n"
+						+   "PROCB			wyswietla liste procesow od tylu \n"
+						+	"CHMEM			wyswietla pamiec.\n"
+						+	"HELP			wyswietla liste komend.\n"
+						+   "SHUTDOWN		zakonczenie pracy.\n");
 	}
 
-	public static void StanProcesu()  //Sprawdzanie stanu listy wiadomosci, jesli cos jest to usuwa proces
+	public static void readMessages()  //Sprawdzanie stanu listy wiadomosci, jesli cos jest to usuwa proces
 	{
 		while(!IBSUPmsg.isEmpty())
 		{
-		Message msg = IBSUPmsg.remove(0);
-		if(msg.content.equals("stopped"))
+			Message msg = IBSUPmsg.remove(0);
+			if(msg.content.equals("stopped"))
 			{
 				try {
 					ZarzProc.removeProcess(msg.sender.name);
-					} catch (procNotFoundError e) 
+				} catch (procNotFoundError e) 
 				{	
-				e.printStackTrace();
+					e.printStackTrace();
 				}
-			//end = false;
+				//end = false;
 			}
 		}
 	}
-	
+
 	public static void IBSUP()
 	{
 		list_cmd();
+
 		do {
-			StanProcesu();
-			
-			komenda=type_cmd();
-			switch(komenda.toUpperCase())
-			{
-			case "CREATE":
-			{
-				System.out.print("Podaj nazwe pliku, ktory ma byc utworzony: "); String nazwa=s.nextLine();
-				System.out.println("Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
-				driver.create(nazwa, zawartosc);
-				break;
-			}
-			case "DELETE":
-			{
-				System.out.print("Podaj nazwe pliku, ktory ma byc usuniety: "); String nazwa=s.nextLine();
-				driver.delete(nazwa);
-				break;
-			}
-			case "EDIT":
-			{
-				System.out.print("Podaj nazwe pliku, ktory ma byc edytowany: "); String nazwa=s.nextLine();
-				if(driver.get_file(nazwa)!=null)
+			readMessages();
+
+			input =type_cmd();
+			komenda= input.split(" ");
+			komenda[0] = komenda[0].toUpperCase();
+
+			switch(komenda.length) {
+			case 1:
+				switch(komenda[0])
 				{
-					System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
-					driver.edit(nazwa, zawartosc);
-				}
-				else System.out.println("Plik o podanej nazwie nie istnieje");
-				break;
-			}
-			case "READ":
-			{
-				System.out.print("Podaj nazwe pliku, ktory chcesz otworzyc: "); String nazwa=s.nextLine();
-				if(driver.get_file(nazwa)!=null)
-				{
-					System.out.println(driver.get_file(nazwa).name);
-					System.out.println(driver.read(nazwa));
-				}
-				else System.out.println("Plik o podanej nazwie nie istnieje");
-				break;
-			}
-			case "DIR":
-			{
-				driver.catalog_show();
-				break;
-			}
-			case "FAT":
-			{
-				driver.fat_show();
-				break;
-			}
-			case "CHDSK":
-			{
-				int free_blocks=driver.count_free_space();
-				int size_driver=driver.size_block*driver.number_blocks;
-				System.out.println("Na dysku jest " + (free_blocks*driver.size_block) + " wolnych bajtow, " + (size_driver -free_blocks*driver.size_block) + " bajtow jest zajetych.");
-				break;
-			}
-			case "PNDSK":
-			{
-				driver.driver_show();
-				break;
-			}
-			case "CRPROC": 
-			{	
-				System.out.print("Podaj nazwe procesu ktory ma zostac utworzony: ");
-				USERPROG(s.nextLine());
-				break;
-			}
-			case "PROC":
-			{
-				ZarzProc.printProcessList();
-				break;
-			}
-			case "PROCB":
-			{
-				ZarzProc.printProcessListBack();
-				break;
-			}
-			case "CHMEM":
-			{
-				break;
-			}
-			case "HELP":
-			{
-				list_cmd();
-				break;
-			}
-			case "":
-			{
-				try {
-					Interpreter.Task();
-				} catch (Exception e) {
-					e.printStackTrace();
+				
+				case "DIR":
+					driver.catalog_show();
+					break;
+
+				case "FAT":
+					driver.fat_show();
+					break;
+
+				case "PNDSK":
+					driver.driver_show();
+					break;
+
+				case "PROC":
+					ZarzProc.printProcessList();
+					break;
+
+				case "PROCB":
+					ZarzProc.printProcessListBack();
+					break;
+
+				case "CHMEM":
+					break;
+
+				case "HELP":
+					list_cmd();
+					break;
+
+				case "":
+					try {
+						Interpreter.Task();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+
+				default:
+					System.out.println("'"+ input + "'" + " nieznana komenda");
+					break;
 				}
 				break;
-			}
+
+			case 2:
+				switch (komenda[0]) {
+				case "CREATE":{
+					System.out.println("Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
+					driver.create(komenda[1], zawartosc);
+					break;}
+				
+				case "DELETE":
+					if (driver.delete(komenda[1])){
+						System.out.println("Pomyślnie usunięto plik.");
+					} else {
+						System.out.println("Blad usuwania pliku");
+					}
+					break;
+
+				case "EDIT":
+					if(driver.find_file(komenda[1]))
+					{
+						System.out.println("dodatkowa zawartosc:"); String zawartosc=s.nextLine();
+						driver.edit(komenda[1], zawartosc);
+					}
+					else System.out.println("Plik o podanej nazwie nie istnieje");
+					break;
+
+				case "READ":
+					if(driver.find_file(komenda[1]))
+					{
+						System.out.println(driver.get_file(komenda[1]).name);
+						System.out.println(driver.read(komenda[1]));
+					}
+					else System.out.println("Plik o podanej nazwie nie istnieje");
+					break;
+					
+				case "CRPROC":
+					USERPROG(komenda[1]);
+					break;
+					
+				default:
+					System.out.println("'"+ input + "'" + " nieznana komenda");
+				}
+				break;
+
 			default:
-			{
-				System.out.println("'"+ komenda + "'" + " nieznana komenda");
-				break;
+				System.out.println("'"+ input + "'" + " niewlasciwa ilosc argumentow");
 			}
-			}
-		} while(komenda != "SHUTDOWN");
+		} while(komenda[0] != "SHUTDOWN");
 
 	}
 
@@ -210,7 +205,7 @@ public class Nadzorca
 			e.printStackTrace();
 		}
 		Processor.next_try = PCB.first;	
-	//	Processor.XPER();
+		//	Processor.XPER();
 	}
 
 	//Tworzenie procesu USERPROG
@@ -237,22 +232,22 @@ public class Nadzorca
 					e.printStackTrace();
 				}
 			}
-				String DoPamieci = null;
-				for(int i=1;i<komendy.length;i++)
-				{
-					DoPamieci+=komendy[i];
-				}
-			
-				Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
-		
-				try 
-				{
-					ZarzProc.startProcess(nazwa);
-				} catch (procNotFoundError e) 
-				{
+			String DoPamieci = null;
+			for(int i=1;i<komendy.length;i++)
+			{
+				DoPamieci+=komendy[i];
+			}
+
+			Pamiec.ZapiszDoPamieci(nazwa,DoPamieci);
+
+			try 
+			{
+				ZarzProc.startProcess(nazwa);
+			} catch (procNotFoundError e) 
+			{
 				e.printStackTrace();
-				}
-							
+			}
+
 		}
 		else
 		{
@@ -264,13 +259,13 @@ public class Nadzorca
 		String[] tmp;
 		int pamiec;
 		tmp = KartaJOB.split(",");
-			if(tmp[0].equals("$JOB"))
-			{
-				pamiec = Integer.parseInt(tmp[1]);
-				return pamiec;
-			}
-			else
-				return -1;
+		if(tmp[0].equals("$JOB"))
+		{
+			pamiec = Integer.parseInt(tmp[1]);
+			return pamiec;
+		}
+		else
+			return -1;
 	}
 
 	public static void start()

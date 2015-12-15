@@ -26,6 +26,6 @@ public class Registers {
 	}
 	
 	public String toString() {
-		return 
+		return String.valueOf(A) + " " + String.valueOf(B) + " " + String.valueOf(C) + " " + String.valueOf(IP);
 	}
 }

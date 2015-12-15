@@ -23,7 +23,7 @@ public class PCB {
         public boolean stopped;
         public boolean blocked;
        
-        Registers register = new Registers();
+        public Registers register = new Registers();
         int memoryLimit;
         //inf. o otwartych plikach
        

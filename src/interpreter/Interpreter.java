@@ -10,7 +10,7 @@ import modul4.*;
 public class Interpreter{
 
 	static hdd_commander driver;
-	
+
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
@@ -22,14 +22,14 @@ public class Interpreter{
 		String[] line= rozkaz.split(" ");
 		Boolean dontIncIP=false;
 
-		switch(line.length){
+		switch(line.length) {
 
 		case 1:
 			switch(line[0]){
 			case "HLT":	
 				ZarzProc.notifySup(Processor.RUNNING);				
 				throw new Exception("HALT");
-			//break;
+				//break;
 			default:
 				System.out.println("Podano bledna komende");	
 			}
@@ -57,32 +57,32 @@ public class Interpreter{
 			case "IN":
 				System.out.print("Podaj liczbe calkowita: ");
 				switch(line[1]){
-					case "A":
-						try{
-							Processor.reg.A=Nadzorca.s.nextInt();}
-						catch(InputMismatchException e) {
+				case "A":
+					try{
+						Processor.reg.A=Nadzorca.s.nextInt();}
+					catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
-							}
+					}
 					break;
-					case "B":
-						try{
-							Processor.reg.B=Nadzorca.s.nextInt();}
-						catch(InputMismatchException e) {
+				case "B":
+					try{
+						Processor.reg.B=Nadzorca.s.nextInt();}
+					catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
-							}
+					}
 					break;
-					case "C":
-						try{
-							Processor.reg.C=Nadzorca.s.nextInt();}
-						catch(InputMismatchException e) {
+				case "C":
+					try{
+						Processor.reg.C=Nadzorca.s.nextInt();}
+					catch(InputMismatchException e) {
 						System.out.println("Nie podano liczby");
-							}
+					}
 					break;
-					default:
-						System.out.println("Podano bledna komende");
+				default:
+					System.out.println("Podano bledna komende");
 				}
 				break;
-				
+
 			case "OUT":
 				switch(line[1]){
 				case "A":
@@ -98,7 +98,7 @@ public class Interpreter{
 					System.out.println("Podano bledna komende");
 				}
 				break;
-				
+
 			case "DCR":
 				switch(line[1]){
 				case "A":
@@ -130,40 +130,40 @@ public class Interpreter{
 					dontIncIP=true;
 				}
 				break;
-				
+
 			case "JS":
 				if(Processor.reg.S){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
-				dontIncIP=true;
+					dontIncIP=true;
 				}
 				break;
-				
+
 			case "JNS":
 				if(!Processor.reg.S){
 					Processor.reg.IP=Integer.parseInt(line[1]);					
-				dontIncIP=true;
+					dontIncIP=true;
 				}
 				break;
-				
+
 			default:
 				System.out.println("Podano bledna komende");	
 			}
 			break;
-			
+
 		case 3:
 			switch(line[0]){
-			
+
 			case "PR":				
 				Nadzorca.USERPROG(line[1]);///////////////////////////////////////				
 				break;
-			
+
 			case "CMP":
 				int a=Integer.parseInt(line[1]);
 				int b=Integer.parseInt(line[2]);
 				int c=a-b;
 				if(c<0) Processor.reg.S=true;			
 				break;
-			
+
 			case "WF":
 				String plikw=line[2];				
 				switch(line[1]){
@@ -180,7 +180,7 @@ public class Interpreter{
 					driver.edit(plikw,line[2]);
 				}
 				break;
-				
+
 			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
 				String plikr=line[2]; 
 				switch(line[1]){
@@ -196,7 +196,7 @@ public class Interpreter{
 				default:
 					System.out.println("Podano bledna komende");	
 				}
-			break;
+				break;
 			case "MVI":
 				switch(line[1]){
 				case "A":
@@ -212,7 +212,7 @@ public class Interpreter{
 					System.out.println("Podano bledna komende");
 				}
 				break;
-			
+
 			case "ADD":
 				switch(line[1]){
 				case "A":
@@ -227,7 +227,7 @@ public class Interpreter{
 						System.out.println("Podano bledna komende");
 					}
 					break;
-				
+
 				case "B":
 					switch(line[2]){
 					case "A":
@@ -240,7 +240,7 @@ public class Interpreter{
 						System.out.println("Podano bledna komende");
 					}
 					break;
-				
+
 				case "C":
 					switch(line[2]){
 					case "A":
@@ -255,7 +255,7 @@ public class Interpreter{
 					break;
 				default:
 					System.out.println("Podano bledna komende");
-			}
+				}
 				break;
 
 			case "MOD2":
@@ -273,7 +273,7 @@ public class Interpreter{
 					}
 					if(Processor.reg.A==0) Processor.reg.Z=true;
 					break;
-				
+
 				case "B":
 					switch(line[2]){
 					case "A":
@@ -287,7 +287,7 @@ public class Interpreter{
 					}
 					if(Processor.reg.B==0) Processor.reg.Z=true;
 					break;
-				
+
 				case "C":
 					switch(line[2]){
 					case "A":
@@ -306,7 +306,7 @@ public class Interpreter{
 				}
 			}	
 			break;
-			
+
 		default:
 			System.out.println("Bledna dlugosc rozkazu");
 		}

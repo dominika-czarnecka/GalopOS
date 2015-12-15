@@ -48,7 +48,7 @@ public class tester {
 					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(cmd[1]), cmd[2]);
 					break;
 				case "read":
-					Message msg = ZarzProc.readMessage(ZarzProc.findProcess(cmd[1]));
+					Message msg = ZarzProc.readMessage(Processor.RUNNING);
 					if (msg!=null) System.out.println(msg.content);
 					else System.out.println("nie zczytano");
 					break;

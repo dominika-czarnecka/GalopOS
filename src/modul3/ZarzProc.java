@@ -138,13 +138,13 @@ public class ZarzProc {
 			return;
 		}
 		
-		System.out.println("nazwa\tblocked\tstopped\tmsgSem");
-		System.out.println("--------------------------------");
+		System.out.println("nazwa\tblocked\tstopped\tmsgSem\trejestry");
+		System.out.println("-----------------------------------------");
 		PCB it = PCB.first;
 		do {
 			System.out.print(it.name);
 			if (it == Processor.RUNNING) System.out.print(" <-");
-			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value);
+			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString());
 			
 			it=it.next;
 		} while(it!=PCB.first);

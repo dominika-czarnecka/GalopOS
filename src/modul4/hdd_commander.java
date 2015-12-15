@@ -147,6 +147,9 @@ public void catalog_show()
 	{
 		System.out.println(main_catalog.get(i).date + " " + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
 	}
+	int free_blocks=count_free_space();
+	int size_driver=size_block*number_blocks;
+	System.out.println("Na dysku jest " + (free_blocks*size_block) + " wolnych bajtow, " + (size_driver -free_blocks*size_block) + " bajtow jest zajetych.");
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////
@@ -327,7 +330,7 @@ public String read(String name, int content_size)
 	}
 	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
 }
-public void delete(String name)
+public boolean delete(String name)
 {
 	if(find_file(name))
 	{  
@@ -335,7 +338,8 @@ public void delete(String name)
 		recc_delete(delete.first_node,delete.bsize);            // wywolanie funkcji rekurencyjnej
 		main_catalog.remove(get_file(name));					// usuniecie z katalogu
 		close(delete);
+		return true;
 	}
-	else System.out.println("Plik jest juz otwarty lub nie istnieje.");
+	else return false;
 }
 }
