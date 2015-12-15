@@ -197,7 +197,7 @@ public class Nadzorca
 			ZarzProc.createProcess("*IPSUB", 0);
 			ZarzProc.createProcess("*IN", 0);
 			ZarzProc.createProcess("*OUT", 0);
-		} catch (procCreationError e1) 
+		} catch (procCreationError | procNotFoundError e1) 
 		{
 			e1.printStackTrace();
 		}
@@ -231,7 +231,7 @@ public class Nadzorca
 				try 
 				{
 					ZarzProc.createProcess(nazwa, p);
-				} catch (procCreationError e) 
+				} catch (procCreationError | procNotFoundError e) 
 				{
 					e.printStackTrace();
 				}
