@@ -11,7 +11,6 @@ import modul4.*;
 public class Interpreter{
 
 	static hdd_commander driver;
-	public static boolean mozliwe = true;
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
@@ -37,8 +36,6 @@ public class Interpreter{
 				else
 				{
 				ZarzProc.notifySup(Processor.RUNNING);	
-				dontIncIP = false;
-				//throw new Exception("HALT");
 				}
 				break;
 			default:
