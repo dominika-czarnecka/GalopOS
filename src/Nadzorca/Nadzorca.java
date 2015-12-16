@@ -41,6 +41,7 @@ public class Nadzorca
 						+	"DIR			wyswietla liste plików.\n"
 						+	"FAT			wyswietla tablice FAT.\n"
 						+	"PNDSK			wyswietla dysk.\n"
+						+	"REG			wyswietla stan rejestrow biezacego procesu.\n"
 						+   "CRPROC	nazwa	\ttworzy nowy proces.\n"
 						+	"DELPROC nazwa	\tusuwa dany proces\n"
 						+	"PROC			wyswietla liste procesow.\n"
