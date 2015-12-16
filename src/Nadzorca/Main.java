@@ -76,6 +76,18 @@ public class Main {
 				+ "JNS 52\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
+		
+		/*driver.create("test1", "$JOB,12,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<1111111111>");
+		
+		driver.create("test2", "$JOB,14,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<222222222222>");
+		
+		driver.create("test3", "$JOB,15,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<3333333333333>");
+		
+		driver.create("test4", "$JOB,20,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<444444444444444444>");*/
 
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
