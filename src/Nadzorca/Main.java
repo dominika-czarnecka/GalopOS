@@ -72,7 +72,7 @@ public class Main {
 				+ "CMP A B\n"//8
 				+ "JS 39\n"//6
 				+ "OUT A\n"//6
-				+ "JNS 53\n"//7
+				+ "JNS 52\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
 

@@ -256,12 +256,13 @@ public class Interpreter{
 				}
 				break;
 
-			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
+			case "RF":
 				String plikr=line[2]; 
 				String read = driver.read(plikr);
 				if (read == null) ZarzProc.notifySup(Processor.RUNNING);
 				else
 				{
+					try{
 				switch(line[1]){
 				case "A":
 					Processor.reg.A=Integer.parseInt(read);
@@ -274,7 +275,7 @@ public class Interpreter{
 					break;					
 				default:
 					System.out.println("[INT]Podano bledna komende");	
-				}
+				}}catch(NumberFormatException e){System.out.println("[INT]Blad odczytu liczby z pliku"); ZarzProc.notifySup(Processor.RUNNING);}
 				}
 				break; 
 				
