@@ -40,6 +40,7 @@ public class Interpreter{
 				break;
 			default:
 				System.out.println("Podano bledna komende");
+				
 				break;
 			}
 			break;		
@@ -258,20 +259,26 @@ public class Interpreter{
 
 			case "RF":// na razie niesprawne, problem z odczytem jednej liczby
 				String plikr=line[2]; 
+				String read = driver.read(plikr);
+				if (read == null) ZarzProc.notifySup(Processor.RUNNING);
+				else
+				{
 				switch(line[1]){
 				case "A":
-					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					Processor.reg.A=Integer.parseInt(read);
 					break;
 				case "B":
-					Processor.reg.B=Integer.parseInt(driver.read(plikr));
+					Processor.reg.B=Integer.parseInt(read);
 					break;
 				case "C":
-					Processor.reg.C=Integer.parseInt(driver.read(plikr));
+					Processor.reg.C=Integer.parseInt(read);
 					break;					
 				default:
 					System.out.println("Podano bledna komende");	
 				}
-				break;
+				}
+				break; 
+				
 			case "MVI":
 				switch(line[1]){
 				case "A":

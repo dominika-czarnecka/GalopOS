@@ -252,7 +252,8 @@ public class Nadzorca
 					ZarzProc.createProcess(nazwa, p);
 
 				} catch (procCreationError e){ 
-						e.printStackTrace();
+					System.out.println("[NADZ]Nie mozna utworzyc procesu.");
+					return;
 				}
 			}
 			String DoPamieci = komendy[1];
