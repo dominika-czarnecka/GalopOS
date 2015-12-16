@@ -41,7 +41,7 @@ public class Main {
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		logo();
-		driver.create("prog1","$JOB,370,FILEIN=IN,FILEOUT=OUT  \n" 
+		driver.create("prog1","$JOB,70,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 3\n"//8
 				+ "MVI B 1\n"//8
 				+ "ADD A B\n"

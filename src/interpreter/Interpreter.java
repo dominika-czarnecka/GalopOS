@@ -20,7 +20,7 @@ public class Interpreter{
 	public static void Task() throws Exception{
 		
 		String rozkaz=Pamiec.WczytajRozkaz(Processor.RUNNING.name,Processor.reg.IP );
-		System.out.println(rozkaz);
+		System.out.println("[INT]Rozkaz:" + rozkaz.replaceAll("\n", "\\n"));
 		
 		String[] line= rozkaz.split(" ");
 		Boolean dontIncIP=false;
@@ -39,7 +39,7 @@ public class Interpreter{
 				}
 				break;
 			default:
-				System.out.println("Podano bledna komende");
+				System.out.println("[INT]Podano bledna komende");
 				
 				break;
 			}
@@ -71,7 +71,8 @@ public class Interpreter{
 				try{
 				Nadzorca.USERPROG(line[1]);	}
 				catch(Exception e){
-					System.out.println("Podany program nie istnieje.");
+					System.out.println("[INT]Nie mozna utworzyc podprocesu.");
+					ZarzProc.notifySup(Processor.RUNNING);	
 				}
 				break;
 
@@ -87,52 +88,52 @@ public class Interpreter{
 					Processor.reg.C+=1;
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 				break;			
 
 			case "IN":
-				System.out.print("Podaj liczbe calkowita: ");
+				System.out.print("[INT]Podaj liczbe calkowita: ");
 				switch(line[1]){
 				case "A":
 					try{
 						Processor.reg.A=Nadzorca.s.nextInt();}
 					catch(InputMismatchException e) {
-						System.out.println("Nie podano liczby");
+						System.out.println("[INT]Nie podano liczby");
 					}
 					break;
 				case "B":
 					try{
 						Processor.reg.B=Nadzorca.s.nextInt();}
 					catch(InputMismatchException e) {
-						System.out.println("Nie podano liczby");
+						System.out.println("[INT]Nie podano liczby");
 					}
 					break;
 				case "C":
 					try{
 						Processor.reg.C=Nadzorca.s.nextInt();}
 					catch(InputMismatchException e) {
-						System.out.println("Nie podano liczby");
+						System.out.println("[INT]Nie podano liczby");
 					}
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 				break;
 
 			case "OUT":
 				switch(line[1]){
 				case "A":
-					System.out.println(Processor.reg.A);
+					System.out.println("[INT]"+ Processor.reg.A);
 					break;
 				case "B":
-					System.out.println(Processor.reg.B);
+					System.out.println("[INT]"+ Processor.reg.B);
 					break;
 				case "C":
-					System.out.println(Processor.reg.C);
+					System.out.println("[INT]"+ Processor.reg.C);
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 				break;
 
@@ -151,7 +152,7 @@ public class Interpreter{
 					if(Processor.reg.C==0) Processor.reg.Z=true;
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 				break;
 
@@ -184,7 +185,7 @@ public class Interpreter{
 				break;
 
 			default:
-				System.out.println("Podano bledna komende");	
+				System.out.println("[INT]Podano bledna komende");	
 			}
 			break;
 
@@ -274,7 +275,7 @@ public class Interpreter{
 					Processor.reg.C=Integer.parseInt(read);
 					break;					
 				default:
-					System.out.println("Podano bledna komende");	
+					System.out.println("[INT]Podano bledna komende");	
 				}
 				}
 				break; 
@@ -291,7 +292,7 @@ public class Interpreter{
 					Processor.reg.C=Integer.parseInt(line[2]);
 					break;
 				default:
-					System.out.println("Podano bledna komende MVI");
+					System.out.println("[INT]Podano bledna komende.");
 				}
 				break;
 
@@ -306,7 +307,7 @@ public class Interpreter{
 						Processor.reg.A+=Processor.reg.C;
 						break;
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					break;
 
@@ -319,7 +320,7 @@ public class Interpreter{
 						Processor.reg.B+=Processor.reg.C;
 						break;
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					break;
 
@@ -332,11 +333,11 @@ public class Interpreter{
 						Processor.reg.C+=Processor.reg.B;
 						break;	
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 				break;
 
@@ -351,7 +352,7 @@ public class Interpreter{
 						Processor.reg.A=Processor.reg.C%2;
 						break;	
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					if(Processor.reg.A==0) Processor.reg.Z=true;
 					break;
@@ -365,7 +366,7 @@ public class Interpreter{
 						Processor.reg.B=Processor.reg.C%2;
 						break;	
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					if(Processor.reg.B==0) Processor.reg.Z=true;
 					break;
@@ -379,18 +380,18 @@ public class Interpreter{
 						Processor.reg.C=Processor.reg.B%2;
 						break;
 					default:
-						System.out.println("Podano bledna komende");
+						System.out.println("[INT]Podano bledna komende");
 					}
 					if(Processor.reg.C==0) Processor.reg.Z=true;
 					break;
 				default:
-					System.out.println("Podano bledna komende");
+					System.out.println("[INT]Podano bledna komende");
 				}
 			}	
 			break;
 
 		default:
-			System.out.println("Bledna dlugosc rozkazu");
+			System.out.println("[INT]Bledna dlugosc rozkazu");
 		}
 		
 		if(!dontIncIP) Processor.reg.IP+=rozkaz.length()+1;
