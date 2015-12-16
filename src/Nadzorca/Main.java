@@ -76,16 +76,6 @@ public class Main {
 				+ "JNS 52\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
-		driver.create("prog4", "$JOB,56,FILEIN=IN,FILEOUT=OUT \n"
-				+ "IN A\n"//5
-				+ "PR prog1\n"//11
-				+ "RM B\n"
-				+ "CMP A B\n"//8
-				+ "JS 39\n"//6
-				+ "OUT A\n"//6
-				+ "JNS 52\n"//7
-				+ "OUT B\n"//6
-				+ "HLT\n");
 
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();

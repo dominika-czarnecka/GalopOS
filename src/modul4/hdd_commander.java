@@ -151,7 +151,7 @@ public void catalog_show()
 	else{
 	for(int i=0;i<main_catalog.size();i++)
 	{
-		System.out.println(main_catalog.get(i).date + "\t" + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
+		System.out.println(main_catalog.get(i).date + "\t" + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bajtow, indeks pierwszego bloku w FAT " + main_catalog.get(i).first_node);
 	}
 	int free_blocks=count_free_space();
 	int size_driver=size_block*number_blocks;
@@ -294,8 +294,8 @@ public void edit(String name, String data) // dwie weryfikacje: czy udalo sie ot
 				fat[edit.last_node]=search_free_space();
 				save(content,size, bsize, index,edit);
 			}
-	
 			close(edit);
+			System.out.println("[Driver] Zedytowano plik " + edit.name);
 	}
 	else System.out.println("[Driver] Brak miejsca na dysku.");
  }
