@@ -194,6 +194,7 @@ public class Interpreter{
 			switch(line[0]){
 
 			case "SM":
+				if(ZarzProc.findProcess(line[1])!=null){
 				switch(line[2]){
 				case "A":
 					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(line[1]),
@@ -207,6 +208,7 @@ public class Interpreter{
 					ZarzProc.sendMessage(Processor.RUNNING, ZarzProc.findProcess(line[1]),
 							Integer.toString(Processor.reg.C));
 					break;
+				}
 				}
 				break;
 			
