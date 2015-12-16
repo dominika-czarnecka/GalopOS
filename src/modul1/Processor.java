@@ -24,7 +24,7 @@ public class Processor {
 			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
 			RUNNING = next_try;
 			next_try = next_try.next;
-
+			time=1;
 			load_all_registers();
 			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name);
 		}
@@ -60,7 +60,7 @@ public class Processor {
 		next_try = RUNNING.next;
 		System.out.println("[Proc]Wyw³aszczam proces: " + RUNNING.name);
 		save_all_registers();
-		time = 1;
+		//time = 1;
 		set_to_run();
 	}
 

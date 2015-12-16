@@ -232,7 +232,7 @@ public class Nadzorca
 	}
 
 	//Tworzenie procesu USERPROG
-	public static void USERPROG(String nazwa)
+	public static boolean USERPROG(String nazwa)
 	{
 		if(driver.find_file(nazwa))
 		{
@@ -244,6 +244,7 @@ public class Nadzorca
 			if(p==-1)
 			{
 				System.out.println("[NADZORCA] Błędny program");
+				return false;
 			}
 			else 
 			{
@@ -253,7 +254,7 @@ public class Nadzorca
 
 				} catch (procCreationError e){ 
 					System.out.println("[NADZORCA] Nie mozna utworzyc procesu.");
-					return;
+					return false;
 				}
 			}
 			String DoPamieci = komendy[1];
@@ -269,14 +270,16 @@ public class Nadzorca
 				ZarzProc.startProcess(nazwa);
 			} catch (procNotFoundError e) 
 			{
-				e.printStackTrace();
+				return false;
 			}
 
 		}
 		else
 		{
 			System.out.println("[NADZORCA] Nie ma takiego programu na dysku");
+			return false;
 		}
+		return true;
 	}
 	public static int SprawdzJOB(String KartaJOB)
 	{

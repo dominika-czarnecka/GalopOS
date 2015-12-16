@@ -11,7 +11,7 @@ public class Pamiec {
 
 	public static Wolna WolnaLista;
 	public static Zajeta ZajetaLista;
-	public static int MEMORY_SIZE = 256;
+	public static int MEMORY_SIZE = 128;
 	public static char[] RAM;
 
 	// public static int licznik = 0 ; //LICZNIK KTÓRY ZAPAMIETUJE GDZIE SKONCZYLO SIE POBIERANIE Z BLOKU RAMU [!]

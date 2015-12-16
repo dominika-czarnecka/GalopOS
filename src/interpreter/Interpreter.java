@@ -68,9 +68,7 @@ public class Interpreter{
 				break;
 				
 			case "PR":			
-				try{
-				Nadzorca.USERPROG(line[1]);	}
-				catch(Exception e){
+				if(Nadzorca.USERPROG(line[1])==false){
 					System.out.println("[INT]Nie mozna utworzyc podprocesu.");
 					ZarzProc.notifySup(Processor.RUNNING);	
 				}
