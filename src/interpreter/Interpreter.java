@@ -11,7 +11,6 @@ import modul4.*;
 public class Interpreter{
 
 	static hdd_commander driver;
-	public static boolean mozliwe = true;
 
 	public Interpreter(hdd_commander driver,Pamiec pamiec)
 	{
@@ -37,8 +36,6 @@ public class Interpreter{
 				else
 				{
 				ZarzProc.notifySup(Processor.RUNNING);	
-				dontIncIP = false;
-				//throw new Exception("HALT");
 				}
 				break;
 			default:
@@ -246,16 +243,16 @@ public class Interpreter{
 				String plikw=line[2];				
 				switch(line[1]){
 				case "A":		
-					driver.edit(plikw,Processor.reg.A+"\n");
+					driver.create(plikw,Processor.reg.A+"\n");
 					break;
 				case "B":
-					driver.edit(plikw,Processor.reg.B+"\n");
+					driver.create(plikw,Processor.reg.B+"\n");
 					break;
 				case "C":
-					driver.edit(plikw,Processor.reg.C+"\n");
+					driver.create(plikw,Processor.reg.C+"\n");
 					break;
 				default:
-					driver.edit(plikw,line[2]);
+					driver.create(plikw,line[1]);
 				}
 				break;
 
@@ -266,10 +263,10 @@ public class Interpreter{
 					Processor.reg.A=Integer.parseInt(driver.read(plikr));
 					break;
 				case "B":
-					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					Processor.reg.B=Integer.parseInt(driver.read(plikr));
 					break;
 				case "C":
-					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					Processor.reg.C=Integer.parseInt(driver.read(plikr));
 					break;					
 				default:
 					System.out.println("Podano bledna komende");	
