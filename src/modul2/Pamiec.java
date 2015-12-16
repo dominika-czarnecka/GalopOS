@@ -48,8 +48,11 @@ public class Pamiec {
 					System.out.println("[Pam] Brak bloku o odpowiednim rozmiarze");
 
 					throw new Exception("[Pam]trzeba przesunac");
-
-					/*System.out.println("[*] Nastepuje przesuniecie blokow pamieci operacyjnej"); //kosztowna operacja - unikam jak moge
+					//
+					//System.out.println("[Pam] Nastepuje przesuniecie blokow pamieci operacyjnej"); //kosztowna operacja - unikam jak moge
+					
+					/*
+					//Przesun(int poczSkad, int poczGdzie, int ile)
 					ZajetaLista.Przesun(RAM);
 					WolnaLista.Wykasuj(ZajetaLista.Ostatni());
 					list_index = WolnaLista.ZnajdzWolne(rozmiar);

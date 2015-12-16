@@ -42,10 +42,12 @@ public class Nadzorca
 						+	"FAT			wyswietla tablice FAT.\n"
 						+	"PNDSK			wyswietla dysk.\n"
 						+   "CRPROC	nazwa	\ttworzy nowy proces.\n"
+						+	"DELPROC nazwa	\tusuwa dany proces\n"
 						+	"PROC			wyswietla liste procesow.\n"
 						+   "PROCB			wyswietla liste procesow od tylu. \n"
-						+	"CHMEM			wyswietla pamiec.\n"
-						+   "PROCD			wyswietla szczegolowa liste procesow. \n" 			
+						+	"CHMEM			wyswietla pamiec RAM.\n"
+						+	"WB			wyswietla struktury pamieci\n"
+						+   "PROCD			wyswietla szczegolowa liste procesow. \n" 	
 						+	"HELP			wyswietla liste komend.\n"
 						+   "SHUTDOWN		zakonczenie pracy.\n");
 	}
@@ -180,6 +182,12 @@ public class Nadzorca
 					
 				case "CRPROC":
 					USERPROG(komenda[1]);
+					break;
+
+				case "DELPROC":
+					PCB proc = ZarzProc.findProcess(komenda[1]);
+					if (proc != null) ZarzProc.notifySup(proc);
+					else System.out.println("[Nadz]Nie znaleziono procesu o tej nazwie");
 					break;
 					
 				default:
