@@ -35,13 +35,12 @@ public class PCB {
                 waitingForMessage = false;
         }
         
-        boolean moznaUruchomic() {
+        public boolean moznaUruchomic() {
         	return !blocked && !stopped;
         }
         
-        public void changebitBlocked(){
-        	if(this.blocked == true) blocked = false;
-        	else blocked = true;
+        public void toggleBlocked(){
+        	blocked = !blocked;
         } 
         
         

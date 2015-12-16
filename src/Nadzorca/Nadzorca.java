@@ -132,6 +132,9 @@ public class Nadzorca
 					Processor.show_register_processor();
 					break;
 					
+				case "SHUTDOWN":
+					break;
+					
 				case "":
 					Processor.run_proc();
 					break;
@@ -187,7 +190,7 @@ public class Nadzorca
 			default:
 				System.out.println("'"+ input + "'" + " niewlasciwa ilosc argumentow");
 			}
-		} while(komenda[0] != "SHUTDOWN");
+		} while(!komenda[0].equals("SHUTDOWN"));
 
 	}
 

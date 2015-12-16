@@ -145,15 +145,16 @@ public class ZarzProc {
 			return;
 		}
 		
-		System.out.println("nazwa\tblocked\tstopped\tmsgSem\trejestry");
-		System.out.println("-----------------------------------------");
+		System.out.println("nazwa\t\tblocked\tstopped\tmsgSem\trejestry\tmozna uruchomic");
+		System.out.println("-------------------------------------------------------------");
 		PCB it = PCB.first;
 		do {
 			System.out.print(it.name);
 			if (it == Processor.RUNNING) System.out.print(" <-");
-			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString());
-			
+			System.out.println("\t\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString()+ "\t" + it.moznaUruchomic());
 			it=it.next;
 		} while(it!=PCB.first);
+		System.out.println("Procesor czeka: " + Processor.waiting);
+
 	}
 }

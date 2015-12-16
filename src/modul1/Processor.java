@@ -21,8 +21,8 @@ public class Processor {
 				next_try = next_try.next;
 			} while (next_try != start);
 			
-			if(next_try == start && !next_try.moznaUruchomic()) ;//waiting = true;
-			
+			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
+			else{
 			RUNNING = next_try;
 			next_try = next_try.next;
 
@@ -30,7 +30,7 @@ public class Processor {
 			System.out.println("NEW RUNNING: "+RUNNING.name);
 			System.out.println("");
 			System.out.println("");
-
+			}
 		}
 		catch(Exception ex) {ex.printStackTrace();}
 
