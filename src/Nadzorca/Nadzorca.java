@@ -191,7 +191,11 @@ public class Nadzorca
 				System.out.println("'"+ input + "'" + " niewlasciwa ilosc argumentow");
 			}
 		} while(!komenda[0].equals("SHUTDOWN"));
-
+		System.out.println("\n");
+		String shutdown="Mozesz teraz bezpiecznie wylaczyc komputer.";
+		char[]shtdwn=shutdown.toCharArray();
+		for(int i=0;i<shutdown.length();i++)
+		System.out.printf("%-2s", shtdwn[i]);
 	}
 
 	static hdd_commander driver;
@@ -239,12 +243,16 @@ public class Nadzorca
 			String kod = driver.read(nazwa);
 	//		System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
 			String[] komendy = kod.split("\n", 2);
-			System.out.println("[NADZORCA] Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
+			System.out.println("[NADZ] Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
 			if(p==-1)
 			{
+<<<<<<< HEAD
 				System.out.println("[NADZORCA] Błędny program");
 				return false;
+=======
+				System.out.println("[NADZ] Błędny program");
+>>>>>>> origin/master
 			}
 			else 
 			{
@@ -253,8 +261,13 @@ public class Nadzorca
 					ZarzProc.createProcess(nazwa, p);
 
 				} catch (procCreationError e){ 
+<<<<<<< HEAD
 					System.out.println("[NADZORCA] Nie mozna utworzyc procesu.");
 					return false;
+=======
+					System.out.println("[NADZ] Nie mozna utworzyc procesu.");
+					return;
+>>>>>>> origin/master
 				}
 			}
 			String DoPamieci = komendy[1];
@@ -276,8 +289,12 @@ public class Nadzorca
 		}
 		else
 		{
+<<<<<<< HEAD
 			System.out.println("[NADZORCA] Nie ma takiego programu na dysku");
 			return false;
+=======
+			System.out.println("[NADZ] Nie ma takiego programu na dysku");
+>>>>>>> origin/master
 		}
 		return true;
 	}
