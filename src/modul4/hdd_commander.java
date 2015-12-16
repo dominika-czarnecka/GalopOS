@@ -1,4 +1,4 @@
-////////////////// SZYMON KO�ODZIEJCZAK
+////////////////// SZYMON KOŁODZIEJCZAK
 package modul4;
 
 import java.text.SimpleDateFormat;
@@ -115,13 +115,15 @@ private void format() // CATALOG, DRIVE & FAT
 /////////////////////////////////////////////////////////////////////////////////////
 public void driver_show()
 {
-	System.out.printf("%-6s","");
-	for(int j=0; j<size_block; j++){System.out.printf("%-6s","["+j+"]");} System.out.println("\n");
 		for(int i=0; i<number_blocks; i++){
-			System.out.printf("%-7s","["+i+"]  ");
+			System.out.printf("%-5s","["+i+"]");
 			for(int j=0; j<size_block; j++){
-				System.out.printf("%-6s",driver[i][j] + " ");
-			 }							
+				if (driver[i][j]==10) {System.out.printf("%-3s","\\n");}
+				else if (driver[i][j]==-1) {System.out.printf("%-3s", "");}
+				else
+				System.out.printf("%-3s",(char)driver[i][j] + " ");
+				//System.out.print(String.valueOf((char)driver[i][j]).replace('\n', '\\'));
+			}							
 			System.out.println();
 		 }
 		System.out.println();
