@@ -36,11 +36,12 @@ public class Main {
 			+ "\t\t\t\t\t\t    (c) Wszelkie prawa zastrzezone.");
 	}
 	public static void main(String[] args) {
+		logo();
+		Nadzorca.s.nextLine();
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
-		logo();
 		driver.create("prog1","$JOB,70,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 3\n"//8
 				+ "MVI B 1\n"//8

@@ -34,7 +34,7 @@ public class Nadzorca
 	public static void list_cmd()
 	{
 		System.out.println(
-				"CREATE		\ttworzy nowy plik.\n"
+				"\nCREATE		\ttworzy nowy plik.\n"
 						+	"DELETE	plik	\tusuwa plik.\n"
 						+	"EDIT plik		edytuj plik.\n"
 						+	"READ plik		czytaj plik.\n"
