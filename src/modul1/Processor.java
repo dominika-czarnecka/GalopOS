@@ -20,43 +20,45 @@ public class Processor {
 				if (next_try.moznaUruchomic()) break;
 				next_try = next_try.next;
 			} while (next_try != start);
-			
+
 			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
-			else{
 			RUNNING = next_try;
 			next_try = next_try.next;
 
 			load_all_registers();
-			System.out.println("NEW RUNNING: "+RUNNING.name);
-			System.out.println("");
-			System.out.println("");
-			}
+			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name);
 		}
+
 		catch(Exception ex) {ex.printStackTrace();}
 
 	}
 	static public void run_proc(){ //wykonaj instrukcjê
-		try
-		{
-			if (waiting) System.out.println("Procesor jest w stanie czekania.");
-			if (RUNNING.name!=null && waiting == false)
+		if (RUNNING.moznaUruchomic()) {
+			try
 			{
-				if (time<4)
+				if (waiting) System.out.println("[Proc]Procesor jest w stanie czekania.");
+				if (RUNNING.name!=null && waiting == false )
 				{
-					System.out.println("Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
-					Interpreter.Task();
-					time++;
+					if (time<4)
+					{
+						System.out.println("[Proc]Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+						Interpreter.Task();
+						time++;
+					}
+					else XPER();
 				}
-				else XPER();
 			}
+			catch(Exception ex) {ex.printStackTrace();;}
 		}
-		catch(Exception ex) {ex.printStackTrace();;}
+		else {
+			set_to_run();
+		}
 	}
 
 	static public void XPER()
 	{
 		next_try = RUNNING.next;
-		System.out.println("Wyw³aszczam proces: " + RUNNING.name);
+		System.out.println("[Proc]Wyw³aszczam proces: " + RUNNING.name);
 		save_all_registers();
 		time = 1;
 		set_to_run();
@@ -85,22 +87,12 @@ public class Processor {
 		reg.Z = RUNNING.register.Z;
 		reg.S = RUNNING.register.S;
 	}	
-	
+
 	static public void show_register_processor(){
-		System.out.println("Rejestry procesora: "+'\n'+"Rejestr A: "+Processor.reg.A+'\n'+"Rejestr B: "+Processor.reg.B+'\n'+"Rejestr C: "+Processor.reg.C+'\n'+"Rejestr D: "+Processor.reg.D+'\n'+"Rejestr IP: "+Processor.reg.IP+'\n');
+		System.out.println("[Proc]Rejestry procesora: "+'\n'+"Rejestr A: "+Processor.reg.A+'\n'+"Rejestr B: "+Processor.reg.B+'\n'+"Rejestr C: "+Processor.reg.C+'\n'+"Rejestr D: "+Processor.reg.D+'\n'+"Rejestr IP: "+Processor.reg.IP+'\n');
 	}
-	
+
 	static public void show_register_process(){
-		System.out.println("Rejestry procesora: "+'\n'+"Rejestr A: "+RUNNING.register.A+'\n'+"Rejestr B: "+RUNNING.register.B+'\n'+"Rejestr C: "+RUNNING.register.C+'\n'+"Rejestr D: "+RUNNING.register.D+'\n'+"Rejestr IP: "+RUNNING.register.IP+'\n');
+		System.out.println("[Proc]Rejestry procesora: "+'\n'+"Rejestr A: "+RUNNING.register.A+'\n'+"Rejestr B: "+RUNNING.register.B+'\n'+"Rejestr C: "+RUNNING.register.C+'\n'+"Rejestr D: "+RUNNING.register.D+'\n'+"Rejestr IP: "+RUNNING.register.IP+'\n');
 	}
-
-
-
-
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-
-	}*/
-
 }

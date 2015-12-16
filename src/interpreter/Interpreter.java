@@ -387,6 +387,5 @@ public class Interpreter{
 		}
 		
 		if(!dontIncIP) Processor.reg.IP+=rozkaz.length()+1;
-		//Processor.time++;
 		}
 }

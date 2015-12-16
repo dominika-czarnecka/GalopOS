@@ -27,7 +27,7 @@ public class ZarzProc {
 			}
 			PCB process = new PCB(name, memory);
 			pushProcess(process);
-			System.out.println("Utworzono proces: "+process.name);
+			System.out.println("[Zarz]Utworzono proces: "+process.name);
 			Processor.waiting = false;
 			return process;
 		}
@@ -42,7 +42,7 @@ public class ZarzProc {
 			popProcess(process);
 			process.Messages.clear(); //bufor czyszczony wiadomosci
 			Pamiec.XF(process.name); //zwalnianie pamieci
-			System.out.println("Usuniêto proces: "+process.name);
+			System.out.println("[Zarz]Usuniêto proces: "+process.name);
 		}
 	}
 
@@ -112,7 +112,7 @@ public class ZarzProc {
 
 
 	static public void printProcessList() {
-		if (PCB.first == null) System.out.println("Puste");
+		if (PCB.first == null) System.out.println("[Zarz]Puste");
 		else {
 			PCB it = PCB.first;
 			System.out.print(it.name);
@@ -126,7 +126,7 @@ public class ZarzProc {
 	}
 
 	static public void printProcessListBack() {
-		if (PCB.first == null) System.out.println("Puste");
+		if (PCB.first == null) System.out.println("[Zarz]Puste");
 		else {
 			PCB it = PCB.first;
 			System.out.print(it.name);
@@ -141,7 +141,7 @@ public class ZarzProc {
 	
 	static public void printDetailedList() {
 		if (PCB.first == null) {
-			System.out.println("lista jest pusta"); 
+			System.out.println("[Zarz]lista jest pusta"); 
 			return;
 		}
 		
@@ -150,8 +150,13 @@ public class ZarzProc {
 		PCB it = PCB.first;
 		do {
 			System.out.print(it.name);
-			if (it == Processor.RUNNING) System.out.print(" <-");
-			System.out.println("\t\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString()+ "\t" + it.moznaUruchomic());
+			if (it == Processor.RUNNING) {
+				System.out.print(" <-");
+				if (it.name.length()<5) System.out.print("\t");
+			}
+			else if (it.name.length()<8) System.out.print("\t");
+			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString()+ "\t" + it.moznaUruchomic());
+			
 			it=it.next;
 		} while(it!=PCB.first);
 		System.out.println("Procesor czeka: " + Processor.waiting);

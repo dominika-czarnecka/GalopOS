@@ -59,7 +59,7 @@ public class Nadzorca
 			{
 				try {
 					ZarzProc.removeProcess(msg.sender.name);
-					System.out.println("Proces " + msg.sender.name + "został usunięty");
+					System.out.println("Proces " + msg.sender.name + " został usunięty");
 				} catch (procNotFoundError e) 
 				{	
 					e.printStackTrace();
