@@ -134,6 +134,10 @@ public class Nadzorca
 					Processor.show_register_processor();
 					break;
 					
+				case "MOVE":
+					Pamiec.przesunWszystko();
+					break;
+					
 				case "SHUTDOWN":
 					break;
 					

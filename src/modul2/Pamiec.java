@@ -47,16 +47,11 @@ public class Pamiec {
 				} else {
 					System.out.println("[Pam] Brak bloku o odpowiednim rozmiarze");
 
-					throw new Exception("[Pam]trzeba przesunac");
-					//
-					//System.out.println("[Pam] Nastepuje przesuniecie blokow pamieci operacyjnej"); //kosztowna operacja - unikam jak moge
-					
-					/*
-					//Przesun(int poczSkad, int poczGdzie, int ile)
-					ZajetaLista.Przesun(RAM);
-					WolnaLista.Wykasuj(ZajetaLista.Ostatni());
-					list_index = WolnaLista.ZnajdzWolne(rozmiar);
-					ZajetaLista.Dodaj(WolnaLista.Zajmij(list_index, rozmiar), rozmiar, NazwaProcesu);*/
+					//throw new Exception("[Pam]trzeba przesunac");
+
+					System.out.println("[Pam]Nastepuje przesuniecie blokow pamieci operacyjnej"); //kosztowna operacja - unikam jak moge
+
+					przesunWszystko();
 				}
 
 				System.out.println("[Pam]Przydzial pamieci dla procesu: " + NazwaProcesu);
@@ -76,7 +71,7 @@ public class Pamiec {
 
 		int ile = daneProcesu.length();
 		char[] daneChar=daneProcesu.toCharArray();
-		
+
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
 		//System.out.println("Zapisuje " + ile + " charow od " + indeksPoczatek);
@@ -118,9 +113,43 @@ public class Pamiec {
 	}
 
 	public static void Przesun(int poczSkad, int poczGdzie, int ile){
+		System.out.println("[Pam]przesuwam " + ile + " bajtow z " + poczSkad + " do " + poczGdzie);
 		for (int i = 0; i < ile; i++) {
-			RAM[poczGdzie + i] = RAM[poczGdzie + i];
+			RAM[poczGdzie + i] = RAM[poczSkad + i];
 		}
+	}
+
+	public static void przesunWszystko() {
+		sortujZajPolozeniem();
+		int wsk = 0;
+		for(int i=0; i < Zajeta.List.size(); i++){
+			int skad = Zajeta.List.get(i).Poczatek();
+			int rozmiar = Zajeta.List.get(i).ZwrocRozmiar();
+			Przesun(skad, wsk, rozmiar);
+			Zajeta.List.get(i).ustawPoczatek(wsk);
+			wsk += rozmiar;
+		}
+		
+		Wolna.List.clear();
+		WolnaLista.DodajWolnyBlok(wsk, MEMORY_SIZE - wsk);
+	}
+
+	public static void sortujZajPolozeniem(){
+		boolean zamieniono = true;
+		ElementZaj temp;
+
+		while (zamieniono) {
+			zamieniono= false;
+			for(int j=0; j< Zajeta.List.size()-1; j++) {
+				if ( Zajeta.List.get(j).Poczatek() > Zajeta.List.get(j+1).Poczatek() )
+				{
+					temp = Zajeta.List.get(j); 
+					Zajeta.List.set(j, Zajeta.List.get(j+1));
+					Zajeta.List.set(j+1, temp);
+					zamieniono = true; 
+				} 
+			} 
+		} 
 	}
 
 	public static void WyswietlWolZaj() {

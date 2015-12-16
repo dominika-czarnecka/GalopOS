@@ -1,6 +1,7 @@
 
 package modul2;
 
+import java.util.Comparator;
 
 public class Element {
     private int indeks;

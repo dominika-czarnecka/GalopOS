@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Wolna {
 
-	private static ArrayList<Element> List = new ArrayList<Element>();
+	public static ArrayList<Element> List = new ArrayList<Element>();
 	public static int wolna; //ilosc wolnej calkowitej
 
 	public Wolna(int rozmiar) {
@@ -29,7 +29,7 @@ public class Wolna {
 				int nr = i+1;
 				System.out.println("[Pam]"+ nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar: " + List.get(i).ZwrocRozmiar() );
 			}
-			System.out.println("[Pam] Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
+			System.out.println("[Pam] Pamiec wolna - ilosc wolnego miejsca: " + iloscWolnej() + "\n\n");
 		}
 		else{
 			System.out.println("[Pam] Pamiec wolna jest pusta\n");
