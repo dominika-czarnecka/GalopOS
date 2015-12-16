@@ -144,15 +144,16 @@ public void fat_show()
 }
 public void catalog_show()
 {
+	System.out.println(" Zawartosc katalogu glownego\n");
 	if(main_catalog.size()==0) System.out.println("empty");
 	else{
 	for(int i=0;i<main_catalog.size();i++)
 	{
-		System.out.println(main_catalog.get(i).date + " " + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
+		System.out.println(main_catalog.get(i).date + "\t" + main_catalog.get(i).name + " " + main_catalog.get(i).size + " bytes");
 	}
 	int free_blocks=count_free_space();
 	int size_driver=size_block*number_blocks;
-	System.out.println("Na dysku jest " + (free_blocks*size_block) + " wolnych bajtow, " + (size_driver -free_blocks*size_block) + " bajtow jest zajetych.");
+	System.out.println("\nNa dysku jest " + (free_blocks*size_block) + " wolnych bajtow, " + (size_driver -free_blocks*size_block) + " bajtow jest zajetych.");
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////

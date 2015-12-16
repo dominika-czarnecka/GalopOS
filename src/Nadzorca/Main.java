@@ -9,12 +9,38 @@ import Nadzorca.*;
 
 public class Main {
 
+	public static void logo()
+	{
+		System.out.print("\t\t\t\t\t\t\t _________\n"
+						+"\t\t\t\t\t\t\t│o  ______│\n"
+						+"\t\t\t\t\t\t\t│o │\n"
+						+"\t\t\t\t\t\t\t│ o│______ \n"
+						+"\t\t\t\t\t\t\t│ o ______│\n"
+						+"\t\t\t\t\t\t\t│ o│\n"
+						+"\t\t\t\t\t\t\t│o │\n"
+						+"\t\t\t\t\t\t\t│__│");
+	System.out.print ("\t ____________\n"
+					+"\t\t\t\t\t\t\t\t│____  o ____│\n"
+					+"\t\t\t\t\t\t\t\t     │o │\n"
+					+"\t\t\t\t\t\t\t\t     │ o│\n"
+					+"\t\t\t\t\t\t\t\t     │ o│\n"
+					+"\t\t\t\t\t\t\t\t     │o │\n"
+					+"\t\t\t\t\t\t\t\t     │__│\n");
+	System.out.printf("\n\t\t\t\t\t\t      "+ "%-5s", "F");
+	System.out.printf("%-5s", "E");
+	System.out.printf("%-5s", "N");
+	System.out.printf("%-5s", "T");
+	System.out.printf("%-5s", "O");
+	System.out.printf("%-5s", "M\n");
+	System.out.println("\n\t\t\t\t\t\t     Fentom [Version 9.5032308953]\n"
+			+ "\t\t\t\t\t\t    (c) Wszelkie prawa zastrzezone.");
+	}
 	public static void main(String[] args) {
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
-		
+		logo();
 		driver.create("prog1","$JOB,68,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 10\n"//8
 				+ "MVI B 1\n"//7
