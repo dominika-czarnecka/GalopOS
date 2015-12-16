@@ -266,10 +266,10 @@ public class Interpreter{
 					Processor.reg.A=Integer.parseInt(driver.read(plikr));
 					break;
 				case "B":
-					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					Processor.reg.B=Integer.parseInt(driver.read(plikr));
 					break;
 				case "C":
-					Processor.reg.A=Integer.parseInt(driver.read(plikr));
+					Processor.reg.C=Integer.parseInt(driver.read(plikr));
 					break;					
 				default:
 					System.out.println("Podano bledna komende");	
