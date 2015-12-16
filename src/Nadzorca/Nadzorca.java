@@ -59,7 +59,7 @@ public class Nadzorca
 			{
 				try {
 					ZarzProc.removeProcess(msg.sender.name);
-					System.out.println("[NADZ]Proces " + msg.sender.name + " został usunięty");
+					System.out.println("[Nadz]Proces " + msg.sender.name + " został usunięty");
 				} catch (procNotFoundError e) 
 				{	
 					e.printStackTrace();
@@ -140,7 +140,7 @@ public class Nadzorca
 					break;
 
 				default:
-					System.out.println("[NADZ]'"+ input + "'" + " nieznana komenda");
+					System.out.println("[Nadz]'"+ input + "'" + " nieznana komenda");
 					break;
 				}
 				break;
@@ -148,25 +148,25 @@ public class Nadzorca
 			case 2:
 				switch (komenda[0]) {
 				case "CREATE":{
-					System.out.println("[NADZ]Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
+					System.out.println("[Nadz]Podaj zawartosc pliku:"); String zawartosc=s.nextLine();
 					driver.create(komenda[1], zawartosc);
 					break;}
 				
 				case "DELETE":
 					if (driver.delete(komenda[1])){
-						System.out.println("[NADZ]Pomyślnie usunięto plik.");
+						System.out.println("[Nadz]Pomyślnie usunięto plik.");
 					} else {
-						System.out.println("[NADZ]Blad usuwania pliku");
+						System.out.println("[Nadz]Blad usuwania pliku");
 					}
 					break;
 
 				case "EDIT":
 					if(driver.find_file(komenda[1]))
 					{
-						System.out.println("[NADZ]dodatkowa zawartosc:"); String zawartosc=s.nextLine();
+						System.out.println("[Nadz]dodatkowa zawartosc:"); String zawartosc=s.nextLine();
 						driver.edit(komenda[1], zawartosc);
 					}
-					else System.out.println("[NADZ]Plik o podanej nazwie nie istnieje");
+					else System.out.println("[Nadz]Plik o podanej nazwie nie istnieje");
 					break;
 
 				case "READ":
@@ -175,7 +175,7 @@ public class Nadzorca
 						System.out.println(driver.get_file(komenda[1]).name);
 						System.out.println(driver.read(komenda[1]));
 					}
-					else System.out.println("[NADZ]Plik o podanej nazwie nie istnieje");
+					else System.out.println("[Nadz]Plik o podanej nazwie nie istnieje");
 					break;
 					
 				case "CRPROC":
@@ -183,12 +183,12 @@ public class Nadzorca
 					break;
 					
 				default:
-					System.out.println("[NADZ]'"+ input + "'" + " nieznana komenda");
+					System.out.println("[Nadz]'"+ input + "'" + " nieznana komenda");
 				}
 				break;
 
 			default:
-				System.out.println("[NADZ]'"+ input + "'" + " niewlasciwa ilosc argumentow");
+				System.out.println("[Nadz]'"+ input + "'" + " niewlasciwa ilosc argumentow");
 			}
 		} while(!komenda[0].equals("SHUTDOWN"));
 		System.out.println("\n");
@@ -243,12 +243,12 @@ public class Nadzorca
 			String kod = driver.read(nazwa);
 	//		System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
 			String[] komendy = kod.split("\n", 2);
-			System.out.println("[NADZ]Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
+			System.out.println("[Nadz]Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
 			if(p==-1)
 			{
 
-				System.out.println("[NADZ]Błędny program");
+				System.out.println("[Nadz]Błędny program");
 				return false;
 			}
 			else 
@@ -259,7 +259,7 @@ public class Nadzorca
 
 				} catch (procCreationError e){ 
 
-					System.out.println("[NADZ]Nie mozna utworzyc procesu.");
+					System.out.println("[Nadz]Nie mozna utworzyc procesu.");
 					return false;
 				}
 			}
@@ -283,7 +283,7 @@ public class Nadzorca
 		else
 		{
 
-			System.out.println("[NADZ]Nie ma takiego programu na dysku");
+			System.out.println("[Nadz]Nie ma takiego programu na dysku");
 			return false;
 		}
 		return true;
