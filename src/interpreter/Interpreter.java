@@ -246,16 +246,16 @@ public class Interpreter{
 				String plikw=line[2];				
 				switch(line[1]){
 				case "A":		
-					driver.edit(plikw,Processor.reg.A+"\n");
+					driver.create(plikw,Processor.reg.A+"\n");
 					break;
 				case "B":
-					driver.edit(plikw,Processor.reg.B+"\n");
+					driver.create(plikw,Processor.reg.B+"\n");
 					break;
 				case "C":
-					driver.edit(plikw,Processor.reg.C+"\n");
+					driver.create(plikw,Processor.reg.C+"\n");
 					break;
 				default:
-					driver.edit(plikw,line[2]);
+					driver.create(plikw,line[1]);
 				}
 				break;
 

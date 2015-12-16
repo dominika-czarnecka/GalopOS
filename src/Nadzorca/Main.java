@@ -41,36 +41,36 @@ public class Main {
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
 		logo();
-		driver.create("prog1","$JOB,68,FILEIN=IN,FILEOUT=OUT  \n" 
-				+ "MVI C 10\n"//8
-				+ "MVI B 1\n"//7
+		driver.create("prog1","$JOB,70,FILEIN=IN,FILEOUT=OUT  \n" 
+				+ "MVI C 3\n"//8
+				+ "MVI B 1\n"//8
 				+ "ADD A B\n"
 				+ "INR B\n"
 				+ "INR B\n"
 				+ "DCR C\n"
-				+ "JNZ 17\n"
+				+ "JNZ 16\n"
 				+ "SM prog3 A\n"
 				+ "OUT A\n"
-				+ "HLT\n\n"); //niepotrzebne XD
+				+ "HLT\n");
 		
-		driver.create("prog2", "$JOB,123,FILEIN=IN,FILEOUT=OUT \n"
+		driver.create("prog2", "$JOB,120,FILEIN=IN,FILEOUT=OUT \n"
 				+ "RF A prog2l1\n"//13
 				+ "RF B prog2l2\n"//13
 				+ "ADD A B\n"//8
 				+ "MOD2 C A\n"//9
-				+ "JNZ 68\n"//7
-				+ "WF Suma_parzysta\n"//17
-				+ "JZ 94\n"//6
-				+ "WF Suma_nieparzysta\n"//20
+				+ "JNZ 75\n"//7
+				+ "WF Suma_parzysta prog2wy\n"//17
+				+ "JZ 101\n"//6
+				+ "WF Suma_nieparzysta prog2wy\n"//20
 				+ "OUT C\n"
 				+ "HLT\n");//4
 
-		driver.create("prog3", "$JOB,63,FILEIN=IN,FILEOUT=OUT \n"
+		driver.create("prog3", "$JOB,56,FILEIN=IN,FILEOUT=OUT \n"
 				+ "IN A\n"//5
 				+ "PR prog1\n"//11
 				+ "RM B\n"
 				+ "CMP A B\n"//8
-				+ "JS 40\n"//6
+				+ "JS 39\n"//6
 				+ "OUT A\n"//6
 				+ "JNS 53\n"//7
 				+ "OUT B\n"//6
