@@ -24,10 +24,10 @@ public class Wolna {
 
 	public void Wyswietl(){
 		if (List.size() > 0){
-			System.out.println("-----LISTA WOLNA-------");
+			System.out.println("-------- Wolna Lista - bloki --------");
 			for(int i=0; i< List.size(); i++){
 				int nr = i+1;
-				System.out.println("[Pam]"+ nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
+				System.out.println("[Pam]"+ nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar: " + List.get(i).ZwrocRozmiar() );
 			}
 			System.out.println("[Pam] Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
 		}
