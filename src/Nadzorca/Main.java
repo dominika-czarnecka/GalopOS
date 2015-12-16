@@ -27,12 +27,12 @@ public class Main {
 					+"\t\t\t\t\t\t\t\t     │o │\n"
 					+"\t\t\t\t\t\t\t\t     │__│\n");
 	System.out.printf("\n\t\t\t\t\t\t      "+ "%-5s", "F");
-	System.out.printf("%-5s", "E");
+	System.out.printf("%-5s", "A");
 	System.out.printf("%-5s", "N");
 	System.out.printf("%-5s", "T");
 	System.out.printf("%-5s", "O");
 	System.out.printf("%-5s", "M\n");
-	System.out.println("\n\t\t\t\t\t\t     Fentom [Version 9.5032308953]\n"
+	System.out.println("\n\t\t\t\t\t\t     Fantom [Version 9.5032308953]\n"
 			+ "\t\t\t\t\t\t    (c) Wszelkie prawa zastrzezone.");
 	}
 	public static void main(String[] args) {
