@@ -249,9 +249,9 @@ public void create(String name, String data)
 		new_file=save(content,size,bsize,index,new_file);
 		main_catalog.add(new_file);
 		}
-		else System.out.println("Brak miejsca na dysku.");
+		else System.out.println("[Driver] Brak miejsca na dysku.");
 		}
-		else System.out.println("Istnieje juz plik o podanej nazwie.");
+		else System.out.println("[Driver] Istnieje juz plik o podanej nazwie.");
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
@@ -297,9 +297,9 @@ public void edit(String name, String data) // dwie weryfikacje: czy udalo sie ot
 	
 			close(edit);
 	}
-	else System.out.println("Brak miejsca na dysku.");
+	else System.out.println("[Driver] Brak miejsca na dysku.");
  }
-else System.out.println("Plik jest juz otwarty lub nie istnieje.");
+else System.out.println("[Driver] Plik jest juz otwarty lub nie istnieje.");
 }
 public String read(String name)
 { 
@@ -313,7 +313,7 @@ public String read(String name)
 		
 		return new String(content);
 	}
-	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
+	else {System.out.println("[Driver] Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public String read(String name, int content_size)
 { 
@@ -322,7 +322,7 @@ public String read(String name, int content_size)
 		file read=get_file(name);  	
 		if(content_size>read.size)
 		{
-			System.out.println("Plik nie ma tylu znakow");
+			System.out.println("[Driver] Plik nie ma tylu znakow");
 			return null;
 		}
 		byte[]content=new byte[content_size]; 													//bufor do ktorego zostana wczytane dane
@@ -334,7 +334,7 @@ public String read(String name, int content_size)
 		
 		return new String(content);
 	}
-	else {System.out.println("Plik jest juz otwarty lub nie istnieje."); return null;}
+	else {System.out.println("[Driver] Plik jest juz otwarty lub nie istnieje."); return null;}
 }
 public boolean delete(String name)
 {
