@@ -17,12 +17,15 @@ public class ZarzProc {
 	}
 
 	static public PCB createProcess(String name, int memory) throws procCreationError {
-		if (findProcess(name)!=null)
+		if (findProcess(name)!=null) {
+			System.out.println("[Zarz]Istnieje juz proces o nazwie " + name);
 			throw new procCreationError();
+		}
 		else {
 			try {
 				Pamiec.XA(name, memory);
 			} catch (Exception e) {
+				System.out.println("[Zarz]Nie mozna zaalokowac pamieci");
 				throw new procCreationError();
 			}
 			PCB process = new PCB(name, memory);
@@ -36,6 +39,7 @@ public class ZarzProc {
 	static public void removeProcess(String name) throws procNotFoundError {
 		PCB process = findProcess(name);
 		if (process == null) {
+			System.out.println("[Zarz]Nie znaleziono procesu o nazwie " + name);
 			throw new procNotFoundError();
 		}
 		else {
@@ -103,16 +107,18 @@ public class ZarzProc {
 		if (!process.waitingForMessage) {
 			if (process.msgSemaphore.P(process) < 0) {
 				process.waitingForMessage = true;
+				System.out.println("[Zarz]proces " + process.name + " czeka na komunikat");
 				return null;
 			}
 		}
 		process.waitingForMessage = false;
+		System.out.println("[Zarz]proces " + process.name +  " odebral komunikat");
 		return process.Messages.remove(0);
 	}
 
 
 	static public void printProcessList() {
-		if (PCB.first == null) System.out.println("[Zarz]Puste");
+		if (PCB.first == null) System.out.println("[Zarz]puste");
 		else {
 			PCB it = PCB.first;
 			System.out.print(it.name);
@@ -126,7 +132,7 @@ public class ZarzProc {
 	}
 
 	static public void printProcessListBack() {
-		if (PCB.first == null) System.out.println("[Zarz]Puste");
+		if (PCB.first == null) System.out.println("[Zarz]puste");
 		else {
 			PCB it = PCB.first;
 			System.out.print(it.name);
