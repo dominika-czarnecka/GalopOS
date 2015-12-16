@@ -191,7 +191,11 @@ public class Nadzorca
 				System.out.println("'"+ input + "'" + " niewlasciwa ilosc argumentow");
 			}
 		} while(!komenda[0].equals("SHUTDOWN"));
-
+		System.out.println("\n");
+		String shutdown="Mozesz teraz bezpiecznie wylaczyc komputer.";
+		char[]shtdwn=shutdown.toCharArray();
+		for(int i=0;i<shutdown.length();i++)
+		System.out.printf("%-2s", shtdwn[i]);
 	}
 
 	static hdd_commander driver;
