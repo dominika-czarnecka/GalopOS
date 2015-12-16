@@ -76,7 +76,7 @@ public class Pamiec {
 		
 		int indeksPoczatek = Zajeta.Poczatek(NazwaProcesu);
 
-		System.out.println("Zapisuje " + ile + " charow od " + indeksPoczatek);
+		//System.out.println("Zapisuje " + ile + " charow od " + indeksPoczatek);
 
 		if (indeksPoczatek != -1) {
 			for (int i = 0; i < ile; i++) {
