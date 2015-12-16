@@ -239,11 +239,11 @@ public class Nadzorca
 			String kod = driver.read(nazwa);
 	//		System.out.println(kod);  //////// do mojej zmiennej kod funkcja dysku przypisuje nulla
 			String[] komendy = kod.split("\n", 2);
-			System.out.println("[NADZORCA] Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
+			System.out.println("[NADZ] Odczytywanie karty $JOB: " + komendy[0]); // $JOB/
 			int p = SprawdzJOB(komendy[0]);
 			if(p==-1)
 			{
-				System.out.println("[NADZORCA] Błędny program");
+				System.out.println("[NADZ] Błędny program");
 			}
 			else 
 			{
@@ -252,7 +252,7 @@ public class Nadzorca
 					ZarzProc.createProcess(nazwa, p);
 
 				} catch (procCreationError e){ 
-					System.out.println("[NADZORCA] Nie mozna utworzyc procesu.");
+					System.out.println("[NADZ] Nie mozna utworzyc procesu.");
 					return;
 				}
 			}
@@ -275,7 +275,7 @@ public class Nadzorca
 		}
 		else
 		{
-			System.out.println("[NADZORCA] Nie ma takiego programu na dysku");
+			System.out.println("[NADZ] Nie ma takiego programu na dysku");
 		}
 	}
 	public static int SprawdzJOB(String KartaJOB)
