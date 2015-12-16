@@ -24,12 +24,7 @@ public class Zajeta {
 
 
     public void Dodaj(int indeks, int rozmiar, String NazwaProcesu){
-        /*for(int i=0; i< List.size(); i++){
-            if(List.get(i).Poczatek() > indeks ) {
-                List.set(i, new ElementZaj(indeks, rozmiar, NazwaProcesu));
-                return;
-            }
-        }*/
+
         List.add(new ElementZaj(indeks, rozmiar, NazwaProcesu));
     }
 
@@ -58,12 +53,12 @@ public class Zajeta {
             for (int i = 0; i < List.size(); i++) {
                 indeks = i + 1;
                 rozmiar += List.get(i).ZwrocRozmiar();
-                System.out.println("[" + indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "\tID procesu: " + List.get(i).pobierzNazwe() + "\tRozmiar bloku: " + List.get(i).ZwrocRozmiar());
+                System.out.println("[Pam] [" + indeks + "]" + "Indeks bloku: " + List.get(i).Poczatek() + "\tID procesu: " + List.get(i).pobierzNazwe() + "\tRozmiar bloku: " + List.get(i).ZwrocRozmiar());
             }
-            System.out.println("Rozmiar Pamieci zajetej: " + rozmiar + "\n");
+            System.out.println("[Pam] Rozmiar Pamieci zajetej: " + rozmiar + "\n");
         }
         else{
-            System.out.println("Lista Zajeta jest pusta\n");
+            System.out.println("[Pam] Lista Zajeta jest pusta\n");
         }
 
     }

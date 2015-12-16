@@ -27,12 +27,12 @@ public class Wolna {
 			System.out.println("-----LISTA WOLNA-------");
 			for(int i=0; i< List.size(); i++){
 				int nr = i+1;
-				System.out.println( nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
+				System.out.println("[Pam]"+ nr + ". " + "Indeks: " + List.get(i).Poczatek() + "\t Rozmiar:" + List.get(i).ZwrocRozmiar() );
 			}
-			System.out.println("Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
+			System.out.println("[Pam] Pamiec wolna - ilosc wolnego miejsca: " + wolna + "\n\n");
 		}
 		else{
-			System.out.println("Pamiec wolna jest pusta\n");
+			System.out.println("[Pam] Pamiec wolna jest pusta\n");
 		}
 
 
@@ -101,14 +101,10 @@ public class Wolna {
 				}
 				return -1; //-1 jak nie ma wolnego bloku
 			}
-			System.out.println("Brak Blokow wolnej pamieci\n");
+			System.out.println("[Pam] Brak Blokow wolnej pamieci\n");
 
 		}catch(Exception ex){ ex.printStackTrace();}
 		return -1;
 	}
 
-	/*public void Wykasuj(int indeks){
-		List.clear(); //lisa staje się pussta
-		List.add(new Element(indeks, Pamiec.MEMORY_SIZE - indeks) );
-	}*/
 }
