@@ -190,9 +190,12 @@ public class Nadzorca
 					break;
 
 				case "DELPROC":
+					if(komenda[1].contains("*"))System.out.println("[Nadz]Proces systemowy nie moze zostac usuniety przez uzytkownika");
+					else {
 					PCB proc = ZarzProc.findProcess(komenda[1]);
 					if (proc != null) ZarzProc.notifySup(proc);
 					else System.out.println("[Nadz]Nie znaleziono procesu o tej nazwie");
+					}
 					break;
 					
 				default:
