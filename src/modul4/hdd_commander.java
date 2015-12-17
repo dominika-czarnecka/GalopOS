@@ -344,8 +344,12 @@ public boolean delete(String name)
 		recc_delete(delete.first_node,delete.bsize);            // wywolanie funkcji rekurencyjnej
 		main_catalog.remove(get_file(name));					// usuniecie z katalogu
 		close(delete);
+		System.out.println("[Driver] Usunieto " + delete.name);
 		return true;
 	}
-	else return false;
+	else {
+		System.out.println("[Driver] Taki plik nie istnieje");
+		return false;
+		}
 }
 }
