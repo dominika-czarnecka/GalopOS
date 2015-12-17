@@ -186,7 +186,10 @@ public class Nadzorca
 					break;
 					
 				case "CRPROC":
+					if(komenda[1].contains("*"))System.out.println("[Nadz]Znak '*' jest zarezerwowany dla procesow systemowych.");
+					else {
 					USERPROG(komenda[1]);
+					}
 					break;
 
 				case "DELPROC":
