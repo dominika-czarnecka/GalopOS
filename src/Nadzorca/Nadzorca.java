@@ -193,7 +193,7 @@ public class Nadzorca
 					break;
 
 				case "DELPROC":
-					if(komenda[1].contains("*"))System.out.println("[Nadz]Proces systemowy nie moze zostac usuniety przez uzytkownika");
+					if(komenda[1].contains("*"))System.out.println("[Nadz]Znak '*' jest zarezerwowany dla procesow systemowych.");
 					else {
 					PCB proc = ZarzProc.findProcess(komenda[1]);
 					if (proc != null) ZarzProc.notifySup(proc);
