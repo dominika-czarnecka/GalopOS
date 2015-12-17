@@ -61,7 +61,7 @@ public class Main {
 				+ "MOD2 C A\n"//9
 				+ "JNZ 75\n"//7
 				+ "WF Suma_parzysta prog2wy\n"//17
-				+ "JZ 109\n"//6
+				+ "JZ 110\n"//6
 				+ "WF Suma_nieparzysta prog2wy\n"//20
 				+ "OUT C\n"
 				+ "HLT\n");//4
