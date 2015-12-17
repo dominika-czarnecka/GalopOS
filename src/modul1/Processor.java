@@ -41,7 +41,7 @@ public class Processor {
 				{
 					if (time<4)
 					{
-						System.out.println("[Proc]Wykonanie intstrukcji: " + time + " procesu: " + RUNNING.name);
+						System.out.println("[Proc]Wykonanie instrukcji: " + time + " procesu: " + RUNNING.name);
 						Interpreter.Task(); 
 						time++;
 					}
