@@ -8,24 +8,22 @@ import modul1.Semaphore;
 public class file
 {
 
-	//access signs
-	static byte in_use=-85;
-	static byte free=-70;
+	
+	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"); //format daty
 
 	public String name;
 	int first_node, last_node; 
 	int size, bsize;
-	int access;
-	Semaphore file_sem = new Semaphore(1);
+	boolean access;
 	String date;
-	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"); //format daty
+
 
 	public file(String name, int size, int bsize)
 	{
 		this.name=name;
 		this.size=size;
 		this.bsize=bsize;
-		access=free;
+		access=true;
 		set_date();
 		System.out.println("[Driver] Utworzono plik o nazwie " + this.name + " i rozmiarze " + this.size + " bajtow.") ;
 	}

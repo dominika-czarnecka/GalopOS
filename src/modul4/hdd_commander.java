@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+
 public class hdd_commander
 {
 	
@@ -74,14 +75,14 @@ private boolean is_enough_space(int bsize)
 	}
 public void close(file file_to_close)
 { 
-	//file_to_close.access=file.free;
+	file_to_close.access=true;
 }
 public boolean open(String name)
 {
-	if (get_file(name)!=null && 
-			get_file(name).access==file.free)
+	if (find_file(name)==true && 
+			get_file(name).access==true)
 		{	
-		get_file(name).access=file.in_use;
+		get_file(name).access=false;
 		return true;
 		}
 	else return false;}
@@ -102,7 +103,7 @@ private void fat_init(int number_blocks)
 	fat=new int[number_blocks];
 	for(int i=0;i<number_blocks;i++) fat[i]=empty_slot;
 }
-private void format() // CATALOG, DRIVE & FAT
+public void format() // CATALOG, DRIVE & FAT
 {
 	main_catalog.clear();
 	driver_init(number_blocks, size_block);
@@ -247,15 +248,16 @@ public void create(String name, String data)
 		file new_file=new file(name,size,bsize); 					//utworzenie pliku i dodanie go do listy
 		new_file.first_node=search_free_space();
 		new_file=save(content,size,bsize,index,new_file);
+		System.out.println("[Driver] Utworzono plik o nazwie " + name + " i rozmiarze " + size +".");
 		main_catalog.add(new_file);
 		}
-		else System.out.println("[Driver] Brak miejsca na dysku.");
+		else {System.out.println("[Driver] Brak miejsca na dysku."); }
 		}
-		else System.out.println("[Driver] Istnieje juz plik o podanej nazwie.");
+		else {System.out.println("[Driver] Istnieje juz plik o podanej nazwie."); }
 }
 public void edit(String name, String data) // dwie weryfikacje: czy udalo sie otworzyc i czy jest miejsce
 {
-	if(find_file(name))
+	if(open(name))
 	{
 		file edit=get_file(name);
 		edit.set_date();
@@ -303,7 +305,7 @@ else System.out.println("[Driver] Plik jest juz otwarty lub nie istnieje.");
 }
 public String read(String name)
 { 
-	if(find_file(name))
+	if(open(name))
 	{  	
 		file read=get_file(name);  															//plik z ktorego czytamy//jezeli mozemy dzialac
 		byte[]content=new byte[read.size]; 													//bufor do ktorego zostana wczytane dane
@@ -317,7 +319,7 @@ public String read(String name)
 }
 public String read(String name, int content_size)
 { 
-	if(find_file(name))
+	if(open(name))
 	{  	
 		file read=get_file(name);  	
 		if(content_size>read.size)
@@ -336,20 +338,18 @@ public String read(String name, int content_size)
 	}
 	else {System.out.println("[Driver] Plik jest juz otwarty lub nie istnieje."); return null;}
 }
-public boolean delete(String name)
+public void delete(String name)
 {
-	if(find_file(name))
+	if(open(name))
 	{  
 		file delete=get_file(name);
 		recc_delete(delete.first_node,delete.bsize);            // wywolanie funkcji rekurencyjnej
 		main_catalog.remove(get_file(name));					// usuniecie z katalogu
 		close(delete);
 		System.out.println("[Driver] Usunieto " + delete.name);
-		return true;
 	}
 	else {
 		System.out.println("[Driver] Taki plik nie istnieje");
-		return false;
 		}
 }
 }
