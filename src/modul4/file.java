@@ -25,7 +25,6 @@ public class file
 		this.bsize=bsize;
 		access=true;
 		set_date();
-		System.out.println("[Driver] Utworzono plik o nazwie " + this.name + " i rozmiarze " + this.size + " bajtow.") ;
 	}
 	public void set_date()
 	{

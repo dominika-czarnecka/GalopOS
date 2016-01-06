@@ -147,8 +147,8 @@ public void fat_show()
 }
 public void catalog_show()
 {
-	System.out.println(" Zawartosc katalogu glownego\n");
-	if(main_catalog.size()==0) System.out.println("empty");
+	System.out.println("Zawartosc katalogu glownego:\n");
+	if(main_catalog.size()==0) System.out.println("Katalog jest pusty.");
 	else{
 	for(int i=0;i<main_catalog.size();i++)
 	{
@@ -248,7 +248,8 @@ public void create(String name, String data)
 		file new_file=new file(name,size,bsize); 					//utworzenie pliku i dodanie go do listy
 		new_file.first_node=search_free_space();
 		new_file=save(content,size,bsize,index,new_file);
-		System.out.println("[Driver] Utworzono plik o nazwie " + name + " i rozmiarze " + size +".");
+		System.out.println("[Driver] Utworzono plik o nazwie " + name + " i rozmiarze " + new_file.
+				size +" bajtow.");
 		main_catalog.add(new_file);
 		}
 		else {System.out.println("[Driver] Brak miejsca na dysku."); }
