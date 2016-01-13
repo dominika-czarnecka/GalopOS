@@ -111,7 +111,7 @@ public class Nadzorca
 				case "FORMAT":
 					driver.format();
 					break;
-
+						
 				case "PROC":
 					ZarzProc.printProcessList();
 					break;

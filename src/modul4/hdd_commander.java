@@ -105,9 +105,11 @@ private void fat_init(int number_blocks)
 }
 public void format() // CATALOG, DRIVE & FAT
 {
+	
 	main_catalog.clear();
 	driver_init(number_blocks, size_block);
 	fat_init(number_blocks);
+	System.out.println("[Dysk] Dysk zostal sformatowany");
 }
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
