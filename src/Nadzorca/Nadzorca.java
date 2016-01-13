@@ -27,17 +27,17 @@ public class Nadzorca
 
 	public static String type_cmd()
 	{
-		System.out.print("[User]: ");
+		System.out.print("[Uzytkownik]: ");
 		String cmd=s.nextLine();   //wybranie opcji z menu
 		return cmd;
 	}
 	public static void list_cmd()
 	{
 		System.out.println(
-				"\nCREATE plik		\ttworzy nowy plik.\n"
-						+	"DELETE	plik	\tusuwa plik.\n"
-						+	"EDIT plik		edytuj plik.\n"
-						+	"READ plik		czytaj plik.\n"
+				"\nCREATE nazwa		tworzy nowy plik.\n"
+						+	"DELETE	nazwa	\tusuwa plik.\n"
+						+	"EDIT nazwa		edytuj plik.\n"
+						+	"READ nazwa		czytaj plik.\n"
 						+	"DIR			wyswietla liste plików.\n"
 						+	"FAT			wyswietla tablice FAT.\n"
 						+	"PNDSK			wyswietla dysk.\n"
