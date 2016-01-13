@@ -175,7 +175,7 @@ public class Nadzorca
 						System.out.println("[Nadz]dodatkowa zawartosc:"); String zawartosc=s.nextLine();
 						driver.edit(komenda[1], zawartosc);
 					}
-					else System.out.println("[Nadz]Plik o podanej nazwie nie istnieje");
+					else System.out.println("[Dysk]Plik o podanej nazwie nie istnieje");
 					break;
 
 				case "READ":
@@ -184,7 +184,7 @@ public class Nadzorca
 						System.out.println(driver.get_file(komenda[1]).name);
 						System.out.println(driver.read(komenda[1]));
 					}
-					else System.out.println("[Nadz]Plik o podanej nazwie nie istnieje");
+					else System.out.println("[Dysk]Plik o podanej nazwie nie istnieje");
 					break;
 					
 				case "CRPROC":
