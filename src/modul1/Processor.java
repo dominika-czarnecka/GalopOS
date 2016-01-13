@@ -17,7 +17,7 @@ public class Processor {
 		{
 			PCB start = next_try;
 			do {
-				if (next_try.moznaUruchomic() && !next_try.czySystemowy()) break;
+				if (next_try.moznaUruchomic()) break;
 				next_try = next_try.next;
 			} while (next_try != start);
 
@@ -48,7 +48,7 @@ public class Processor {
 					else XPER();
 				}
 			}
-			catch(Exception ex) {ex.printStackTrace();;}
+			catch(Exception ex) {ex.printStackTrace();}
 		}
 		else {
 			set_to_run();

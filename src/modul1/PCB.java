@@ -39,10 +39,6 @@ public class PCB {
         	return !blocked && !stopped;
         }
         
-        public boolean czySystemowy(){
-        	return (name.contains("*"));
-        }
-        
         public void toggleBlocked(){
         	blocked = !blocked;
         } 
