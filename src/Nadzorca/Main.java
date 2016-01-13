@@ -12,20 +12,20 @@ public class Main {
 
 	public static void logo()
 	{
-		System.out.print("\n\t\t _________\n"
-						+"\t\t│o  ______│\n"
+		System.out.print("\t\t ________\n"
+						+"\t\t│o  _____│\n"
 						+"\t\t│o │\n"
-						+"\t\t│ o│______ \n"
-						+"\t\t│ o ______│\n"
+						+"\t\t│ o│_____ \n"
+						+"\t\t│ o _____│\n"
 						+"\t\t│ o│\n"
-						+"\t\t│o │\n"
+					//	+"\t\t│o │\n"
 						+"\t\t│__│");
-	System.out.print ("\t ____________\n"
-					+"\t\t\t│____  o ____│\n"
+	System.out.print ("\t ___________\n"
+					+"\t\t\t│____ o  ___│\n"
 					+"\t\t\t     │o │\n"
 					+"\t\t\t     │ o│\n"
 					+"\t\t\t     │ o│\n"
-					+"\t\t\t     │o │\n"
+					//+"\t\t\t     │o │\n"
 					+"\t\t\t     │__│\n");
 	System.out.printf("\n\t      "+ "%-5s", "F");
 	System.out.printf("%-5s", "A");
@@ -33,8 +33,7 @@ public class Main {
 	System.out.printf("%-5s", "T");
 	System.out.printf("%-5s", "O");
 	System.out.printf("%-5s", "M\n");
-	System.out.println("\n\t     Fantom [Version 9.5032308953]\n"
-			+ "\t    (c) Wszelkie prawa zastrzezone.");
+	System.out.println("\t     Fantom [Version 9.5032308953]");
 	}
 	public static void main(String[] args) {
 	//	logo();
