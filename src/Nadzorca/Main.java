@@ -12,33 +12,33 @@ public class Main {
 
 	public static void logo()
 	{
-		System.out.print("\t\t\t\t\t\t\t _________\n"
-						+"\t\t\t\t\t\t\t│o  ______│\n"
-						+"\t\t\t\t\t\t\t│o │\n"
-						+"\t\t\t\t\t\t\t│ o│______ \n"
-						+"\t\t\t\t\t\t\t│ o ______│\n"
-						+"\t\t\t\t\t\t\t│ o│\n"
-						+"\t\t\t\t\t\t\t│o │\n"
-						+"\t\t\t\t\t\t\t│__│");
+		System.out.print("\n\t\t _________\n"
+						+"\t\t│o  ______│\n"
+						+"\t\t│o │\n"
+						+"\t\t│ o│______ \n"
+						+"\t\t│ o ______│\n"
+						+"\t\t│ o│\n"
+						+"\t\t│o │\n"
+						+"\t\t│__│");
 	System.out.print ("\t ____________\n"
-					+"\t\t\t\t\t\t\t\t│____  o ____│\n"
-					+"\t\t\t\t\t\t\t\t     │o │\n"
-					+"\t\t\t\t\t\t\t\t     │ o│\n"
-					+"\t\t\t\t\t\t\t\t     │ o│\n"
-					+"\t\t\t\t\t\t\t\t     │o │\n"
-					+"\t\t\t\t\t\t\t\t     │__│\n");
-	System.out.printf("\n\t\t\t\t\t\t      "+ "%-5s", "F");
+					+"\t\t\t│____  o ____│\n"
+					+"\t\t\t     │o │\n"
+					+"\t\t\t     │ o│\n"
+					+"\t\t\t     │ o│\n"
+					+"\t\t\t     │o │\n"
+					+"\t\t\t     │__│\n");
+	System.out.printf("\n\t      "+ "%-5s", "F");
 	System.out.printf("%-5s", "A");
 	System.out.printf("%-5s", "N");
 	System.out.printf("%-5s", "T");
 	System.out.printf("%-5s", "O");
 	System.out.printf("%-5s", "M\n");
-	System.out.println("\n\t\t\t\t\t\t     Fantom [Version 9.5032308953]\n"
-			+ "\t\t\t\t\t\t    (c) Wszelkie prawa zastrzezone.");
+	System.out.println("\n\t     Fantom [Version 9.5032308953]\n"
+			+ "\t    (c) Wszelkie prawa zastrzezone.");
 	}
 	public static void main(String[] args) {
-		logo();
-		Nadzorca.s.nextLine();
+	//	logo();
+	//	Nadzorca.s.nextLine();
 		hdd_commander driver = new hdd_commander(32,32);
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
@@ -89,7 +89,9 @@ public class Main {
 		
 		driver.create("test4", "$JOB,20,FILEIN=IN,FILEOUT=OUT \n"
 				+ "<444444444444444444>");*/
-
+		
+		logo();
+		Nadzorca.s.nextLine();
 		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
 	
