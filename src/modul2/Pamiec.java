@@ -43,6 +43,7 @@ public class Pamiec {
 
 				if (list_index != -1) {
 					ZajetaLista.Dodaj(WolnaLista.Zajmij(list_index, rozmiar), rozmiar, NazwaProcesu);
+					if(!NazwaProcesu.contains("*"))
 					System.out.println("[Pam] Nowa ilosc wolnej: " + Wolna.iloscWolnej());
 				} else {
 					System.out.println("[Pam] Brak bloku o odpowiednim rozmiarze");
@@ -53,7 +54,7 @@ public class Pamiec {
 
 					przesunWszystko();
 				}
-
+				if(!NazwaProcesu.contains("*"))
 				System.out.println("[Pam]Przydzial pamieci dla procesu: " + NazwaProcesu);
 			}
 		}
