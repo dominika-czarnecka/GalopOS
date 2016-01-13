@@ -90,11 +90,10 @@ public class Main {
 		driver.create("test4", "$JOB,20,FILEIN=IN,FILEOUT=OUT \n"
 				+ "<444444444444444444>");*/
 		
+		nadzorca.IPLRTN();
 		logo();
 		Nadzorca.s.nextLine();
-		nadzorca.IPLRTN();
 		nadzorca.IBSUP();
-	
 	}
 
 }
