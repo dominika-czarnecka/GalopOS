@@ -42,6 +42,22 @@ public class Main {
 		Pamiec pamiec=new Pamiec();
 		Nadzorca nadzorca=new Nadzorca(driver, pamiec);
 		Interpreter interpreter= new Interpreter(driver, pamiec);
+		
+		
+		/*driver.create("test1", "$JOB,12,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<1111111111>");
+		
+		driver.create("test2", "$JOB,14,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<222222222222>");
+		
+		driver.create("test3", "$JOB,15,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<3333333333333>");
+		
+		driver.create("test4", "$JOB,20,FILEIN=IN,FILEOUT=OUT \n"
+				+ "<444444444444444444>");*/
+		
+		nadzorca.IPLRTN();
+		
 		driver.create("prog1","$JOB,70,FILEIN=IN,FILEOUT=OUT  \n" 
 				+ "MVI C 3\n"//8
 				+ "MVI B 1\n"//8
@@ -76,20 +92,6 @@ public class Main {
 				+ "JNS 52\n"//7
 				+ "OUT B\n"//6
 				+ "HLT\n");
-		
-		/*driver.create("test1", "$JOB,12,FILEIN=IN,FILEOUT=OUT \n"
-				+ "<1111111111>");
-		
-		driver.create("test2", "$JOB,14,FILEIN=IN,FILEOUT=OUT \n"
-				+ "<222222222222>");
-		
-		driver.create("test3", "$JOB,15,FILEIN=IN,FILEOUT=OUT \n"
-				+ "<3333333333333>");
-		
-		driver.create("test4", "$JOB,20,FILEIN=IN,FILEOUT=OUT \n"
-				+ "<444444444444444444>");*/
-		
-		nadzorca.IPLRTN();
 		logo();
 		Nadzorca.s.nextLine();
 		nadzorca.IBSUP();
