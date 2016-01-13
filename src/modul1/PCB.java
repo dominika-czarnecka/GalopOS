@@ -35,14 +35,14 @@ public class PCB {
                 waitingForMessage = false;
         }
         
-        public boolean moznaUruchomic() {
+        /*public boolean moznaUruchomic() {
         	return !blocked && !stopped;
-        }
+        }*/
         
-        public boolean czySystemowy(){
-        	return (name.contains("*"));
+        public boolean moznaUruchomic(){
+        	 return !blocked && !stopped;
         }
-        
+                
         public void toggleBlocked(){
         	blocked = !blocked;
         } 

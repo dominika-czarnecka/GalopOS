@@ -17,26 +17,28 @@ public class Processor {
 		{
 			PCB start = next_try;
 			do {
-				if (next_try.moznaUruchomic() && !next_try.czySystemowy()) break;
+				if (next_try.moznaUruchomic()) break;
 				next_try = next_try.next;
 			} while (next_try != start);
-
+			
 			if(next_try == start && !next_try.moznaUruchomic()) waiting = true;
+			
 			RUNNING = next_try;
 			next_try = next_try.next;
 			time=1;
 			load_all_registers();
-			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name);
+			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name); 
 		}
 
 		catch(Exception ex) {ex.printStackTrace();}
 
 	}
+	
 	static public void run_proc(){ //wykonaj instrukcjê
-		if (RUNNING.moznaUruchomic()) {
-			try
-			{
+		if (RUNNING.moznaUruchomic()){
+			try{
 				if (waiting) System.out.println("[Proc]Procesor jest w stanie czekania.");
+				else{
 				if (RUNNING.name!=null && waiting == false )
 				{
 					if (time<4)
@@ -47,13 +49,14 @@ public class Processor {
 					}
 					else XPER();
 				}
+				}
 			}
-			catch(Exception ex) {ex.printStackTrace();;}
-		}
+			catch(Exception ex) {ex.printStackTrace();;}}
+		
 		else {
 			set_to_run();
 		}
-	}
+}
 
 	static public void XPER()
 	{
