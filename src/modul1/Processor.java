@@ -75,7 +75,7 @@ public class Processor {
 		else {
 			set_to_run();
 		}
-	}
+	} else waiting = true;
 	}
 >>>>>>> origin/master
 
