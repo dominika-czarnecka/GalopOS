@@ -157,7 +157,8 @@ public class ZarzProc {
 		do {
 			System.out.print(it.name);
 			if (it == Processor.RUNNING) {
-				System.out.print(" <-");
+				if(!it.name.contains("*")){System.out.print(" <-");}
+				else System.out.print("   ");
 				if (it.name.length()<5) System.out.print("\t");
 			}
 			else if (it.name.length()<8) System.out.print("\t");

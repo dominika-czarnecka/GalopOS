@@ -10,7 +10,7 @@ public class Processor {
 	public static PCB next_try = PCB.first;
 	public static int time=1;
 	public static boolean waiting = false;
-
+	
 	static public void set_to_run(){ //znajdŸ pierwszy mo¿liwy do wykonania
 		waiting = false;
 		try
@@ -26,13 +26,14 @@ public class Processor {
 			next_try = next_try.next;
 			time=1;
 			load_all_registers();
-			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name);
+			if(!RUNNING.name.contains("*")){
+			System.out.println("[Proc]NEW RUNNING: "+RUNNING.name);}
 		}
 
 		catch(Exception ex) {ex.printStackTrace();}
-
 	}
 	static public void run_proc(){ //wykonaj instrukcjê
+		if(n_proc()!=3){
 		if (RUNNING.moznaUruchomic()) {
 			try
 			{
@@ -53,6 +54,7 @@ public class Processor {
 		else {
 			set_to_run();
 		}
+	}
 	}
 
 	static public void XPER()
@@ -94,5 +96,11 @@ public class Processor {
 
 	static public void show_register_process(){
 		System.out.println("[Proc]Rejestry procesora: "+'\n'+"Rejestr A: "+RUNNING.register.A+'\n'+"Rejestr B: "+RUNNING.register.B+'\n'+"Rejestr C: "+RUNNING.register.C+'\n'+"Rejestr D: "+RUNNING.register.D+'\n'+"Rejestr IP: "+RUNNING.register.IP+'\n');
+	}
+	static public int n_proc(){ 
+		PCB start = next_try;
+		int n=0;
+		do { next_try = next_try.next;n++;} while (next_try != start);
+		return n;
 	}
 }
