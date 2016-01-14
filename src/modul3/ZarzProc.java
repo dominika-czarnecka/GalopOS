@@ -162,7 +162,7 @@ public class ZarzProc {
 				if (it.name.length()<5) System.out.print("\t");
 			}
 			else if (it.name.length()<8) System.out.print("\t");
-			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString()+ "\t" + it.moznaUruchomic());
+			System.out.println("\t" + it.blocked + "\t" + it.stopped + "\t" + it.msgSemaphore.value + "\t" + it.register.toString()+ "\t\t" + it.moznaUruchomic());
 			
 			it=it.next;
 		} while(it!=PCB.first);
