@@ -39,10 +39,13 @@ public class PCB {
         	return !blocked && !stopped;
         }*/
         
+<<<<<<< HEAD
         public boolean moznaUruchomic(){
         	 return !blocked && !stopped;
         }
                 
+=======
+>>>>>>> origin/master
         public void toggleBlocked(){
         	blocked = !blocked;
         } 
